@@ -37,173 +37,157 @@ tailwind.config={
   .sub{font-size:11.5px;color:#64748B;font-weight:400}
   .lbl{font-size:11px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.04em}
   table td,table th{white-space:nowrap}
-  .side{width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 4px;font-size:10px;font-weight:600;color:#94A3B8;border-left:3px solid transparent;transition:all 0.2s ease}
-  .side:hover{color:#FFFFFF;background:rgba(255,255,255,0.04)}
-  .side.active{color:#FFFFFF;background:rgba(253,81,8,0.14);border-left-color:#FD5108}
+  tbody tr{transition:background .15s}tbody tr:hover,tbody tr.hl{background:#FFF4EE}
+  tbody tr.hl td:first-child{box-shadow:inset 3px 0 0 #FD5108}
+  .side{width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 4px;font-size:10px;font-weight:600;color:#94A3B8;border-left:3px solid transparent;transition:all .2s}
+  .side:hover{color:#fff;background:rgba(255,255,255,.05)}.side.active{color:#fff;background:rgba(253,81,8,.15);border-left-color:#FD5108}
   .side svg{width:20px;height:20px}
-  .pill{padding:0.35rem 0.9rem;border-radius:9999px;font-size:12px;font-weight:600;border:1px solid #CBD5E1;background:#FFFFFF;color:#334155;transition:all 0.15s ease;cursor:pointer}
-  .pill:hover{border-color:#94A3B8;background:#F8FAFC}
-  .pill.on{background:#FFF4EE;color:#D94304;border-color:#FD5108}
-  .seg{display:inline-flex;border:1px solid #CBD5E1;border-radius:9999px;overflow:hidden;background:#FFFFFF}
-  .seg button{padding:0.3rem 1rem;font-size:12px;font-weight:600;color:#475569;transition:all 0.15s ease}
-  .seg button.on{background:#FFF4EE;color:#D94304}
-  .tile{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:0.5rem;padding:0.65rem 0.85rem;display:flex;justify-content:space-between;align-items:center;gap:0.5rem;text-align:left;width:100%;transition:all 0.15s ease}
+  .pill{padding:.35rem .9rem;border-radius:9999px;font-size:12px;font-weight:600;border:1px solid #CBD5E1;background:#fff;color:#334155;transition:all .15s;cursor:pointer}
+  .pill:hover{border-color:#FD5108;transform:translateY(-1px)}.pill.on{background:#FFF4EE;color:#D94304;border-color:#FD5108}
+  .seg{display:inline-flex;border:1px solid #CBD5E1;border-radius:9999px;overflow:hidden;background:#fff}
+  .seg button{padding:.3rem 1rem;font-size:12px;font-weight:600;color:#475569;transition:all .15s}.seg button.on{background:#FFF4EE;color:#D94304}
+  .tile{background:#fff;border:1px solid #E2E8F0;border-radius:.5rem;padding:.65rem .85rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem;width:100%;text-align:left;transition:all .15s}
   .tile .t{font-size:11.5px;color:#475569}.tile .v{font-size:14px;font-weight:700;color:#0F172A}
-  .tile.link{cursor:pointer}.tile.link:hover{border-color:#FD5108;transform:translateY(-1px)}.tile.link .v{color:#D94304}
-  .tile.warn .v{color:#DC2626}
-  .heat{text-align:center;font-weight:600}
-  .node{background:#FFFFFF;border:1px solid #CBD5E1;border-radius:0.5rem;padding:0.5rem 0.75rem;font-size:11px;text-align:left;width:100%;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
-  .node b{font-size:12px;color:#0F172A}
-  .node.flag{border-color:#F97316;background:#FFF7ED}.node.sel{border:2px solid #FD5108;background:#FFEDD5}
-  .node.root{background:#FFF7ED;border-color:#FD5108;max-width:280px}
-  .col{min-width:210px;flex:1}
-  .flow-path{transition:fill-opacity 0.25s ease, stroke-opacity 0.25s ease;cursor:pointer}
-  .flow-path:hover{fill-opacity:0.45 !important;stroke-opacity:0.9 !important;}
-  .flow-node{transition:filter 0.2s ease;cursor:pointer}
-  .flow-node:hover{filter:brightness(1.06);}
-  ::-webkit-scrollbar{width:6px;height:6px}
-  ::-webkit-scrollbar-track{background:#F1F5F9}
-  ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
-  ::-webkit-scrollbar-thumb:hover{background:#94A3B8}
+  .tile.link{cursor:pointer}.tile.link:hover{border-color:#FD5108;transform:translateY(-1px)}.tile.link .v{color:#D94304}.tile.warn .v{color:#DC2626}
+  .heat{text-align:center;font-weight:600;transition:transform .15s}.heat:hover{transform:scale(1.06);position:relative;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .flow-el{transition:opacity .25s;cursor:pointer;animation:flowIn .6s ease backwards;animation-delay:var(--d,0s)}
+  .flow-el.dim{opacity:.1}.flow-el:hover path{fill-opacity:.5}
+  @keyframes flowIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+  #flow-tip{position:absolute;pointer-events:none;background:#0F172A;color:#fff;font-size:11px;padding:6px 10px;border-radius:8px;opacity:0;transition:opacity .15s;white-space:nowrap;z-index:5}
+  .funnel-bar{transition:width .55s cubic-bezier(.22,1,.36,1), filter .2s}
+  .funnel-row:hover .funnel-bar{filter:brightness(1.06)}
+  .node{background:#fff;border:1px solid #CBD5E1;border-radius:.5rem;padding:.5rem .75rem;font-size:11px;text-align:left;width:100%;box-shadow:0 1px 2px rgba(0,0,0,.03);transition:all .2s;animation:fadeIn .5s ease backwards;animation-delay:var(--d,0s)}
+  button.node{cursor:pointer}button.node:hover{border-color:#FD5108;transform:translateY(-2px);box-shadow:0 6px 14px rgba(15,23,42,.08)}
+  .node b{font-size:12px;color:#0F172A}.node.flag{border-color:#F97316;background:#FFF7ED}.node.sel{border:2px solid #FD5108;background:#FFEDD5}.node.root{background:#FFF7ED;border-color:#FD5108;max-width:300px}
+  .col{min-width:175px;flex:1}
+  ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
 </style>
 </head>
-<body class="bg-mckBg text-pwcDark antialiased flex flex-col">
+<body class="bg-mckBg text-slate-900 antialiased flex flex-col overflow-x-hidden">
 
-<!-- Top Header -->
 <header class="bg-[#111827] text-white h-14 px-5 flex items-center justify-between shrink-0 border-b border-slate-800">
   <div class="flex items-center gap-3.5">
-    <svg class="h-7 w-auto" viewBox="0 0 180 120" fill="none">
-      <polygon points="95,38 128,38 136,24 103,24" fill="#FD5108"/>
-      <polygon points="128,24 165,24 173,10 136,10" fill="#FD5108"/>
-      <text x="8" y="92" font-family="Georgia, serif" font-weight="bold" font-style="italic" font-size="68" fill="#fff" letter-spacing="-3">pwc</text>
-    </svg>
+    <div class="bg-white rounded-md px-2 py-0.5 flex items-center justify-center shadow-sm">
+      <svg class="h-7 w-auto" viewBox="0 0 220 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="108,42 150,42 160,26 118,26" fill="#FD5108"/>
+        <polygon points="150,26 196,26 206,10 160,10" fill="#FD5108"/>
+        <text x="10" y="102" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="80" fill="#111827" letter-spacing="-3">pwc</text>
+      </svg>
+    </div>
     <div class="h-5 w-px bg-slate-700 hidden sm:block"></div>
-    <span class="text-sm font-semibold tracking-tight text-white">Rewards Framework</span>
+    <span class="text-sm font-semibold tracking-tight">Rewards Framework</span>
   </div>
-
-  <div class="text-xs font-medium text-slate-300 hidden lg:flex items-center gap-2">
-    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-    <span>Dataset: <strong id="data-status" class="text-white font-semibold">Sample Dataset (12 Grades → 6 Benchmarks)</strong></span>
-  </div>
-
+  <div class="text-xs text-slate-300 hidden lg:flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>Dataset: <strong id="data-status" class="text-white">Sample dataset</strong>
+    <button id="btn-report" onclick="showReport()" class="hidden ml-2 underline text-pwcOrange font-semibold">View detected fields</button></div>
   <div class="flex items-center gap-2.5">
-    <button onclick="downloadTemplate()" class="text-xs border border-slate-600 hover:border-pwcOrange hover:text-white text-slate-200 px-3 py-1.5 rounded-lg font-medium transition">Template</button>
-    <button onclick="exportResults()" class="text-xs border border-slate-600 hover:border-pwcOrange hover:text-white text-slate-200 px-3 py-1.5 rounded-lg font-medium transition">Export</button>
-    <label class="cursor-pointer bg-pwcOrange hover:bg-pwcHover text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold shadow-sm transition">
-      Import Excel
-      <input type="file" accept=".xlsx,.xls,.csv" class="hidden" onchange="handleExcelImport(event)">
-    </label>
+    <button onclick="downloadTemplate()" class="text-xs border border-slate-600 hover:border-pwcOrange px-3 py-1.5 rounded-lg font-medium transition">Template</button>
+    <button onclick="exportResults()" class="text-xs border border-slate-600 hover:border-pwcOrange px-3 py-1.5 rounded-lg font-medium transition">Export</button>
+    <label class="cursor-pointer bg-pwcOrange hover:bg-pwcHover text-xs px-3.5 py-1.5 rounded-lg font-semibold transition">Import Excel<input type="file" accept=".xlsx,.xls,.csv" class="hidden" onchange="handleExcelImport(event)"></label>
   </div>
 </header>
 
-<div class="flex flex-1 min-h-0">
-  <!-- Left Navigation Sidebar -->
-  <aside id="side" class="w-[82px] bg-[#111827] shrink-0 pt-3 overflow-y-auto border-r border-slate-800"></aside>
-
-  <!-- Main Workspace Area -->
-  <div class="flex-1 overflow-y-auto">
-    <div class="bg-white border-b border-slate-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-10">
-      <div>
-        <div class="text-[10px] font-bold uppercase tracking-widest text-pwcOrange">Total Rewards Diagnostic</div>
-        <h1 id="page-title" class="text-xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
-      </div>
-
+<div class="flex flex-1 min-h-0 overflow-hidden">
+  <aside id="side" class="w-[78px] bg-[#111827] shrink-0 pt-3 overflow-y-auto border-r border-slate-800"></aside>
+  <div class="flex-1 min-w-0 overflow-y-auto overflow-x-hidden" id="scroller">
+    <div class="bg-white border-b border-slate-200 px-6 py-3 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-10">
+      <div><div class="text-[10px] font-bold uppercase tracking-widest text-pwcOrange">Total Rewards Diagnostic</div><h1 id="page-title" class="text-xl font-bold">Dashboard</h1></div>
       <div class="flex flex-wrap items-center gap-4">
-        <div>
-          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Anomaly Filter</label>
-          <button id="btn-cleanse" onclick="S.excludeOutliers=!S.excludeOutliers;renderAll()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white text-slate-800 hover:border-pwcOrange transition flex items-center gap-1.5">
-            <span id="cleanse-dot" class="w-2 h-2 rounded-full bg-slate-300"></span>
-            <span id="cleanse-lbl">Include All Staff</span>
-          </button>
-        </div>
-        <div>
-          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Population</label>
-          <select id="pop" onchange="S.pop=this.value;renderAll()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white text-slate-800 focus:outline-none focus:border-pwcOrange"></select>
-        </div>
-        <div class="text-right hidden sm:block">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Active Scope</div>
-          <div id="pop-note" class="text-xs font-bold text-slate-800 mt-1">0 employees</div>
-        </div>
+        <div><label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Outliers</label>
+          <button onclick="toggleExclude()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white hover:border-pwcOrange transition flex items-center gap-1.5"><span id="cleanse-dot" class="w-2 h-2 rounded-full bg-slate-300"></span><span id="cleanse-lbl">Include all staff</span></button></div>
+        <div><label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Population</label>
+          <select id="pop" onchange="S.pop=this.value;renderAll()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white focus:outline-none focus:border-pwcOrange"></select></div>
+        <div class="text-right hidden sm:block"><div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">In scope</div><div id="pop-note" class="text-xs font-bold mt-1">0 employees</div></div>
       </div>
     </div>
-
-    <main class="p-6">
-      <div class="space-y-6 max-w-[1600px] mx-auto" id="shell"></div>
-    </main>
+    <main class="p-5"><div id="warn-bar" class="max-w-full"></div><div class="space-y-5 max-w-full" id="shell"></div></main>
   </div>
 </div>
 
-<!-- Message Modal (replaces alert) -->
 <div id="msg-modal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 p-4">
-  <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-xl border border-slate-200">
-    <h3 id="msg-title" class="text-base font-bold text-slate-900">Notice</h3>
-    <p id="msg-body" class="text-sm text-slate-600 mt-2"></p>
-    <div class="mt-5 flex justify-end">
-      <button onclick="closeMsg()" class="bg-pwcOrange hover:bg-pwcHover text-white text-xs font-semibold px-4 py-2 rounded-lg">Understood</button>
-    </div>
+  <div class="bg-white rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 shadow-xl border border-slate-200">
+    <h3 id="msg-title" class="text-base font-bold">Notice</h3><div id="msg-body" class="text-sm text-slate-600 mt-3"></div>
+    <div class="mt-5 flex justify-end"><button onclick="closeMsg()" class="bg-pwcOrange hover:bg-pwcHover text-white text-xs font-semibold px-4 py-2 rounded-lg">Close</button></div>
   </div>
 </div>
 
 <script>
-/* ================= STATE & CONSTANTS ================= */
-const C={o:'#FD5108',o2:'#FE7C39',o3:'#FFAA72',d:'#1E293B',g:'#94A3B8',r:'#EF4444',gr:'#10B981',am:'#F59E0B',blue:'#3B82F6',indigo:'#6366F1'};
-const COMP={base:C.d,allow:C.o,bonus:C.o3,ben:C.g};
-const S={grades:[],benchmarks:[],emps:[],pop:'All',excludeOutliers:false,pStruct:50,pBench:50,pGrade:50,sel:0,tab:'dash',dm:'cost',chip:'All',node:null,est:false,flowScope:'All',
+const C={o:'#FD5108',o2:'#FE7C39',o3:'#FFAA72',d:'#1E293B',g:'#94A3B8',r:'#EF4444',gr:'#10B981',am:'#F59E0B',blue:'#3B82F6'};
+const COMP={base:C.d,allow:C.o,bonus:C.o3,ben:C.blue};
+const S={grades:[],benchmarks:[],emps:[],pop:'All',excludeOutliers:false,manual:new Set(),collapsed:new Set(),node:null,pStruct:50,pBench:50,pGrade:50,sel:0,tab:'dash',dm:'cost',chip:'All',estMarket:false,derivedBands:false,report:null,flowScope:'All',funnelGrade:'All',mixMode:'amt',oFilter:'flag',fresh:true,
   tb:{pct:50,bw:50,gap:20,allowPct:100,benPct:100,bonusDelta:0,onCost:12,attrRed:3,repl:50,phase:1}};
 const PRESETS={'Conservative':{pct:40,bw:50,gap:0,allowPct:90,benPct:90,bonusDelta:0},'Market-aligned':{pct:50,bw:50,gap:20,allowPct:100,benPct:100,bonusDelta:0},'Competitive':{pct:60,bw:60,gap:30,allowPct:105,benPct:105,bonusDelta:2}};
 let G=[],E=[],RAW_E=[],K={},charts={};
-
-const MODS=[
- ['dash','Dashboard','M4 5a1 1 0 011-1h5v7H4V5zm10-1h5a1 1 0 011 1v3h-6V4zM4 13h6v7H5a1 1 0 01-1-1v-6zm10-3h6v9a1 1 0 01-1 1h-5V10z'],
+const MODS=[['dash','Dashboard','M4 5a1 1 0 011-1h5v7H4V5zm10-1h5a1 1 0 011 1v3h-6V4zM4 13h6v7H5a1 1 0 01-1-1v-6zm10-3h6v9a1 1 0 01-1 1h-5V10z'],
  ['struct','Pay structure','M4 20V10m6 10V4m6 16v-7m4 7H2'],
  ['rewards','Total rewards','M12 8c-3 0-6-1-6-2.5S9 3 12 3s6 1 6 2.5S15 8 12 8zM6 5.5v4C6 11 9 12 12 12s6-1 6-2.5v-4M6 9.5v4C6 15 9 16 12 16s6-1 6-2.5v-4M6 13.5v4C6 19 9 20 12 20s6-1 6-2.5v-4'],
- ['bench','Benchmark','M3 17l6-6 4 4 8-8M15 7h6v6'],
  ['work','Workspace','M12 3v4m0 0H5v4m7-4h7v4M3 11h4v4H3zm14 0h4v4h-4zM10 3h4v4h-4z'],
- ['grade','Grade analysis','M12 3l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5'],
+ ['grade','Grade outliers','M12 3l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5'],
+ ['bench','Benchmark','M3 17l6-6 4 4 8-8M15 7h6v6'],
  ['tobe','To-be design','M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M14 4v4M8 10v4M16 16v4'],
- ['impact','Financial impact','M12 3v18m4-14h-5a3 3 0 000 6h2a3 3 0 010 6H8']
-];
-const TITLES={
-  dash:'Executive Dashboard',
-  struct:'Pay Structure & Bandwidth Matrix',
-  rewards:'Total Rewards & Compensation Flow',
-  bench:'Market Benchmarking (Multi-Grade Mapping)',
-  work:'Organisation Tree & Role Profile',
-  grade:'Grade Drill-Down & Anomaly Detection',
-  tobe:'To-Be Pay Structure Design',
-  impact:'Financial Impact & ROI'
-};
+ ['impact','Financial impact','M12 3v18m4-14h-5a3 3 0 000 6h2a3 3 0 010 6H8']];
+const TITLES={dash:'Executive Dashboard',struct:'Pay Structure & Grade Ladder',rewards:'Total Rewards, Cost Flow & Demographics',work:'Workspace: Organisation Tree',grade:'Grade Outliers & Drill-Down',bench:'Market Benchmarking',tobe:'To-Be Pay Structure',impact:'Financial Impact'};
 
-/* ================= HELPERS ================= */
-function showMsg(t,b){document.getElementById('msg-title').innerText=t;document.getElementById('msg-body').innerText=b;const m=document.getElementById('msg-modal');m.classList.remove('hidden');m.classList.add('flex')}
+function showHTML(t,h){document.getElementById('msg-title').innerText=t;document.getElementById('msg-body').innerHTML=h;const m=document.getElementById('msg-modal');m.classList.remove('hidden');m.classList.add('flex')}
+const showMsg=(t,b)=>showHTML(t,`<p>${esc(b)}</p>`);
 function closeMsg(){const m=document.getElementById('msg-modal');m.classList.add('hidden');m.classList.remove('flex')}
-const sum=a=>a.reduce((x,y)=>x+y,0), avg=a=>a.length?sum(a)/a.length:0;
+const sum=a=>a.reduce((x,y)=>x+y,0),avg=a=>a.length?sum(a)/a.length:0;
 const fmt=n=>(n==null||isNaN(n))?'-':Math.round(n).toLocaleString();
-const fm=n=>{if(n==null||isNaN(n))return '-';const a=Math.abs(n);return (n<0?'-':'')+(a>=1e6?(a/1e6).toFixed(2)+'M':a>=1e3?(a/1e3).toFixed(1)+'K':Math.round(a))};
+const fm=n=>{if(n==null||isNaN(n))return'-';const a=Math.abs(n);return(n<0?'-':'')+(a>=1e6?(a/1e6).toFixed(2)+'M':a>=1e3?(a/1e3).toFixed(1)+'K':Math.round(a))};
 const pc=(n,d=1)=>(n==null||isNaN(n))?'-':n.toFixed(d)+'%';
 const sgn=(n,f=fm)=>(n>=0?'+':'')+f(n);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const q$=s=>esc(s).replace(/'/g,"\\'");
 function quant(s,p){if(!s.length)return 0;const i=(s.length-1)*p/100,lo=Math.floor(i),hi=Math.ceil(i);return s[lo]+(s[hi]-s[lo])*(i-lo)}
 function corr(x,y){const n=x.length;if(n<4)return null;const mx=avg(x),my=avg(y);let a=0,b=0,c=0;for(let i=0;i<n;i++){a+=(x[i]-mx)*(y[i]-my);b+=(x[i]-mx)**2;c+=(y[i]-my)**2}return b&&c?a/Math.sqrt(b*c):null}
 function mkt(g,p){const pts=[[25,g.p25],[50,g.p50],[75,g.p75],[90,g.p90]];let a=pts[0],b=pts[1];if(p>=50&&p<75){a=pts[1];b=pts[2]}else if(p>=75){a=pts[2];b=pts[3]}return Math.max(0,a[1]+(b[1]-a[1])*(p-a[0])/(b[0]-a[0]))}
-function mktPct(g,v){let lo=1,hi=99;for(let i=0;i<30;i++){const m=(lo+hi)/2;mkt(g,m)<v?lo=m:hi=m}return (lo+hi)/2}
+function mktPct(g,v){let lo=1,hi=99;for(let i=0;i<30;i++){const m=(lo+hi)/2;mkt(g,m)<v?lo=m:hi=m}return(lo+hi)/2}
 const rc=r=>r==null?['No data','bg-slate-100 text-slate-500','#e2e8f0']:r<95?['Lagging','bg-amber-100 text-amber-800','#fde68a']:r>105?['Leading','bg-rose-100 text-rose-800','#fecaca']:['Aligned','bg-emerald-100 text-emerald-800','#bbf7d0'];
-const get=k=>k.split('.').reduce((o,p)=>o[p],S);
-const SL={};
-function sl(key,label,min,max,step,pre='',suf=''){SL[key]={pre,suf};const v=get(key);return `<div><div class="flex justify-between items-center mb-1.5"><label class="text-xs font-semibold text-slate-700">${label}</label><span id="o-${key}" class="text-xs font-bold bg-pwcOrange text-white px-2.5 py-0.5 rounded-md">${pre}${v}${suf}</span></div><input id="i-${key}" type="range" min="${min}" max="${max}" step="${step}" value="${v}" oninput="setS('${key}',+this.value)"></div>`}
-function syncOut(k){const v=get(k);if(document.getElementById('o-'+k))document.getElementById('o-'+k).innerText=SL[k].pre+v+SL[k].suf;if(document.getElementById('i-'+k))document.getElementById('i-'+k).value=v}
+const get=k=>k.split('.').reduce((o,p)=>o[p],S);const SL={};
+function sl(key,label,min,max,step,pre='',suf=''){SL[key]={pre,suf};const v=get(key);return`<div><div class="flex justify-between items-center mb-1.5"><label class="text-xs font-semibold text-slate-700">${label}</label><span id="o-${key}" class="text-xs font-bold bg-pwcOrange text-white px-2.5 py-0.5 rounded-md">${pre}${v}${suf}</span></div><input id="i-${key}" type="range" min="${min}" max="${max}" step="${step}" value="${v}" oninput="setS('${key}',+this.value)"></div>`}
+function syncOut(k){const v=get(k);const o=document.getElementById('o-'+k),i=document.getElementById('i-'+k);if(o)o.innerText=SL[k].pre+v+SL[k].suf;if(i)i.value=v}
 function setS(k,v){const p=k.split('.'),l=p.pop();p.reduce((o,x)=>o[x],S)[l]=v;syncOut(k);renderAll()}
-const cv=(id,title,h='h-72',span='',sub='')=>`<div class="card ${span}"><div class="h3">${title}${sub?` <span class="sub">${sub}</span>`:''}</div><div class="relative ${h}"><canvas id="${id}"></canvas></div></div>`;
-const kpi=(l,v,s='',col='')=>`<div class="card"><span class="lbl">${l}</span><p class="text-2xl font-extrabold mt-1.5 tracking-tight ${col||'text-slate-900'}">${v}</p>${s?`<p class="text-[11px] text-slate-500 mt-1">${s}</p>`:''}</div>`;
-function table(id,heads,rows){const el=document.getElementById(id);if(!el)return;el.innerHTML=`<thead><tr class="bg-slate-50 text-slate-700 border-b border-slate-200 font-bold">${heads.map(h=>`<th class="p-3">${h}</th>`).join('')}</tr></thead><tbody class="divide-y divide-slate-100 text-slate-600">${rows.map(r=>`<tr class="hover:bg-slate-50/80 transition-colors">${r.map((c,i)=>`<td class="p-3 ${i==0?'font-bold text-slate-900':''}">${c}</td>`).join('')}</tr>`).join('')}</tbody>`}
-const tw=(id,title,sub='')=>`<div class="card p-0 overflow-hidden"><div class="px-5 py-3.5 border-b border-slate-100 flex flex-wrap justify-between items-center gap-2"><div class="h3 mb-0">${title} ${sub?`<span class="sub font-normal ml-1">${sub}</span>`:''}</div></div><div class="overflow-x-auto"><table class="w-full text-left text-xs" id="${id}"></table></div></div>`;
-function chart(id,cfg){const el=document.getElementById(id);if(!el)return;if(charts[id])charts[id].destroy();cfg.options=Object.assign({responsive:true,maintainAspectRatio:false,animation:{duration:450,easing:'easeOutQuart'},interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:14,font:{size:11,family:'Inter'}}},tooltip:{backgroundColor:'#0F172A',titleFont:{size:12,family:'Inter'},bodyFont:{size:11,family:'Inter'},padding:10,cornerRadius:8}}},cfg.options||{});charts[id]=new Chart(el,cfg)}
+const cv=(id,title,h='h-72',span='',sub='')=>`<div class="card min-w-0 ${span}"><div class="h3">${title}${sub?` <span class="sub block">${sub}</span>`:''}</div><div class="w-full"><div class="relative w-full ${h}" id="w-${id}"><canvas id="${id}"></canvas></div></div></div>`;
+const kpi=(l,v,s='',col='')=>`<div class="card lift"><span class="lbl">${l}</span><p class="kpi-v text-2xl font-extrabold mt-1.5 tracking-tight ${col||'text-slate-900'}">${v}</p>${s?`<p class="text-[11px] text-slate-500 mt-1">${s}</p>`:''}</div>`;
+function table(id,heads,rows,rowAttr){const el=document.getElementById(id);if(!el)return;el.innerHTML=`<thead><tr class="bg-slate-50 text-slate-700 border-b border-slate-200 font-bold">${heads.map(h=>`<th class="p-2.5">${h}</th>`).join('')}</tr></thead><tbody class="divide-y divide-slate-100 text-slate-600">${rows.map((r,ri)=>`<tr ${rowAttr?rowAttr(ri):''}>${r.map((c,i)=>`<td class="p-2.5 ${i==0?'font-bold text-slate-900':''}">${c}</td>`).join('')}</tr>`).join('')}</tbody>`}
+const tw=(id,title,sub='',extra='')=>`<div class="card p-0 overflow-hidden min-w-0"><div class="px-5 py-3.5 border-b border-slate-100 flex flex-wrap justify-between items-center gap-2"><div class="h3 mb-0">${title} <span class="sub ml-1">${sub}</span></div>${extra}</div><div class="overflow-x-auto max-h-[440px]"><table class="w-full text-left text-xs" id="${id}"></table></div></div>`;
 const ySc=(t,x={})=>({y:Object.assign({beginAtZero:true,grid:{color:'#F1F5F9'},title:{display:!!t,text:t,font:{size:11,weight:'600'}}},x),x:{grid:{display:false}}});
 const stk=(t,x={})=>({x:{stacked:true,grid:{display:false}},y:Object.assign({stacked:true,beginAtZero:true,grid:{color:'#F1F5F9'},title:{display:!!t,text:t,font:{size:11,weight:'600'}}},x)});
-const line=(label,data,color,x={})=>Object.assign({type:'line',label,data,borderColor:color,backgroundColor:color,tension:.25,pointRadius:3.5,pointHoverRadius:6,order:1},x);
+const line=(label,data,color,x={})=>Object.assign({type:'line',label,data,borderColor:color,backgroundColor:color,tension:.25,pointRadius:4,pointHoverRadius:7,order:1},x);
 const rangeBars=(a,color,label)=>({type:'bar',label,data:a,backgroundColor:color,borderRadius:4,order:2});
 
-/* ================= SAMPLE DATA (12 Client Grades mapped to 6 Benchmark Levels) ================= */
+const ladderPlugin={id:'ladder',
+  beforeDatasetsDraw(ch,_a,o){const{ctx,chartArea:ca,scales:{x,y}}=ch;if(!x||!y)return;const act=ch.tooltip&&ch.tooltip.getActiveElements&&ch.tooltip.getActiveElements()[0];
+    if(act&&x.ticks.length>1){const w=Math.abs(x.getPixelForValue(1)-x.getPixelForValue(0));ctx.save();ctx.fillStyle='rgba(15,23,42,.05)';ctx.fillRect(x.getPixelForValue(act.index)-w/2,ca.top,w,ca.bottom-ca.top);ctx.restore()}
+    if(!o||!o.g)return;const g=o.g;ctx.save();
+    for(let i=0;i<g.length-1;i++){const n=g[i+1];if(g[i].max<=n.min)continue;const x0=x.getPixelForValue(i),x1=x.getPixelForValue(i+1),yt=y.getPixelForValue(g[i].max),yb=y.getPixelForValue(n.min);
+      const hot=act&&(act.index===i||act.index===i+1);ctx.fillStyle=hot?'rgba(253,81,8,.38)':'rgba(253,81,8,.16)';ctx.strokeStyle='rgba(253,81,8,.85)';ctx.setLineDash([4,3]);ctx.lineWidth=hot?1.6:1;ctx.fillRect(x0,yt,x1-x0,yb-yt);ctx.strokeRect(x0,yt,x1-x0,yb-yt)}
+    ctx.restore()},
+  afterDatasetsDraw(ch,_a,o){if(!o||!o.g||o.g.length>14)return;const{ctx,scales:{x,y}}=ch,g=o.g;ctx.save();ctx.font='600 10px Inter';ctx.textAlign='center';
+    for(let i=0;i<g.length-1;i++){if(g[i+1].prog==null)continue;const x0=x.getPixelForValue(i),x1=x.getPixelForValue(i+1),ym=(y.getPixelForValue(g[i].mid)+y.getPixelForValue(g[i+1].mid))/2;
+      const t='+'+g[i+1].prog.toFixed(0)+'%';const w=ctx.measureText(t).width+8;ctx.fillStyle='#1E293B';ctx.beginPath();ctx.roundRect((x0+x1)/2-w/2,ym-17,w,15,4);ctx.fill();ctx.fillStyle='#fff';ctx.fillText(t,(x0+x1)/2,ym-6)}
+    ctx.restore()}};
+Chart.register(ladderPlugin);
+function chart(id,cfg,opt={}){
+  const el=document.getElementById(id);if(!el)return;
+  cfg.type=cfg.type||'bar';
+  const base={responsive:true,maintainAspectRatio:false,animation:{duration:650,easing:'easeOutCubic',delay:c=>c.type==='data'&&c.mode==='default'?Math.min(c.dataIndex*28,420):0},interaction:{mode:'index',intersect:false},
+    onHover:(e,a)=>{if(e.native&&e.native.target)e.native.target.style.cursor=opt.drill&&a.length?'pointer':'default';if(opt.hover)opt.hover(a)},
+    onClick:opt.drill?(e,a,ch)=>{const p=ch.getElementsAtEventForMode(e,'index',{intersect:false},true);if(p.length){S.sel=p[0].index;switchTab('grade')}}:undefined,
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:12,usePointStyle:true,font:{size:11}}},tooltip:{backgroundColor:'#0F172A',padding:10,cornerRadius:8,boxPadding:4}}};
+  const o=cfg.options||{};cfg.options=Object.assign({},base,o,{plugins:Object.assign({},base.plugins,o.plugins||{})});
+  if(charts[id]&&!S.fresh&&charts[id].config.type===cfg.type){const c=charts[id];c.data=cfg.data;c.options=cfg.options;c.update();return}
+  if(charts[id])charts[id].destroy();charts[id]=new Chart(el,cfg);
+}
+function countUp(){document.querySelectorAll('#shell .kpi-v').forEach(el=>{const t=el.textContent,m=t.match(/^([^0-9\-]*)(-?[\d,]*\.?\d+)(.*)$/);if(!m)return;const dec=(m[2].split('.')[1]||'').length,end=parseFloat(m[2].replace(/,/g,''));if(isNaN(end))return;const t0=performance.now();const step=now=>{const k=Math.min(1,(now-t0)/750),e=1-Math.pow(1-k,3);el.textContent=m[1]+(end*e).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3];if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})}
+
+/* ================= GRADE NAME HELPERS ================= */
+const nk=s=>String(s??'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const gk=s=>{let t=String(s??'').toLowerCase().trim().replace(/\b(job ?grade|pay ?grade|grade|level|band|gr|lvl)\b/g,'');t=t.replace(/[^a-z0-9]/g,'').replace(/^[gl](?=\d)/,'').replace(/^0+(?=\d)/,'');return t||nk(s)};
+const gname=s=>{const t=String(s??'').trim();return/^\d+(\.\d+)?$/.test(t)?'Grade '+t:t};
+const natGrade=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:'base'});
+const cleanH=h=>nk(String(h).replace(/\(.*?\)|\[.*?\]/g,''));
+
+/* ================= SAMPLE DATA ================= */
 function sampleData(){
   const benchmarks=[
     {bGrade:'BM-1 (Entry)',p25:46000,p50:55000,p75:64000,p90:68500,mAllow:6000,mBonus:5,mBen:8000},
@@ -239,11 +223,11 @@ function sampleData(){
     const bm=benchmarks.find(b=>b.bGrade===g.bGrade)||benchmarks[0];
     const [role,base,n]=roleTemplates[idx%roleTemplates.length];
     for(let i=0;i<n;i++){
-      const gender=rnd()<.46?'F':'M', ten=Math.round(rnd()*150)/10, age=Math.round(22+rnd()*20+(idx*1.6));
+      const gender=rnd()<.46?'F':'M',ten=Math.round(rnd()*150)/10,age=Math.round(22+rnd()*20+(idx*1.6));
       let pos=base+(rnd()-.5)*.38+ten*.007-(gender==='F'&&idx%3===0?.06:0);
       if(rnd()<.09)pos=rnd()<.5?-.09-rnd()*.1:1.06+rnd()*.12;
       const b=Math.round((g.min+(g.max-g.min)*pos)/500)*500;
-      const at=rnd()<.05?0:bm.mAllow*(.8+rnd()*.4), bn=bm.mBen*(.85+rnd()*.3), bpct=bm.mBonus/100;
+      const at=rnd()<.05?0:bm.mAllow*(.8+rnd()*.4),bn=bm.mBen*(.85+rnd()*.3),bpct=bm.mBonus/100;
       emps.push({id:'EMP-'+(id++),grade:g.grade,role,fn:fns[Math.floor(rnd()*4)],gender,age,ten,base:b,hous:Math.round(at*.55),trans:Math.round(at*.25),oth:Math.round(at*.20),bpct,bonus:Math.round(b*bpct*(.55+rnd()*.85)),med:Math.round(bn*.40),ret:Math.round(bn*.35),ins:Math.round(bn*.15),obn:Math.round(bn*.10)});
     }
   });
@@ -251,715 +235,460 @@ function sampleData(){
 }
 function prep(emps){emps.forEach(e=>{e.allow=e.hous+e.trans+e.oth;e.ben=e.med+e.ret+e.ins+e.obn;e.tcc=e.base+e.allow+e.bonus+e.ben})}
 
-/* ================= ANALYTICS ENGINE ================= */
-function resolveBenchmark(g,idx,totalGrades){
-  if(S.benchmarks && S.benchmarks.length){
-    const exact=S.benchmarks.find(b=>b.bGrade===g.bGrade);
-    if(exact) return exact;
-    const mappedIdx=Math.min(S.benchmarks.length-1,Math.floor(idx*S.benchmarks.length/Math.max(1,totalGrades)));
-    return S.benchmarks[mappedIdx];
-  }
-  const mid=(g.min+g.max)/2;
-  return {bGrade:g.grade,p25:g.p25??mid*.88,p50:g.p50??mid,p75:g.p75??mid*1.12,p90:g.p90??mid*1.25,mAllow:g.mAllow??mid*.1,mBonus:g.mBonus??10,mBen:g.mBen??mid*.12};
+/* ================= SMART IMPORT ENGINE ================= */
+const SCH_E={id:['employeeid','empid','employeenumber','empno','staffid','staffno','personnelnumber','employee','name','id'],grade:['grade','level','band','jobgrade','salarygrade','paygrade','joblevel','careerlevel','hostgrade','jobband','gradecode','payband','tier','lvl'],role:['role','designation','jobtitle','title','position','jobname','jobrole'],fn:['function','department','division','businessunit','dept','team','unit'],gender:['gender','sex'],age:['age','employeeage','staffage'],ten:['tenure','yearsofservice','serviceyears','lengthofservice','yos','seniority'],
+  base:['basesalary','basicsalary','basepay','basicpay','annualbase','fixedpay','annualsalary','fixedsalary','basic','base','salary','pay'],
+  hous:['housing','hra','rent','accommodation'],trans:['transport','fuel','car','commut','conveyance','mobility'],oa:['allowance','allowances','mobile','phone','meal','education','shift'],
+  med:['medical','health','healthcare','healthinsurance','medicalinsurance'],ret:['pension','provident','retirement','gratuity','superannuation','401k','savings'],ins:['insurance','life','accident','disability'],ob:['benefit','benefits'],
+  bpct:['bonustarget','targetbonus','bonuspct','bonuspercent','bonusrate','targetincentive','incentivetarget','stiptarget','bonustargetpct'],bonus:['bonus','incentive','variable','stip','commission','performancepay']};
+const GEN_E=['id','grade','role','fn','base','oa','ob','bonus'];
+const SCH_G={grade:['grade','level','band','jobgrade','salarygrade','paygrade','joblevel','careerlevel','jobband','hostgrade','gradecode','payband','tier'],bg:['benchmarkgrade','benchmarklevel','mappedbenchmark','benchmark','marketlevel','marketgrade','surveygrade','marketmatch','mappedlevel'],
+  min:['rangeminimum','rangemin','minimum','min','bandmin','minsalary','salaryminimum','lowerlimit','lower','floor','start'],max:['rangemaximum','rangemax','maximum','max','bandmax','maxsalary','salarymaximum','upperlimit','upper','ceiling','cap'],mid:['rangemidpoint','midpoint','mid','mp'],
+  p25:['marketp25','p25','25thpercentile','25th','q1','lowerquartile','mktp25','market25'],p50:['marketp50','p50','50thpercentile','50th','median','marketmedian','mktp50','marketmid','market50'],p75:['marketp75','p75','75thpercentile','75th','q3','upperquartile','mktp75','market75'],p90:['marketp90','p90','90thpercentile','90th','mktp90','market90'],
+  ma:['marketallowance','allowancemarket','marketallow'],mb:['marketbonus','bonusmarket','marketstip'],me:['marketbenefit','benefitmarket']};
+const GEN_G=['grade'];
+const IGN=/tcc|ctc|totalcomp|totalrem|totalpackage|totalcash|totalreward|gross|netpay|netsalary|package|compa|ratio/;
+const FRIENDLY={id:'Employee ID',grade:'Grade',role:'Role',fn:'Function',gender:'Gender',age:'Age',ten:'Tenure',base:'Base salary',hous:'Housing',trans:'Transport / fuel',oa:'Other allowances',med:'Medical',ret:'Retirement',ins:'Insurance',ob:'Other benefits',bpct:'Bonus target %',bonus:'Bonus paid',bg:'Benchmark link',min:'Range min',max:'Range max',mid:'Midpoint',p25:'Market P25',p50:'Market P50',p75:'Market P75',p90:'Market P90',ma:'Market allowances',mb:'Market bonus %',me:'Market benefits'};
+function scoreAlias(h,a){if(h===a)return 1000+a.length;if(a.length<=2)return 0;if(a.length===3)return((/^p\d\d$/.test(a)||a==='min'||a==='max')&&(h.startsWith(a)||h.endsWith(a)))?3:0;if(a.length===4)return(h.startsWith(a)||h.endsWith(a))?4:0;return h.includes(a)?a.length:0}
+function mapHeaders(headers,SCH,GEN){const out=[];headers.forEach((raw,i)=>{const n=cleanH(raw);if(!n||IGN.test(n))return;let bf=null,bs=0;
+  for(const f in SCH)for(const a of SCH[f]){let s=scoreAlias(n,a);if(s&&s<1000&&!GEN.includes(f))s+=20;if(s>bs){bs=s;bf=f}}
+  if(bf){const r=String(raw).toLowerCase();if(bf==='bonus'&&/%|pct|percent|target|rate/.test(r))bf='bpct';out.push({i,f:bf,s:bs,h:String(raw).trim(),mon:/month|mthly|permonth|\bpm\b/.test(r)?12:1})}});return out}
+function readSheet(ws){const aoa=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:true,blankrows:false});if(!aoa||aoa.length<2)return null;
+  const U=Object.assign({},SCH_E,SCH_G);let hr=0,bc=-1;
+  for(let r=0;r<Math.min(25,aoa.length);r++){const c=aoa[r].filter(x=>typeof x==='string'&&x.trim()&&mapHeaders([x],U,[]).length).length;if(c>bc){bc=c;hr=r}}
+  return{headers:aoa[hr].map(x=>String(x).trim()),rows:aoa.slice(hr+1).filter(r=>r.some(c=>c!==''&&c!=null)&&!/^(grand )?total/i.test(String(r[0]).trim()))}}
+function toNum(v){if(typeof v==='number')return isFinite(v)?v:undefined;if(v==null)return;let s=String(v).trim().replace(/[,\s]/g,'');if(!s||s==='-')return;const m=s.match(/-?\d+(\.\d+)?/);if(!m)return;let n=parseFloat(m[0]);if(/^\(.*\)$/.test(s))n=-Math.abs(n);if(/\dk$/i.test(s))n*=1e3;else if(/\dm$/i.test(s))n*=1e6;return n}
+const best=(M,f)=>M.filter(x=>x.f===f).sort((a,b)=>b.s-a.s)[0];
+const has=(M,f)=>M.some(x=>x.f===f);
+
+function detectGradeColFallback(headers,rows){
+  let bestIdx=-1,bestScore=0;
+  headers.forEach((h,i)=>{
+    const clean=cleanH(h);
+    if(!clean||/(id|name|emp|salary|base|pay|bonus|allow|ben|age|ten|gender|sex|fn|func|dept|role|title|desig)/.test(clean))return;
+    const vals=rows.map(r=>String(r[i]??'').trim()).filter(Boolean);
+    if(!vals.length)return;
+    const uniq=new Set(vals);
+    const codeLike=vals.filter(v=>v.length<=20&&/\d/.test(v)&&!/^\d+(\.\d+)?$/.test(v)).length/vals.length;
+    if(uniq.size>=2&&uniq.size<=Math.max(40,vals.length*0.6)&&codeLike>bestScore){bestScore=codeLike;bestIdx=i}
+  });
+  return bestScore>=0.45?{i:bestIdx,f:'grade',s:50,h:headers[bestIdx]||'Grade'}:null;
 }
 
-function derive(){
-  const basePool=S.emps.filter(e=>S.pop==='All'||e.fn===S.pop);
-  RAW_E=basePool;
-  const sortedRaw=S.grades.slice().sort((a,b)=>a.min-b.min);
-  G=sortedRaw.map((g,idx)=>{
-    const bm=resolveBenchmark(g,idx,sortedRaw.length);
-    return {...g, bGrade:bm.bGrade, p25:bm.p25, p50:bm.p50, p75:bm.p75, p90:bm.p90, mAllow:bm.mAllow, mBonus:bm.mBonus, mBen:bm.mBen};
-  });
-  G.forEach((g,i)=>{
-    const n=G[i+1], prev=G[i-1];
-    g.mid=(g.min+g.max)/2;
-    g.bw=(g.max-g.min)/g.min*100;
-    g.prog=prev?(g.mid-prev.mid)/prev.mid*100:null;
-    g.diff=prev?(g.mid-prev.mid):null;
-    g.ovlPrev=prev?Math.max(0,(prev.max-g.min)/(prev.max-prev.min)*100):null;
-    g.ovl=n?Math.max(0,(g.max-n.min)/(g.max-g.min)*100):null;
-  });
+function parseWorkbook(wb,fname){
+  const rep={file:fname,sheets:[],map:[],warn:[],miss:[]};
+  const sh=wb.SheetNames.map(n=>{const d=readSheet(wb.Sheets[n]);if(!d)return null;const eM=mapHeaders(d.headers,SCH_E,GEN_E),gM=mapHeaders(d.headers,SCH_G,GEN_G);
+    if(!has(eM,'grade')){const fb=detectGradeColFallback(d.headers,d.rows);if(fb)eM.push(fb)}
+    if(!has(gM,'grade')){const fb=detectGradeColFallback(d.headers,d.rows);if(fb)gM.push(fb)}
+    return{n,d,eM,gM,eS:has(eM,'base')&&has(eM,'grade')?10+Math.min(d.rows.length,1e4)/1e4:has(eM,'base')?3:0,gS:has(gM,'min')&&has(gM,'max')?10:(has(gM,'min')||has(gM,'max'))&&has(gM,'mid')?9:0,mS:has(gM,'p50')?5:0}}).filter(Boolean);
+  if(!sh.length)throw new Error('The file has no readable sheets.');
+  const emp=sh.filter(s=>s.eS>=10&&s.d.rows.length>=2).sort((a,b)=>b.eS-a.eS)[0]||null;
+  const gsh=sh.filter(s=>s!==emp&&s.gS>=9).sort((a,b)=>b.gS-a.gS)[0]||null;
+  const bsh=sh.filter(s=>s!==emp&&s!==gsh&&s.mS>0).sort((a,b)=>b.mS-a.mS)[0]||null;
+  if(!emp&&!gsh)throw new Error('Could not find an employee sheet (needs a Grade column and a Base Salary column) or a grade sheet (needs Grade, Min and Max columns). Headers seen on the first sheet: '+sh[0].d.headers.filter(Boolean).slice(0,12).join(', '));
 
-  if(S.excludeOutliers){
-    E=basePool.filter(e=>{
-      const g=G.find(x=>x.grade===e.grade);
-      return g && e.base>=g.min && e.base<=g.max;
-    });
-  } else {
-    E=basePool;
+  const grades=[];const gidx={};const addGrade=(name,o)=>{const k=gk(name);if(!k)return null;if(!gidx[k]){gidx[k]={grade:gname(name),...o,k};grades.push(gidx[k])}else Object.entries(o).forEach(([a,b])=>{if(gidx[k][a]==null&&b!=null)gidx[k][a]=b});return gidx[k]};
+  const gradeRows=(s,src)=>{const M=s.gM,gc=best(M,'grade')||{i:0,h:s.d.headers[0]};rep.sheets.push(src+': "'+s.n+'" ('+s.d.rows.length+' rows)');
+    ['grade','bg','min','max','mid','p25','p50','p75','p90','ma','mb','me'].forEach(f=>{const c=f==='grade'?gc:best(M,f);if(c&&!rep.map.some(x=>x[0]===FRIENDLY[f]))rep.map.push([FRIENDLY[f],c.h])});
+    s.d.rows.forEach(r=>{const nm=r[gc.i];if(nm===''||nm==null)return;const v=f=>{const c=best(M,f);return c?toNum(r[c.i])*(c.mon||1):undefined};let min=v('min'),max=v('max'),mid=v('mid');
+      if(min!=null&&max==null&&mid!=null)max=2*mid-min;if(max!=null&&min==null&&mid!=null)min=2*mid-max;
+      let mb=v('mb');if(mb!=null&&mb<=1)mb*=100;const bc=best(M,'bg');
+      addGrade(nm,{min,max,bGrade:bc&&r[bc.i]!==''?String(r[bc.i]).trim():undefined,p25:v('p25'),p50:v('p50'),p75:v('p75'),p90:v('p90'),mAllow:v('ma'),mBonus:mb,mBen:v('me')})})};
+  if(gsh)gradeRows(gsh,'Grades');
+  else if(emp&&emp.gS>=9)gradeRows(emp,'Grades (inside employee sheet)');
+
+  let benchmarks=[];
+  const mkBench=(label,o)=>{const p50=o.p50;if(p50==null)return null;return{bGrade:String(label).trim(),p25:o.p25??p50*.88,p50,p75:o.p75??p50*1.12,p90:o.p90??p50*1.25,mAllow:o.mAllow??p50*.1,mBonus:o.mBonus??10,mBen:o.mBen??p50*.12,partial:o.mAllow==null||o.mBonus==null||o.mBen==null}};
+  if(bsh){const M=bsh.gM,lc=best(M,'grade')||best(M,'bg')||{i:0};rep.sheets.push('Market benchmarks: "'+bsh.n+'" ('+bsh.d.rows.length+' levels)');
+    benchmarks=bsh.d.rows.map(r=>{const v=f=>{const c=best(M,f);return c?toNum(r[c.i]):undefined};let mb=v('mb');if(mb!=null&&mb<=1)mb*=100;return mkBench(r[lc.i],{p25:v('p25'),p50:v('p50'),p75:v('p75'),p90:v('p90'),mAllow:v('ma'),mBonus:mb,mBen:v('me')})}).filter(Boolean)}
+  else benchmarks=grades.filter(g=>g.p50!=null).map(g=>mkBench(g.grade,g)).filter(Boolean);
+  benchmarks.sort((a,b)=>a.p50-b.p50);
+  if(benchmarks.some(b=>b.partial))rep.warn.push('Some market allowance, bonus or benefit values were missing and have been estimated as a share of market P50.');
+
+  let emps=[];let dropped=0,unmapped=0;
+  if(emp){const M=emp.eM,d=emp.d;rep.sheets.push('Employees: "'+emp.n+'" ('+d.rows.length+' rows)');
+    const single=['id','grade','role','fn','gender','age','ten','base','bpct','bonus'],ml={};
+    const sel={};single.forEach(f=>{const c=best(M,f);if(c)sel[f]=c});
+    ['hous','trans','oa','med','ret','ins','ob'].forEach(f=>ml[f]=M.filter(x=>x.f===f));
+    const dropTotal=(gen,spec)=>{if(spec.some(f=>ml[f].length))ml[gen]=ml[gen].filter(c=>!/total|overall|sum/i.test(c.h))};dropTotal('oa',['hous','trans']);dropTotal('ob',['med','ret','ins']);
+    if(sel.bonus&&!sel.bpct&&sel.base){const bv=d.rows.map(r=>toNum(r[sel.bonus.i])).filter(x=>x!=null).sort((a,b)=>a-b),bs=d.rows.map(r=>toNum(r[sel.base.i])).filter(x=>x>0).sort((a,b)=>a-b);
+      if(bv.length&&bs.length&&bv[bv.length-1]<=100&&bs[Math.floor(bs.length/2)]>5000){sel.bpct=sel.bonus;delete sel.bonus;rep.warn.push('The "'+sel.bpct.h+'" column holds small values, so it was read as a bonus target %, not an amount.')}}
+    single.forEach(f=>{if(sel[f])rep.map.push([FRIENDLY[f],sel[f].h])});['hous','trans','oa','med','ret','ins','ob'].forEach(f=>{if(ml[f].length)rep.map.push([FRIENDLY[f],ml[f].map(c=>c.h).join(' + ')])});
+    if(M.some(x=>x.mon>1))rep.warn.push('Monthly columns were detected and annualised (x12).');
+    ['bonus','med','ret','hous','trans'].forEach(f=>{if(!(sel[f]||(ml[f]&&ml[f].length)))rep.miss.push(FRIENDLY[f])});
+    const sumCols=(r,cols)=>sum(cols.map(c=>(toNum(r[c.i])||0)*c.mon));
+    d.rows.forEach((r,i)=>{const base=sel.base?toNum(r[sel.base.i])*sel.base.mon:undefined,g=sel.grade?r[sel.grade.i]:'';if(base==null||isNaN(base)||base<=0||g===''||g==null){dropped++;return}
+      let bp=sel.bpct?toNum(r[sel.bpct.i]):undefined;if(bp!=null&&(bp>1||/%/.test(String(r[sel.bpct.i]))))bp/=100;
+      let bonus=sel.bonus?(toNum(r[sel.bonus.i])||0)*sel.bonus.mon:(bp?base*bp:0);
+      emps.push({id:String(sel.id?r[sel.id.i]:'E'+(i+1)),grade:g,role:String(sel.role&&r[sel.role.i]!==''?r[sel.role.i]:'Unspecified').trim(),fn:String(sel.fn&&r[sel.fn.i]!==''?r[sel.fn.i]:'All staff').trim(),gender:sel.gender?(c=>/^(f|w)/i.test(c)?'F':/^m/i.test(c)?'M':'')(String(r[sel.gender.i]).trim()):'',age:sel.age?(v=>v>=14&&v<=80?v:null)(toNum(r[sel.age.i])):null,ten:sel.ten?(v=>v>=0&&v<=50?v:null)(toNum(r[sel.ten.i])):null,base,
+        hous:sumCols(r,ml.hous),trans:sumCols(r,ml.trans),oth:sumCols(r,ml.oa),bpct:bp||0,bonus,med:sumCols(r,ml.med),ret:sumCols(r,ml.ret),ins:sumCols(r,ml.ins),obn:sumCols(r,ml.ob)})});
+    if(!sel.bonus&&sel.bpct)rep.warn.push('No actual bonus column found, so bonus is assumed paid at target.');
+    emps.forEach(e=>{const k=gk(e.grade);let g=gidx[k];if(!g){g=addGrade(e.grade,{derived:true});unmapped++}e.grade=g.grade});
   }
+  if(!grades.length)throw new Error('No grades could be identified.');
+  let derived=0;grades.forEach(g=>{if(g.min==null||g.max==null){const s=emps.filter(e=>e.grade===g.grade).map(e=>e.base).sort((a,b)=>a-b);if(s.length){g.min=s[0];g.max=s[s.length-1]>s[0]?s[s.length-1]:s[0]*1.2;g.derived=true;derived++}}});
+  const ok=grades.filter(g=>g.min!=null&&g.max!=null&&g.max>g.min);
+  if(!ok.length)throw new Error('Grade ranges could not be read or derived. Provide Min and Max columns or an employee sheet with Grade and Base Salary.');
+  if(derived)rep.warn.push(derived+' grade'+(derived>1?'s have':' has')+' no min/max in the file, so the band was derived from actual pay. Outlier results for these grades are not meaningful until real ranges are supplied.');
+  if(unmapped&&(gsh||(emp&&emp.gS>=9)))rep.warn.push(unmapped+' grade name'+(unmapped>1?'s':'')+' in the employee data did not match the grade sheet and were added as new grades.');
+  if(dropped)rep.warn.push(dropped+' employee row'+(dropped>1?'s were':' was')+' skipped (missing grade or base salary).');
+  if(!benchmarks.length)rep.warn.push('No market benchmark data found. Market values are estimated from grade midpoints until a benchmark sheet is imported.');
+  emps=emps.filter(e=>ok.some(g=>g.grade===e.grade));
+  const out=ok.map(g=>{const mid=(g.min+g.max)/2;let b=null;
+    if(benchmarks.length){b=g.bGrade?benchmarks.find(x=>gk(x.bGrade)===gk(g.bGrade)):null;if(!b)b=benchmarks.find(x=>gk(x.bGrade)===gk(g.grade));if(!b)b=benchmarks.reduce((a,c)=>Math.abs(c.p50-mid)<Math.abs(a.p50-mid)?c:a,benchmarks[0])}
+    return{grade:g.grade,bGrade:b?b.bGrade:'',min:g.min,max:g.max,derived:!!g.derived}});
+  rep.nGrades=out.length;rep.nEmps=emps.length;rep.derived=derived;
+  return{grades:out,benchmarks,emps,rep};
+}
 
-  G.forEach(g=>{
-    g.e=E.filter(e=>e.grade===g.grade);
-    g.rawE=basePool.filter(e=>e.grade===g.grade);
-    g.hc=g.e.length;
-    g.sal=g.e.map(e=>e.base).sort((a,b)=>a-b);
-    const av=f=>avg(g.e.map(f));
-    g.avg=av(e=>e.base);g.aAllow=av(e=>e.allow);g.aBonus=av(e=>e.bonus);g.aBen=av(e=>e.ben);g.aTcc=av(e=>e.tcc);
-    g.aHous=av(e=>e.hous);g.aTrans=av(e=>e.trans);g.aOth=av(e=>e.oth);
-    g.aMed=av(e=>e.med);g.aRet=av(e=>e.ret);g.aIns=av(e=>e.ins);g.aObn=av(e=>e.obn);
-    g.compa=g.hc?g.avg/g.mid*100:null;
-    g.pen=g.hc?avg(g.e.map(e=>(e.base-g.min)/(g.max-g.min)*100)):null;
-    g.below=g.rawE.filter(e=>e.base<g.min).length;
-    g.above=g.rawE.filter(e=>e.base>g.max).length;
-    g.bPct=g.hc?av(e=>e.bpct)*100:null;
-    const tg=sum(g.e.map(e=>e.base*e.bpct));
-    g.payout=tg?sum(g.e.map(e=>e.bonus))/tg*100:null;
-    g.mTcc=g.p50+g.mAllow+g.p50*g.mBonus/100+g.mBen;
-    const f=g.e.filter(e=>e.gender==='F').map(e=>e.base),m=g.e.filter(e=>e.gender==='M').map(e=>e.base);
-    g.gap=f.length>=1&&m.length>=1?(avg(m)-avg(f))/avg(m)*100:null;
-    g.fPct=g.hc?(g.e.filter(e=>e.gender==='F').length/g.hc*100):0;
-    g.mPct=g.hc?(g.e.filter(e=>e.gender==='M').length/g.hc*100):0;
-    g.avgAge=g.hc?av(e=>e.age||32):0;
-    g.tcor=corr(g.e.map(e=>e.ten),g.e.map(e=>e.base));
-    g.mp=g.hc?mktPct(g,g.avg):null;
-  });
+function handleExcelImport(ev){
+  const file=ev.target.files[0];if(!file)return;const rd=new FileReader();
+  rd.onload=e=>{try{
+    const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});const r=parseWorkbook(wb,file.name);
+    prep(r.emps);S.grades=r.grades;S.benchmarks=r.benchmarks;S.emps=r.emps;S.estMarket=!r.benchmarks.length;S.derivedBands=r.derived>0;S.report=r.rep;S.sel=0;S.excludeOutliers=false;S.manual=new Set();S.collapsed=new Set();S.node=null;S.pop='All';S.flowScope='All';S.funnelGrade='All';
+    setPopOptions();document.getElementById('data-status').innerText=`${file.name} (${r.rep.nGrades} grades, ${r.rep.nEmps} staff)`;document.getElementById('btn-report').classList.remove('hidden');
+    S.fresh=true;renderAll();showReport();
+  }catch(err){console.error(err);showMsg('Import problem',err.message||'Could not read this file.')}ev.target.value=''};
+  rd.readAsArrayBuffer(file);
+}
+function showReport(){const r=S.report;if(!r)return;
+  const chips=G.slice(0,40).map(g=>`<span class="inline-block bg-slate-100 border border-slate-200 rounded-full px-2.5 py-0.5 text-[11px] font-semibold mr-1 mb-1">${esc(g.grade)}${g.derived?' *':''}</span>`).join('')+(G.length>40?`<span class="sub">+${G.length-40} more</span>`:'');
+  showHTML('Import summary',`<div class="space-y-4"><div><div class="font-bold text-slate-900 mb-1">${r.nGrades} grades and ${r.nEmps} employees detected</div><div>${chips}</div>${S.derivedBands?'<div class="sub mt-1">* band derived from actual pay</div>':''}</div>
+   <div><div class="font-bold text-slate-900 mb-1">Sheets used</div>${r.sheets.map(s=>`<div class="text-xs">• ${esc(s)}</div>`).join('')}</div>
+   <div><div class="font-bold text-slate-900 mb-1">Columns matched automatically</div><div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">${r.map.map(m=>`<div class="flex justify-between gap-2 border-b border-slate-100 py-0.5"><span class="text-slate-500">${esc(m[0])}</span><b class="truncate">${esc(m[1])}</b></div>`).join('')}</div></div>
+   ${r.miss.length?`<div class="text-xs text-slate-500">Not found (treated as zero): ${r.miss.map(esc).join(', ')}</div>`:''}
+   ${r.warn.length?`<div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800 space-y-1">${r.warn.map(w=>`<div>• ${esc(w)}</div>`).join('')}</div>`:''}</div>`)}
+function setPopOptions(){const f=[...new Set(S.emps.map(e=>e.fn))].sort();document.getElementById('pop').innerHTML=['All',...f].map(x=>`<option>${esc(x)}</option>`).join('');S.pop='All'}
 
+/* ================= ANALYTICS ENGINE ================= */
+function resolveBenchmark(g,mid){const B=S.benchmarks;
+  if(B.length){let b=g.bGrade?B.find(x=>gk(x.bGrade)===gk(g.bGrade)):null;if(!b)b=B.reduce((a,c)=>Math.abs(c.p50-mid)<Math.abs(a.p50-mid)?c:a,B[0]);return b}
+  return{bGrade:'Estimated',p25:mid*.88,p50:mid,p75:mid*1.12,p90:mid*1.25,mAllow:mid*.1,mBonus:10,mBen:mid*.12}}
+function derive(){
+  const pool=S.emps.filter(e=>S.pop==='All'||e.fn===S.pop);
+  RAW_E=pool;
+  G=S.grades.slice().sort((a,b)=>((a.min+a.max)-(b.min+b.max))||natGrade(a.grade,b.grade)).map(g=>{const mid=(g.min+g.max)/2,b=resolveBenchmark(g,mid);return{...g,mid,bGrade:b.bGrade,p25:b.p25,p50:b.p50,p75:b.p75,p90:b.p90,mAllow:b.mAllow,mBonus:b.mBonus,mBen:b.mBen}});
+  const gm={};G.forEach(g=>gm[g.grade]=g);
+  G.forEach((g,i)=>{const n=G[i+1],p=G[i-1];g.bw=(g.max-g.min)/g.min*100;g.prog=p?(g.mid-p.mid)/p.mid*100:null;g.diff=p?g.mid-p.mid:null;g.ovlPrev=p?Math.max(0,(p.max-g.min)/(p.max-p.min)*100):null;g.ovl=n?Math.max(0,(g.max-n.min)/(g.max-g.min)*100):null});
+  E=pool.filter(e=>{if(S.manual.has(e.id))return false;if(S.excludeOutliers){const g=gm[e.grade];return g&&e.base>=g.min&&e.base<=g.max}return true});
+  G.forEach(g=>{g.rawE=pool.filter(e=>e.grade===g.grade);g.e=E.filter(e=>e.grade===g.grade);g.hc=g.e.length;g.sal=g.e.map(e=>e.base).sort((a,b)=>a-b);const av=f=>avg(g.e.map(f));
+    g.avg=av(e=>e.base);g.aAllow=av(e=>e.allow);g.aBonus=av(e=>e.bonus);g.aBen=av(e=>e.ben);g.aTcc=av(e=>e.tcc);g.aHous=av(e=>e.hous);g.aTrans=av(e=>e.trans);g.aOth=av(e=>e.oth);g.aMed=av(e=>e.med);g.aRet=av(e=>e.ret);g.aIns=av(e=>e.ins);g.aObn=av(e=>e.obn);
+    g.compa=g.hc?g.avg/g.mid*100:null;g.pen=g.hc?avg(g.e.map(e=>(e.base-g.min)/(g.max-g.min)*100)):null;
+    g.below=g.rawE.filter(e=>e.base<g.min).length;g.above=g.rawE.filter(e=>e.base>g.max).length;
+    g.bPct=g.hc?av(e=>e.bpct)*100:null;const tg=sum(g.e.map(e=>e.base*e.bpct));g.payout=tg?sum(g.e.map(e=>e.bonus))/tg*100:null;g.mTcc=g.p50+g.mAllow+g.p50*g.mBonus/100+g.mBen;
+    const f=g.e.filter(e=>e.gender==='F').map(e=>e.base),m=g.e.filter(e=>e.gender==='M').map(e=>e.base);g.gap=f.length&&m.length?(avg(m)-avg(f))/avg(m)*100:null;g.mp=g.hc?mktPct(g,g.avg):null;
+    g.fPct=g.hc?g.e.filter(e=>e.gender==='F').length/g.hc*100:0;g.mPct=g.hc?g.e.filter(e=>e.gender==='M').length/g.hc*100:0;
+    const ag=g.e.map(e=>e.age).filter(x=>x!=null&&!isNaN(x)),tn=g.e.map(e=>e.ten).filter(x=>x!=null&&!isNaN(x));g.avgAge=ag.length?avg(ag):null;g.avgTen=tn.length?avg(tn):null});
   const t=f=>sum(E.map(f)),hc=E.length;
-  K={hc,rawHc:basePool.length,base:t(e=>e.base),allow:t(e=>e.allow),bonus:t(e=>e.bonus),ben:t(e=>e.ben),tcc:t(e=>e.tcc),
-     hous:t(e=>e.hous),trans:t(e=>e.trans),oth:t(e=>e.oth),med:t(e=>e.med),ret:t(e=>e.ret),ins:t(e=>e.ins),obn:t(e=>e.obn)};
-  K.avgBase=hc?K.base/hc:0;K.avgTcc=hc?K.tcc/hc:0;K.medTcc=quant(E.map(e=>e.tcc).sort((a,b)=>a-b),50);
-  K.out=sum(G.map(g=>g.below+g.above));K.ten=avg(E.map(e=>e.ten));K.age=avg(E.map(e=>e.age||32));
+  K={hc,rawHc:pool.length,base:t(e=>e.base),allow:t(e=>e.allow),bonus:t(e=>e.bonus),ben:t(e=>e.ben),tcc:t(e=>e.tcc)};
+  K.avgBase=hc?K.base/hc:0;K.avgTcc=hc?K.tcc/hc:0;K.medTcc=quant(E.map(e=>e.tcc).sort((a,b)=>a-b),50);K.out=sum(G.map(g=>g.below+g.above));
   const tg=sum(E.map(e=>e.base*e.bpct));K.payout=tg?K.bonus/tg*100:null;
   const w=G.filter(g=>g.gap!=null);K.gap=w.length?sum(w.map(g=>g.gap*g.hc))/sum(w.map(g=>g.hc)):null;
-  K.baseVs=hc?sum(G.map(g=>g.avg*g.hc))/sum(G.map(g=>g.p50*g.hc))*100:null;
-  K.tccVs=hc?sum(G.map(g=>g.aTcc*g.hc))/sum(G.map(g=>g.mTcc*g.hc))*100:null;
-  const cr=(a,b)=>hc?sum(G.map(g=>g[a]*g.hc))/sum(G.map(g=>g[b]*g.hc))*100:null;
-  K.allowVs=cr('aAllow','mAllow');K.benVs=cr('aBen','mBen');
+  K.baseVs=hc?sum(G.map(g=>g.avg*g.hc))/sum(G.map(g=>g.p50*g.hc))*100:null;K.tccVs=hc?sum(G.map(g=>g.aTcc*g.hc))/sum(G.map(g=>g.mTcc*g.hc))*100:null;
+  const cr=(a,b)=>hc?sum(G.map(g=>g[a]*g.hc))/sum(G.map(g=>g[b]*g.hc))*100:null;K.allowVs=cr('aAllow','mAllow');K.benVs=cr('aBen','mBen');
   K.bonusVs=hc?sum(G.map(g=>(g.bPct||0)*g.hc))/sum(G.map(g=>g.mBonus*g.hc))*100:null;
+  const A=E.map(e=>e.age).filter(x=>x!=null&&!isNaN(x)),Tn=E.map(e=>e.ten).filter(x=>x!=null&&!isNaN(x));K.age=A.length?avg(A):null;K.ten=Tn.length?avg(Tn):null;K.fPct=hc?E.filter(e=>e.gender==='F').length/hc*100:0;
 }
-
 function toBe(over){
   const p=Object.assign({},S.tb,over);let any=0;
-  const T=G.map(g=>{
-    const mid=mkt(g,p.pct),min=mid*2/(2+p.bw/100),max=min*(1+p.bw/100);
-    const aT=g.mAllow*p.allowPct/100,bT=g.mBen*p.benPct/100,tp=Math.max(0,(g.mBonus+p.bonusDelta)/100),po=(g.payout==null?100:g.payout)/100;
+  const T=G.map(g=>{const mid=mkt(g,p.pct),min=mid*2/(2+p.bw/100),max=min*(1+p.bw/100);const aT=g.mAllow*p.allowPct/100,bT=g.mBen*p.benPct/100,tp=Math.max(0,(g.mBonus+p.bonusDelta)/100),po=(g.payout==null?100:g.payout)/100;
     const t={g,mid,min,max,nb:0,na:0,cB:0,cA:0,cBo:0,cBe:0,nB:0,nA:0,nBo:0,nBe:0};
-    g.e.forEach(e=>{
-      let b=e.base;if(b<min)b=min;if(b<mid)b+=(mid-b)*p.gap/100;if(b>max&&e.base<=max)b=max;
-      const dB=b-e.base,dA=Math.max(0,aT-e.allow),dBo=Math.max(0,b*tp*po-e.bonus),dBe=Math.max(0,bT-e.ben);
-      if(e.base<min)t.nb++;if(e.base>max)t.na++;
-      t.cB+=dB;t.cA+=dA;t.cBo+=dBo;t.cBe+=dBe;
-      if(dB>.5)t.nB++;if(dA>.5)t.nA++;if(dBo>.5)t.nBo++;if(dBe>.5)t.nBe++;if(dB+dA+dBo+dBe>.5)any++;
-    });
-    t.cOn=p.onCost/100*(t.cB+t.cA+t.cBo);
-    t.asTcc=sum(g.e.map(e=>e.tcc));t.asCtc=t.asTcc+p.onCost/100*sum(g.e.map(e=>e.base+e.allow+e.bonus));
-    t.inc=t.cB+t.cA+t.cBo+t.cBe;t.toTcc=t.asTcc+t.inc;t.toCtc=t.asCtc+t.inc+t.cOn;
-    return t;});
+    g.e.forEach(e=>{let b=e.base;if(b<min)b=min;if(b<mid)b+=(mid-b)*p.gap/100;if(b>max&&e.base<=max)b=max;
+      const dB=b-e.base,dA=Math.max(0,aT-e.allow),dBo=Math.max(0,b*tp*po-e.bonus),dBe=Math.max(0,bT-e.ben);if(e.base<min)t.nb++;if(e.base>max)t.na++;
+      t.cB+=dB;t.cA+=dA;t.cBo+=dBo;t.cBe+=dBe;if(dB>.5)t.nB++;if(dA>.5)t.nA++;if(dBo>.5)t.nBo++;if(dBe>.5)t.nBe++;if(dB+dA+dBo+dBe>.5)any++});
+    t.cOn=p.onCost/100*(t.cB+t.cA+t.cBo);t.asTcc=sum(g.e.map(e=>e.tcc));t.asCtc=t.asTcc+p.onCost/100*sum(g.e.map(e=>e.base+e.allow+e.bonus));
+    t.inc=t.cB+t.cA+t.cBo+t.cBe;t.toTcc=t.asTcc+t.inc;t.toCtc=t.asCtc+t.inc+t.cOn;return t});
   T.forEach((t,i)=>{const n=T[i+1];t.ovl=n?Math.max(0,(t.max-n.min)/(t.max-t.min)*100):null;t.prog=i?(t.mid/T[i-1].mid-1)*100:null});
   const s=f=>sum(T.map(f));
   const tot={cB:s(t=>t.cB),cA:s(t=>t.cA),cBo:s(t=>t.cBo),cBe:s(t=>t.cBe),cOn:s(t=>t.cOn),nB:s(t=>t.nB),nA:s(t=>t.nA),nBo:s(t=>t.nBo),nBe:s(t=>t.nBe),asTcc:s(t=>t.asTcc),asCtc:s(t=>t.asCtc),toCtc:s(t=>t.toCtc),aff:any,nb:s(t=>t.nb),na:s(t=>t.na)};
-  tot.inc=tot.cB+tot.cA+tot.cBo+tot.cBe;tot.incCtc=tot.inc+tot.cOn;tot.toTcc=tot.asTcc+tot.inc;
-  tot.save=K.hc*p.attrRed/100*p.repl/100*K.avgBase;
-  return{T,tot,p};
+  tot.inc=tot.cB+tot.cA+tot.cBo+tot.cBe;tot.incCtc=tot.inc+tot.cOn;tot.toTcc=tot.asTcc+tot.inc;tot.save=K.hc*p.attrRed/100*p.repl/100*K.avgBase;return{T,tot,p};
 }
 
 /* ================= SHELL ================= */
 function buildShell(){
   document.getElementById('side').innerHTML=MODS.map(m=>`<button class="side" id="btn-${m[0]}" onclick="switchTab('${m[0]}')"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="${m[2]}"/></svg><span>${m[1]}</span></button>`).join('');
-  const sec=(id,h)=>`<section id="tab-${id}" class="tab-content space-y-6">${h}</section>`;
-  const g2='grid md:grid-cols-2 gap-6';
+  const sec=(id,h)=>`<section id="tab-${id}" class="tab-content space-y-6">${h}</section>`,g2='grid lg:grid-cols-2 gap-6';
   document.getElementById('shell').innerHTML=
-  sec('dash',`<div class="flex flex-wrap justify-between items-center gap-2"><h2 class="text-lg font-bold text-slate-900">Executive Rewards Summary</h2><span class="sub">Real-time as-is diagnostics and to-be scenario modeling</span></div>
-    <div class="grid lg:grid-cols-[330px_1fr] gap-5"><div id="db-left" class="space-y-4"></div>
-    <div class="card"><div class="flex justify-between items-center mb-3"><span class="h3 mb-0">Cost & Headcount Waterfall</span><div class="seg"><button id="dm-count" onclick="S.dm='count';renderAll()">Employees</button><button id="dm-cost" onclick="S.dm='cost';renderAll()">Cost</button></div></div><div class="relative h-80"><canvas id="c-db-wf"></canvas></div></div></div>
-    <div class="flex flex-wrap gap-2" id="db-chips"></div><div id="db-tiles" class="grid md:grid-cols-2 gap-4"></div>`)+
-
-  sec('struct',`<div class="card">${sl('pStruct','Position within range (percentile of internal salary band)',10,95,5,'P')}</div>
-    <div id="st-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-    ${tw('tb-struct','Grade Structure & Percentile Matrix','Computed Bandwidth, Midpoint Progression, Midpoint Differential, Overlap & P25/P50/P75/P90')}
-    <div class="${g2}">
-      ${cv('c-st-range','Connected Grade Ranges, Midpoint Progression & Selected Percentile','h-80','','Midpoint progression line connects grade midpoints across overlapping bands')}
-      ${cv('c-st-ovl','Grade Overlap & Midpoint Progression Comparison (%)','h-80','','Dual-metric trend across grade hierarchy')}
-      ${cv('c-st-pct','Internal Percentile Curves (P25, P50, P75, P90)','h-72')}
-      ${cv('c-st-ppl','Range Penetration & Compa-Ratio by Grade (%)','h-72')}
-    </div>
-    <div class="card"><div class="h3">Grade Overlap Heatmap <span class="sub">Share of a grade's range (row) covered by another grade (column)</span></div><div class="overflow-x-auto"><table class="text-xs w-full" id="tb-heat"></table></div></div>`)+
-
+  sec('dash',`<div class="grid lg:grid-cols-[320px_1fr] gap-5"><div id="db-left" class="space-y-4"></div>
+    <div class="card"><div class="flex justify-between items-center mb-3"><span class="h3 mb-0">To-be cost waterfall</span><div class="seg"><button id="dm-count" onclick="S.dm='count';renderAll()">Employees</button><button id="dm-cost" onclick="S.dm='cost';renderAll()">Cost</button></div></div><div class="relative h-80"><canvas id="c-db-wf"></canvas></div></div></div>
+    <div class="flex flex-wrap gap-2" id="db-chips"></div><div id="db-tiles" class="grid md:grid-cols-2 xl:grid-cols-4 gap-4"></div>`)+
+  sec('struct',`<div id="st-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+    ${tw('tb-struct','Grade structure metrics','hover a row to highlight the grade in the ladder')}
+    <div class="card">${sl('pStruct','Percentile position within each salary band',10,95,5,'P')}</div>
+    <div class="grid gap-6">${cv('c-st-range','Grade ladder: bands, overlaps and midpoint progression','h-96','','Orange zones show where adjacent grades overlap. Black tags show midpoint progression. Click a grade to drill down.')}
+    ${cv('c-st-ovl','Overlap and progression by grade','h-72','','Bars: overlap with the next grade. Line: midpoint progression from the previous grade.')}</div>
+    <div class="card"><div class="h3">Overlap heatmap <span class="sub">share of a grade's band (row) covered by another grade (column). Darker means more overlap.</span></div><div class="overflow-x-auto"><table class="text-xs w-full" id="tb-heat"></table></div></div>`)+
   sec('rewards',`<div id="rw-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+    <div class="card"><div class="flex flex-wrap items-center justify-between gap-4 mb-4"><div><div class="h3 mb-0">Where the money goes</div><div class="sub">Hover any block to trace it through the package. Change the scope to a department, a grade or one employee.</div></div>
+      <select id="flow-scope" onchange="S.flowScope=this.value;S.fresh=true;renderAll()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white focus:outline-none focus:border-pwcOrange max-w-[260px]"></select></div>
+      <div id="flow-svg-wrap" class="w-full overflow-x-auto relative"><div id="flow-tip"></div><div id="flow-svg"></div></div></div>
+    <div class="card"><div class="flex flex-wrap justify-between items-center gap-3 mb-2"><div class="h3 mb-0">Package by grade</div><div class="seg"><button id="mx-amt" onclick="S.mixMode='amt';renderAll()">Amount</button><button id="mx-pct" onclick="S.mixMode='pct';renderAll()">% mix</button></div></div><div class="w-full"><div class="relative w-full h-80" id="w-c-rw-mix"><canvas id="c-rw-mix"></canvas></div></div></div>
+    ${tw('tb-rw','Total rewards by grade','average per employee')}
+    <div class="flex flex-wrap items-center justify-between gap-2 pt-2"><h2 class="text-lg font-bold">Demographics & Dispersion Funnel</h2><span class="sub">Gender split, age brackets, tenure and dispersion drill-down across grades</span></div>
+    <div id="dm-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
     <div class="card">
-      <div class="flex flex-wrap items-center justify-between gap-4 mb-4 pb-3 border-b border-slate-100">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
         <div>
-          <div class="h3 mb-0">Total Compensation Flow Diagram</div>
-          <div class="sub">Interactive multi-tier cost breakdown from Total Package into sub-categories (Housing, Transport/Fuel, Medical, Retirement, Insurance)</div>
+          <div class="h3 mb-0">Demographic Dispersion Funnel by Grade</div>
+          <div class="sub">Drill-down funnel tracing active headcount into Gender Split, Age Brackets (&lt;30, 30–39, 40–49, 50+), and Pay Band Positioning</div>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-xs font-semibold text-slate-600">Inspect Scope:</span>
-          <select id="flow-scope" onchange="S.flowScope=this.value;renderFlowChart()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white text-slate-800 focus:outline-none focus:border-pwcOrange"></select>
-        </div>
+        <select id="funnel-grade" onchange="S.funnelGrade=this.value;renderFunnel()" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white focus:outline-none focus:border-pwcOrange"></select>
       </div>
-      <div id="flow-svg-wrap" class="w-full overflow-x-auto"></div>
+      <div id="dm-funnel" class="w-full"></div>
     </div>
-    ${tw('tb-rw','Total Rewards Summary by Grade (Averages per Employee)')}
-    <div class="${g2}">
-      ${cv('c-rw-tcc','Average Total Cash & Benefits by Grade')}
-      ${cv('c-rw-mix','Compensation Mix by Grade (% of Total Package)')}
-      ${cv('c-rw-gender-dist','Demographics: Gender Split by Grade (%)','h-72','','Male vs. Female representation across grades')}
-      ${cv('c-rw-age-dist','Demographics: Average Age & Tenure Profile by Grade','h-72','','Age (years) vs. Tenure (years)')}
-      ${cv('c-rw-gender','Adjusted Gender Base Pay Gap by Grade (%)','h-72','','Positive = Men paid higher than Women')}
-      ${cv('c-rw-ten','Tenure vs. Compa-Ratio Dispersion','h-72','','Each point represents an active employee')}
-      ${cv('c-rw-allow','Allowances Breakdown by Grade (Housing, Transport/Fuel, Other)')}
-      ${cv('c-rw-ben','Core Benefits Breakdown by Grade (Medical, Retirement, Insurance)')}
-    </div>`)+
-
-  sec('bench',`<div class="card space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        <div class="flex-1 min-w-[260px]">${sl('pBench','Target Market Percentile',10,90,5,'P')}</div>
-        <div class="text-xs bg-slate-50 border border-slate-200 px-3 py-2 rounded-lg text-slate-600">
-          Comparing <b class="text-slate-900">${G.length} Client Grades</b> against <b class="text-pwcOrange">${S.benchmarks.length||G.length} Benchmark Levels</b>
-        </div>
-      </div>
-      <div id="bn-map-panel" class="pt-3 border-t border-slate-100"></div>
-    </div>
+    <div class="${g2}">${cv('c-dm-gender','Gender split by grade (%)')}${cv('c-dm-age-band','Age bracket distribution by grade (%)')}${cv('c-dm-age','Average age and tenure by grade')}${cv('c-dm-gap','Gender base pay gap by grade (%)','h-72','','Positive means men are paid more than women within the grade. Red is above 3%.')}${cv('c-dm-ten','Tenure vs. compa-ratio','h-72','lg:col-span-2','Each dot is an employee. Hover for details.')}</div>`)+
+  sec('work',`<div class="flex flex-wrap justify-between items-center gap-2"><h2 class="text-lg font-bold">Organisation tree</h2><span class="sub">Click a grade to collapse it. Click a role for its rewards profile. Orange borders mark staff outside the band.</span></div><div class="soft overflow-x-auto"><div id="wk-tree"></div></div><div id="wk-detail" class="space-y-4"></div>`)+
+  sec('grade',`${cv('c-gd-out','Outliers by grade','h-60','','Employees outside the salary band. Click a bar to open that grade.')}
+    <div class="card"><div class="flex flex-wrap items-center justify-between gap-4"><div class="min-w-0 flex-1"><div class="h3 mb-1">Select grade</div><div id="grade-pills" class="flex flex-wrap gap-2 max-h-24 overflow-y-auto"></div></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 flex items-center gap-3"><div><div class="text-xs font-bold">Remove anomalies</div><div class="text-[11px] text-slate-500" id="gd-cl-note">Exclude staff outside the band</div></div><button id="gd-cleanse-btn" onclick="toggleExclude()" class="px-3 py-1.5 rounded-lg text-xs font-bold transition"></button></div></div></div>
+    <div id="gd-empty" class="card text-sm text-slate-500 hidden">No employees remain in this grade under the current filters.</div>
+    <div id="gd-body" class="space-y-6"><div id="gd-cards" class="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+      ${cv('c-gd-scatter','Individual base pay against the grade band','h-96','','Hover a dot for details. Red dots are outside the band.')}
+      ${tw('tb-emps','Employees to review','',`<div class="flex flex-wrap gap-1.5" id="of-chips"></div>`)}
+      ${tw('tb-roles','Pay differences between roles in this grade')}</div>`)+
+  sec('bench',`<div class="card"><div class="flex flex-wrap items-center gap-6"><div class="flex-1 min-w-[260px]">${sl('pBench','Target market percentile',10,90,5,'P')}</div><div class="text-xs text-slate-600" id="bn-note"></div></div>
+      <details class="mt-3"><summary class="text-xs font-semibold text-pwcOrange cursor-pointer">Adjust grade to benchmark mapping</summary><div id="bn-map-panel" class="pt-3"></div></details></div>
     <div id="bn-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-    <div class="card"><div class="h3">Competitiveness Heatmap <span class="sub">Our average vs. mapped market P50 per component (95% to 105% is aligned)</span></div><div class="overflow-x-auto"><table class="text-xs w-full" id="tb-bnheat"></table></div></div>
-    ${tw('tb-bench','Base Pay Market Matrix (Client Grades Mapped to Benchmark Levels)')}
-    <div class="${g2}">${cv('c-bn-range','Our Range vs. Mapped Market P25 to P90')}${cv('c-bn-ratio','Midpoint Competitiveness (%)')}${cv('c-bn-comp','Components vs. Market (% of Market P50)')}${cv('c-bn-pos','Estimated Market Percentile of Avg Base Pay')}</div>
-    ${tw('tb-bnout','Employee Benchmark Outliers','Base pay below mapped market P25 or above mapped market P90')}`)+
-
-  sec('work',`<div class="flex justify-between items-center"><h2 class="text-lg font-bold">Organisation Tree</h2><span class="sub">Select a role to inspect its rewards profile. Orange borders mark range outliers.</span></div><div class="soft overflow-x-auto"><div id="wk-tree" class="min-w-[900px]"></div></div><div id="wk-detail" class="space-y-4"></div>`)+
-
-  sec('grade',`<div class="card flex flex-wrap items-center justify-between gap-4">
-      <div><div class="h3 mb-1">Select Grade for Deep-Dive</div><div id="grade-pills" class="flex flex-wrap gap-2"></div></div>
-      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 flex items-center gap-3">
-        <div>
-          <div class="text-xs font-bold text-slate-800">Bandwidth Anomaly Elimination</div>
-          <div class="text-[11px] text-slate-500">Exclude staff outside grade min/max</div>
-        </div>
-        <button id="gd-cleanse-btn" onclick="S.excludeOutliers=!S.excludeOutliers;renderAll()" class="px-3 py-1.5 rounded-lg text-xs font-bold transition"></button>
-      </div>
-    </div>
-    <div id="gd-empty" class="card text-sm text-slate-500 hidden">No employee records remaining for this grade under the current filter.</div>
-    <div id="gd-body" class="space-y-6">
-      <div id="gd-cards" class="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
-      <div class="card">${sl('pGrade','Actual base pay percentile within this grade',10,95,5,'P')}<div id="gd-pct-text" class="text-sm text-slate-700 mt-3"></div></div>
-      ${tw('tb-roles','Role Breakdown Within Grade','Comparing role averages against grade midpoint and percentiles')}
-      <div class="${g2}">${cv('c-gd-role','Average Pay Components by Role')}${cv('c-gd-dist','Employee Distribution Across Range Quartiles')}${cv('c-gd-scatter','Individual Base Pay by Role vs. Grade Min / Mid / Max & P25-P75','h-80','md:col-span-2')}</div>
-      ${tw('tb-emps','Identified Grade Outliers & Furthest From Midpoint','Employees earning below grade min / P25 or above grade max / P75')}
-    </div>`)+
-
-  sec('tobe',`<div class="card"><div class="h3">Scenario Presets</div><div class="flex flex-wrap gap-2" id="sc-pills"></div></div>
-    <div class="grid md:grid-cols-3 gap-4"><div class="card space-y-4"><div class="h3">Base pay structure</div>${sl('tb.pct','Midpoint at market percentile',25,90,5,'P')}${sl('tb.bw','Bandwidth (max - min) / min',20,100,5,'','%')}${sl('tb.gap','Gap to midpoint closed for staff below it',0,60,5,'','%')}</div>
-    <div class="card space-y-4"><div class="h3">Allowances, bonus and benefits</div>${sl('tb.allowPct','Allowance floor (% of market P50)',50,130,5,'','%')}${sl('tb.benPct','Benefits floor (% of market P50)',50,130,5,'','%')}${sl('tb.bonusDelta','Bonus target vs. market (pts)',-5,10,1,'','pts')}</div>
-    <div class="card space-y-4"><div class="h3">Employer cost</div>${sl('tb.onCost','Employer on-costs (% of cash pay)',0,30,1,'','%')}<p class="sub">On-costs include payroll taxes and social contributions applied to incremental cash spend.</p></div></div>
-    <div id="tb-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>${tw('tb-tobe','To-Be Structure & Lever Costs')}
-    <div class="${g2}">${cv('c-tb-range','As-Is vs. To-Be Salary Ranges')}${cv('c-tb-ovl','To-Be Overlap & Progression (%)')}${cv('c-tb-lev','Incremental Cost by Lever & Grade')}${cv('c-tb-sc','Scenario Comparison: Incremental Cost')}</div>${tw('tb-sc','Scenario Comparison')}`)+
-
-  sec('impact',`<div class="grid md:grid-cols-4 gap-4"><div class="card">${sl('tb.attrRed','Attrition reduction (pts)',0,10,1,'','pts')}</div><div class="card">${sl('tb.repl','Replacement cost (% of base)',10,100,5,'','%')}</div><div class="card">${sl('tb.phase','Phasing period (years)',1,3,1,'','y')}</div><div class="card"><div class="lbl">Employer on-costs</div><p class="text-xs text-slate-600 mt-1">Configured on To-be design tab: <b id="im-on"></b> of cash pay.</p></div></div>
-    <div id="im-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>${tw('tb-im','Financial Impact by Grade')}
-    <div class="${g2}">${cv('c-im-ctc','Average Cost-to-Company per Employee: As-Is vs. To-Be')}${cv('c-im-wf','Cost Bridge: As-Is CTC to To-Be CTC')}${cv('c-im-ph','Phased Incremental Cost')}${cv('c-im-sens','Sensitivity: Incremental Cost by Target Percentile')}</div>`);
+    <div class="card"><div class="h3">Competitiveness heatmap <span class="sub">our average as % of mapped market P50 (95% to 105% is aligned)</span></div><div class="overflow-x-auto"><table class="text-xs w-full" id="tb-bnheat"></table></div></div>
+    ${tw('tb-bench','Market benchmark matrix by grade')}
+    <div class="${g2}">${cv('c-bn-range','Our bands against market P25 to P90','h-80')}${cv('c-bn-ratio','Midpoint competitiveness (%)','h-80')}</div>`)+
+  sec('tobe',`<div class="card"><div class="h3">Scenario presets</div><div class="flex flex-wrap gap-2" id="sc-pills"></div></div>
+    <div class="grid md:grid-cols-3 gap-4"><div class="card space-y-4"><div class="h3">Base pay structure</div>${sl('tb.pct','Midpoint at market percentile',25,90,5,'P')}${sl('tb.bw','Bandwidth (max - min) / min',20,100,5,'','%')}${sl('tb.gap','Gap to midpoint closed',0,60,5,'','%')}</div>
+    <div class="card space-y-4"><div class="h3">Allowances, bonus, benefits</div>${sl('tb.allowPct','Allowance floor (% of market P50)',50,130,5,'','%')}${sl('tb.benPct','Benefits floor (% of market P50)',50,130,5,'','%')}${sl('tb.bonusDelta','Bonus target vs. market',-5,10,1,'','pts')}</div>
+    <div class="card space-y-4"><div class="h3">Employer cost</div>${sl('tb.onCost','Employer on-costs (% of cash pay)',0,30,1,'','%')}<p class="sub">Pay is only ever raised to the new floors, never reduced.</p></div></div>
+    <div id="tb-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+    <div class="${g2}">${cv('c-tb-range','As-is vs. to-be bands','h-80')}${cv('c-tb-lev','Incremental cost by lever','h-80')}</div>${tw('tb-tobe','To-be structure and lever costs')}`)+
+  sec('impact',`<div class="grid md:grid-cols-3 gap-4"><div class="card">${sl('tb.attrRed','Attrition reduction',0,10,1,'','pts')}</div><div class="card">${sl('tb.repl','Replacement cost (% of base)',10,100,5,'','%')}</div><div class="card">${sl('tb.phase','Phasing period',1,3,1,'','y')}</div></div>
+    <div id="im-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+    <div class="${g2}">${cv('c-im-ctc','Average cost-to-company per employee','h-80')}${cv('c-im-wf','Cost bridge: as-is CTC to to-be CTC','h-80')}</div>${tw('tb-im','Impact by grade')}`);
 }
-
-function switchTab(t){
-  S.tab=t;
-  document.getElementById('page-title').innerText=TITLES[t];
-  document.querySelectorAll('.tab-content').forEach(e=>e.classList.toggle('active',e.id==='tab-'+t));
-  document.querySelectorAll('.side').forEach(b=>b.classList.toggle('active',b.id==='btn-'+t));
-  renderAll();
-}
+function switchTab(t){S.tab=t;S.fresh=true;document.getElementById('page-title').innerText=TITLES[t];
+  document.querySelectorAll('.tab-content').forEach(e=>e.classList.toggle('active',e.id==='tab-'+t));document.querySelectorAll('.side').forEach(b=>b.classList.toggle('active',b.id==='btn-'+t));
+  document.getElementById('scroller').scrollTo({top:0,behavior:'smooth'});renderAll()}
+function toggleExclude(){S.excludeOutliers=!S.excludeOutliers;S.fresh=false;renderAll()}
 
 /* ================= RENDERERS ================= */
 function rDash(){
   const X=toBe(),t=X.tot;
-  const sc=(title,sub,rows,go)=>`<div class="soft"><div class="flex justify-between"><div><div class="font-bold text-sm text-slate-900">${title}</div><div class="sub">${sub}</div></div>${go?`<button class="text-[11px] font-bold text-pwcOrange hover:underline" onclick="switchTab('${go}')">Inspect →</button>`:''}</div><div class="mt-2.5 space-y-1.5 text-xs">${rows.map(r=>`<div class="flex justify-between"><span class="text-slate-600">${r[0]}</span><b class="text-slate-900">${r[1]}</b></div>`).join('')}</div></div>`;
+  const sc=(title,sub,rows,go)=>`<div class="soft"><div class="flex justify-between"><div><div class="font-bold text-sm">${title}</div><div class="sub">${sub}</div></div><button class="text-[11px] font-bold text-pwcOrange hover:underline" onclick="switchTab('${go}')">Open</button></div><div class="mt-2.5 space-y-1.5 text-xs">${rows.map(r=>`<div class="flex justify-between"><span class="text-slate-600">${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div></div>`;
   document.getElementById('db-left').innerHTML=
-    sc('Headcount & Payroll','Active scope summary',[['Employees',fmt(K.hc)],['Base Payroll',fm(K.base)],['Total Rewards (TCC)',fm(K.tcc)],['Avg Rewards / Staff',fm(K.avgTcc)]],'rewards')+
-    sc('To-Be Cost Impact','As-is vs. to-be cost-to-company',[['As-is CTC',fm(t.asCtc)],['To-be CTC',fm(t.toCtc)],['Net Cost Delta',(t.incCtc>=0?'+ ':'- ')+fm(Math.abs(t.incCtc))],['% of As-is CTC',pc(t.incCtc/t.asCtc*100,2)]],'impact')+
-    sc('Market & Bandwidth Health','Internal vs. market P50',[['Base Pay vs P50',pc(K.baseVs)],['Total Rewards vs P50',pc(K.tccVs)],['Bandwidth Outliers',K.out+' staff'],['Impacted by Redesign',t.aff+' of '+K.hc]],'bench');
-  document.getElementById('dm-count').classList.toggle('on',S.dm==='count');
-  document.getElementById('dm-cost').classList.toggle('on',S.dm==='cost');
+    sc('Headcount and payroll','Employees in scope',[['Employees',fmt(K.hc)],['Base payroll',fm(K.base)],['Total rewards',fm(K.tcc)],['Avg rewards / staff',fm(K.avgTcc)]],'rewards')+
+    sc('Pay structure health','Bands and outliers',[['Grades',G.length],['Outside band',K.out+' staff'],['Avg bandwidth',pc(avg(G.map(g=>g.bw)),0)],['Avg overlap',pc(avg(G.filter(g=>g.ovl!=null).map(g=>g.ovl)),0)]],'struct')+
+    sc('To-be cost impact','Current scenario',[['As-is CTC',fm(t.asCtc)],['To-be CTC',fm(t.toCtc)],['Change',(t.incCtc>=0?'+':'-')+fm(Math.abs(t.incCtc))],['% of CTC',pc(t.incCtc/t.asCtc*100,2)]],'impact');
+  document.getElementById('dm-count').classList.toggle('on',S.dm==='count');document.getElementById('dm-cost').classList.toggle('on',S.dm==='cost');
   const labs=['Base pay','Allowances','Bonus','Benefits','On-costs'];
-  if(S.dm==='cost'){
-    const v=[t.cB,t.cA,t.cBo,t.cBe,t.cOn];let run=t.asCtc;const fl=[[0,run]];v.forEach(x=>{fl.push([run,run+x]);run+=x});fl.push([0,run]);
-    chart('c-db-wf',{type:'bar',data:{labels:['As-is CTC',...labs,'To-be CTC'],datasets:[{data:fl,backgroundColor:[C.d,C.o,C.o2,C.o3,C.g,'#cbd5e1',C.d],borderRadius:4}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fm(c.raw[1]-c.raw[0])}}},scales:{y:{min:Math.floor(t.asCtc*.9/1e5)*1e5,title:{display:true,text:'Cost-to-company'},ticks:{callback:v=>fm(v)}}}}});
-  }else chart('c-db-wf',{type:'bar',data:{labels:['Population',...labs.slice(0,4),'Any change'],datasets:[{data:[K.hc,t.nB,t.nA,t.nBo,t.nBe,t.aff],backgroundColor:[C.d,C.o,C.o2,C.o3,C.g,C.d],borderRadius:4}]},options:{plugins:{legend:{display:false}},scales:ySc('Employees',{ticks:{precision:0}})}});
-
-  const gaps=G.filter(g=>g.gap!=null&&Math.abs(g.gap)>3).length,lowA=E.filter(e=>e.allow===0).length;
-  const TL=[
-   ['Exceptions','Employees below grade minimum',sum(G.map(g=>g.below)),'grade',1],['Exceptions','Employees above grade maximum',sum(G.map(g=>g.above)),'grade',1],
-   ['Exceptions','% of employees outside bandwidth',pc(K.rawHc?K.out/K.rawHc*100:0),'grade',K.out>0],['Exceptions','Compa-ratio < 80% or > 120%',E.filter(e=>{const g=G.find(x=>x.grade===e.grade);const c=e.base/g.mid*100;return c<80||c>120}).length,'grade',1],
-   ['Exceptions','Employees with zero allowances',lowA,'rewards',lowA>0],['Exceptions','Grades with overlap > 50%',G.filter(g=>g.ovl>50).length,'struct',1],
-   ['Exceptions','Grades lagging market (< 95%)',G.filter(g=>g.mid/g.p50*100<95).length,'bench',1],['Exceptions','Grades with gender gap > 3%',gaps,'rewards',gaps>0],
-   ['Metrics','Active Headcount',fmt(K.hc)],['Metrics','Client Grades',G.length],['Metrics','Total Base Payroll',fm(K.base)],['Metrics','Total Allowances',fm(K.allow)],['Metrics','Total Bonus Paid',fm(K.bonus)],['Metrics','Total Core Benefits',fm(K.ben)],
-   ['Metrics','Total Rewards (TCC)',fm(K.tcc),'rewards'],['Metrics','Average Bandwidth',pc(avg(G.map(g=>g.bw))),'struct'],['Metrics','Average Midpoint Progression',pc(avg(G.filter(g=>g.prog!=null).map(g=>g.prog))),'struct'],['Metrics','Average Overlap',pc(avg(G.filter(g=>g.ovl!=null).map(g=>g.ovl))),'struct'],
-   ['Benchmarks','Base Pay vs. Market P50',pc(K.baseVs),'bench'],['Benchmarks','Total Rewards vs. Market P50',pc(K.tccVs),'bench'],['Benchmarks','Below Market P25 (base)',E.filter(e=>e.base<G.find(g=>g.grade===e.grade).p25).length,'bench',1],['Benchmarks','Above Market P90 (base)',E.filter(e=>e.base>G.find(g=>g.grade===e.grade).p90).length,'bench',1],
-   ['Demographics','Average Employee Age',K.age.toFixed(1)+' yrs','rewards'],['Demographics','Average Tenure',K.ten.toFixed(1)+' yrs','rewards'],['Demographics','Adjusted Gender Pay Gap',K.gap==null?'-':pc(K.gap),'rewards',K.gap>3],['Demographics','Functions in Scope',new Set(E.map(e=>e.fn)).size]
-  ].map(a=>({c:a[0],l:a[1],v:a[2],link:a[3],warn:a[4]===true||(a[0]==='Exceptions'&&parseFloat(a[2])>0)}));
+  if(S.dm==='cost'){const v=[t.cB,t.cA,t.cBo,t.cBe,t.cOn];let run=t.asCtc;const fl=[[0,run]];v.forEach(x=>{fl.push([run,run+x]);run+=x});fl.push([0,run]);
+    chart('c-db-wf',{data:{labels:['As-is CTC',...labs,'To-be CTC'],datasets:[{data:fl,backgroundColor:[C.d,C.o,C.o2,C.o3,C.blue,'#cbd5e1',C.d],borderRadius:5}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fm(c.raw[1]-c.raw[0])}}},scales:{y:{min:Math.floor(t.asCtc*.9/1e5)*1e5,ticks:{callback:v=>fm(v)},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}})}
+  else chart('c-db-wf',{data:{labels:['Population',...labs.slice(0,4),'Any change'],datasets:[{data:[K.hc,t.nB,t.nA,t.nBo,t.nBe,t.aff],backgroundColor:[C.d,C.o,C.o2,C.o3,C.blue,C.d],borderRadius:5}]},options:{plugins:{legend:{display:false}},scales:ySc('Employees',{ticks:{precision:0}})}});
+  const gOf=e=>G.find(g=>g.grade===e.grade);
+  const TL=[['Exceptions','Employees below band',sum(G.map(g=>g.below)),'grade'],['Exceptions','Employees above band',sum(G.map(g=>g.above)),'grade'],['Exceptions','Grades with overlap > 50%',G.filter(g=>g.ovl>50).length,'struct'],['Exceptions','Grades lagging market',G.filter(g=>g.mid/g.p50*100<95).length,'bench'],
+   ['Metrics','Total base payroll',fm(K.base),'rewards'],['Metrics','Total allowances',fm(K.allow),'rewards'],['Metrics','Total bonus',fm(K.bonus),'rewards'],['Metrics','Total benefits',fm(K.ben),'rewards'],['Metrics','Bonus payout vs. target',pc(K.payout,0),'rewards'],
+   ['Benchmarks','Base pay vs. market P50',pc(K.baseVs),'bench'],['Benchmarks','Total rewards vs. market P50',pc(K.tccVs),'bench'],['Benchmarks','Allowances vs. market',pc(K.allowVs),'bench'],['Benchmarks','Benefits vs. market',pc(K.benVs),'bench'],['Benchmarks','Staff below market P25',E.filter(e=>e.base<gOf(e).p25).length,'bench'],
+   ['Demographics','Female share',pc(K.fPct,0),'rewards'],['Demographics','Adjusted gender gap',K.gap==null?'-':pc(K.gap),'rewards'],['Demographics','Average age',K.age==null?'-':K.age.toFixed(1)+' yrs','rewards'],['Demographics','Average tenure',K.ten==null?'-':K.ten.toFixed(1)+' yrs','rewards']
+  ].map(a=>({c:a[0],l:a[1],v:a[2],link:a[3],warn:(a[0]==='Exceptions'&&parseFloat(a[2])>0)||(a[1]==='Adjusted gender gap'&&K.gap>3)}));
   const cats=['Exceptions','Metrics','Benchmarks','Demographics'];
-  document.getElementById('db-chips').innerHTML=['All',...cats].map(c=>`<button class="pill ${S.chip===c?'on':''}" onclick="S.chip='${c}';renderAll()">${c}${c!=='All'?` (${TL.filter(x=>x.c===c).length})`:''}</button>`).join('');
-  document.getElementById('db-tiles').innerHTML=cats.filter(c=>S.chip==='All'||S.chip===c).map(c=>`<div class="soft ${S.chip!=='All'?'md:col-span-2':''}"><div class="font-bold text-sm text-slate-900 mb-2.5">${c}</div><div class="grid ${S.chip!=='All'?'md:grid-cols-4':'grid-cols-2'} gap-2">${TL.filter(x=>x.c===c).map(x=>`<button class="tile ${x.link?'link':''} ${x.warn?'warn':''}" ${x.link?`onclick="switchTab('${x.link}')"`:''}><span class="t">${x.l}</span><span class="v">${x.v}</span></button>`).join('')}</div></div>`).join('');
+  document.getElementById('db-chips').innerHTML=['All',...cats].map(c=>`<button class="pill ${S.chip===c?'on':''}" onclick="S.chip='${c}';S.fresh=false;renderAll()">${c}</button>`).join('');
+  document.getElementById('db-tiles').innerHTML=cats.filter(c=>S.chip==='All'||S.chip===c).map(c=>`<div class="soft ${S.chip!=='All'?'md:col-span-2 xl:col-span-4':''}"><div class="font-bold text-sm mb-2.5">${c}</div><div class="grid ${S.chip!=='All'?'md:grid-cols-4':'grid-cols-1'} gap-2">${TL.filter(x=>x.c===c).map(x=>`<button class="tile link ${x.warn?'warn':''}" onclick="switchTab('${x.link}')"><span class="t">${x.l}</span><span class="v">${x.v}</span></button>`).join('')}</div></div>`).join('');
 }
 
-function rStruct(){
-  const p=S.pStruct,L=G.map(g=>g.grade),sel=g=>g.min+(g.max-g.min)*p/100;
-  document.getElementById('st-cards').innerHTML=
-    kpi('Total Grades',G.length,'Ordered low to high')+
-    kpi('Average Bandwidth',pc(avg(G.map(g=>g.bw))),'Target benchmark: ~60–80%','text-pwcOrange')+
-    kpi('Avg Midpoint Progression',pc(avg(G.filter(g=>g.prog!=null).map(g=>g.prog))),'Step increase between grades')+
-    kpi('Average Overlap',pc(avg(G.filter(g=>g.ovl!=null).map(g=>g.ovl))),'Adjacent band overlap');
+function rHeat(){
+  document.getElementById('tb-heat').innerHTML=`<thead><tr><th></th>${G.map(g=>`<th class="p-2 text-slate-500">${esc(g.grade)}</th>`).join('')}</tr></thead><tbody>${G.map(a=>`<tr><th class="p-2 text-left">${esc(a.grade)}</th>${G.map(b=>{if(a===b)return'<td class="p-2 heat bg-slate-100 text-slate-400">-</td>';const o=Math.max(0,Math.min(a.max,b.max)-Math.max(a.min,b.min))/(a.max-a.min)*100;return`<td class="p-2 heat" title="${esc(a.grade)} covered by ${esc(b.grade)}: ${o.toFixed(0)}%" style="background:rgba(253,81,8,${(o/100*.85).toFixed(2)});color:${o>55?'#fff':'#334155'}">${o.toFixed(0)}%</td>`}).join('')}</tr>`).join('')}</tbody>`}
 
-  table('tb-struct',[
-    'Grade','Min','Midpoint','Max','Midpoint Progression','Bandwidth','Overlap (w/ Prev)','Midpoint Differential','Internal P25','Internal P50','Internal P75','Internal P90',`Selected P${p}`,'Headcount'
-  ],G.map(g=>{
-    const q=x=>fmt(g.min+(g.max-g.min)*x/100);
-    return[
-      esc(g.grade),
-      fmt(g.min),
-      `<b class="text-pwcOrange">${fmt(g.mid)}</b>`,
-      fmt(g.max),
-      g.prog==null?'<span class="text-slate-400">-</span>':`<span class="font-semibold text-slate-800">${pc(g.prog,0)}</span>`,
-      `<span class="font-semibold">${pc(g.bw,0)}</span>`,
-      g.ovlPrev==null?'<span class="text-slate-400">-</span>':`<span class="font-semibold ${g.ovlPrev>85?'text-amber-600':'text-slate-700'}">${pc(g.ovlPrev,0)}</span>`,
-      g.diff==null?'<span class="text-slate-400">-</span>':`<span class="font-semibold text-slate-800">${fmt(g.diff)}</span>`,
-      q(25),q(50),q(75),q(90),
-      `<b class="text-pwcOrange">${fmt(sel(g))}</b>`,
-      g.hc
-    ];
-  }));
+function renderFunnel(){
+  const box=document.getElementById('dm-funnel'),sel=document.getElementById('funnel-grade');if(!box||!sel)return;
+  const opts=[['All',`All Grades (${E.length} Employees)`],...G.filter(g=>g.hc).map(g=>[g.grade,`${g.grade} (${g.hc} Employees)`])];
+  if(!opts.some(o=>o[0]===S.funnelGrade))S.funnelGrade='All';
+  sel.innerHTML=opts.map(o=>`<option value="${esc(o[0])}" ${o[0]===S.funnelGrade?'selected':''}>${esc(o[1])}</option>`).join('');
+  const sub=S.funnelGrade==='All'?E:E.filter(e=>e.grade===S.funnelGrade);
+  const tot=sub.length||1;
+  const fCnt=sub.filter(e=>e.gender==='F').length,mCnt=sub.filter(e=>e.gender==='M').length;
+  const u30=sub.filter(e=>e.age!=null&&e.age<30).length,a30=sub.filter(e=>e.age!=null&&e.age>=30&&e.age<40).length,a40=sub.filter(e=>e.age!=null&&e.age>=40&&e.age<50).length,a50=sub.filter(e=>e.age!=null&&e.age>=50).length;
+  const gm={};G.forEach(g=>gm[g.grade]=g);
+  const inBand=sub.filter(e=>{const g=gm[e.grade];return g&&e.base>=g.min&&e.base<=g.max}).length;
+  const outBand=sub.length-inBand;
 
-  chart('c-st-range',{
-    data:{
-      labels:L,
-      datasets:[
-        rangeBars(G.map(g=>[g.min,g.max]),'rgba(255, 170, 114, 0.55)','Salary Band (Min–Max)'),
-        line('Midpoint Progression Trajectory',G.map(g=>g.mid),C.d,{borderWidth:2.5,pointRadius:5,pointBackgroundColor:C.d}),
-        line('Selected P'+p+' Curve',G.map(sel),C.o,{borderDash:[5,4],borderWidth:2,pointRadius:4})
-      ]
-    },
-    options:{scales:ySc('Annual Base Pay')}
-  });
-
-  chart('c-st-ovl',{
-    data:{
-      labels:L,
-      datasets:[
-        {type:'bar',label:'Overlap w/ Next Grade (%)',data:G.map(g=>g.ovl??0),backgroundColor:G.map(g=>(g.ovl||0)>60?C.r:'rgba(253,81,8,0.8)'),borderRadius:4,order:2},
-        line('Midpoint Progression (%)',G.map(g=>g.prog??null),C.d,{borderWidth:2.5,pointRadius:4,order:1})
-      ]
-    },
-    options:{scales:ySc('Percentage (%)')}
-  });
-
-  chart('c-st-pct',{type:'line',data:{labels:L,datasets:[25,50,75,90].map((x,i)=>line('P'+x,G.map(g=>g.min+(g.max-g.min)*x/100),[C.g,C.o,C.d,C.o3][i])).concat([line('P'+p+' Selected',G.map(sel),C.r,{borderWidth:3,borderDash:[4,3]})])},options:{scales:ySc()}});
-  chart('c-st-ppl',{type:'bar',data:{labels:L,datasets:[{label:'Avg Range Penetration %',data:G.map(g=>g.pen),backgroundColor:C.d,borderRadius:4},{label:'Compa-Ratio % (Avg / Mid)',data:G.map(g=>g.compa),backgroundColor:C.o3,borderRadius:4}]},options:{scales:ySc('%')}});
-  document.getElementById('tb-heat').innerHTML=`<thead><tr><th></th>${G.map(g=>`<th class="p-2 text-slate-500">${esc(g.grade)}</th>`).join('')}</tr></thead><tbody>${G.map(a=>`<tr><th class="p-2 text-left">${esc(a.grade)}</th>${G.map(b=>{if(a===b)return'<td class="p-2 heat bg-slate-100 text-slate-400">-</td>';const o=Math.max(0,Math.min(a.max,b.max)-Math.max(a.min,b.min))/(a.max-a.min)*100;return`<td class="p-2 heat" style="background:rgba(253,81,8,${(o/100*.85).toFixed(2)});color:${o>55?'#fff':'#334155'}">${o.toFixed(0)}%</td>`}).join('')}</tr>`).join('')}</tbody>`;
-}
-
-function renderFlowChart(){
-  const wrap=document.getElementById('flow-svg-wrap');
-  if(!wrap)return;
-  const fns=[...new Set(E.map(e=>e.fn))].sort();
-  const selEl=document.getElementById('flow-scope');
-  if(selEl){
-    const opts=['All',...fns,...E.slice(0,60).map(e=>`EMP:${e.id}`)];
-    if(!opts.includes(S.flowScope))S.flowScope='All';
-    selEl.innerHTML=`<option value="All" ${S.flowScope==='All'?'selected':''}>Entire Active Scope (${E.length} Staff)</option>`+
-      `<optgroup label="By Department / Function">${fns.map(f=>`<option value="${esc(f)}" ${S.flowScope===f?'selected':''}>Department: ${esc(f)}</option>`).join('')}</optgroup>`+
-      `<optgroup label="By Individual Employee">${E.slice(0,60).map(e=>`<option value="EMP:${esc(e.id)}" ${S.flowScope==='EMP:'+e.id?'selected':''}>${esc(e.id)} — ${esc(e.role)} (${esc(e.grade)})</option>`).join('')}</optgroup>`;
-  }
-
-  let subE=E;
-  let titleLbl='Total Compensation Pool';
-  if(S.flowScope.startsWith('EMP:')){
-    const id=S.flowScope.slice(4);
-    subE=E.filter(e=>e.id===id);
-    if(subE[0])titleLbl=`${subE[0].id} (${subE[0].role})`;
-  } else if(S.flowScope!=='All'){
-    subE=E.filter(e=>e.fn===S.flowScope);
-    titleLbl=`${S.flowScope} Department`;
-  }
-
-  const tot=sum(subE.map(e=>e.tcc))||1;
-  const vBase=sum(subE.map(e=>e.base));
-  const vAllow=sum(subE.map(e=>e.allow));
-  const vBonus=sum(subE.map(e=>e.bonus));
-  const vBen=sum(subE.map(e=>e.ben));
-
-  const vHous=sum(subE.map(e=>e.hous));
-  const vTrans=sum(subE.map(e=>e.trans));
-  const vOth=sum(subE.map(e=>e.oth));
-  const vMed=sum(subE.map(e=>e.med));
-  const vRet=sum(subE.map(e=>e.ret));
-  const vIns=sum(subE.map(e=>e.ins));
-  const vObn=sum(subE.map(e=>e.obn));
-
-  const W=920,H=390;
-  const colX=[20,330,650],nodeW=220;
-  const t2=[
-    {name:'Base Salary',val:vBase,col:'#1E293B'},
-    {name:'Allowances',val:vAllow,col:'#FD5108'},
-    {name:'Variable Bonus',val:vBonus,col:'#FE7C39'},
-    {name:'Core Benefits',val:vBen,col:'#3B82F6'}
+  const stages=[
+    {stage:'1. Total Scope Headcount',sub:'Active population in selected grade',items:[{lbl:'Active Staff',cnt:sub.length,col:'#0F172A'}]},
+    {stage:'2. Gender Dispersion',sub:'Male vs. Female workforce split',items:[{lbl:'Male',cnt:mCnt,col:'#1E293B'},{lbl:'Female',cnt:fCnt,col:'#FD5108'}]},
+    {stage:'3. Age Cohort Dispersion',sub:'Generational distribution across age brackets',items:[{lbl:'Under 30',cnt:u30,col:'#3B82F6'},{lbl:'30 – 39 yrs',cnt:a30,col:'#0EA5E9'},{lbl:'40 – 49 yrs',cnt:a40,col:'#FE7C39'},{lbl:'50+ yrs',cnt:a50,col:'#64748B'}]},
+    {stage:'4. Pay Band Alignment',sub:'Employees within vs. outside grade salary range',items:[{lbl:'Within Band',cnt:inBand,col:'#10B981'},{lbl:'Outside Band',cnt:outBand,col:'#EF4444'}]}
   ];
-  const t3=[
-    {name:'Guaranteed Base',val:vBase,col:'#1E293B',p:0},
-    {name:'Housing Allowance',val:vHous,col:'#FD5108',p:1},
-    {name:'Fuel & Transport',val:vTrans,col:'#FB923C',p:1},
-    {name:'Other Allowances',val:vOth,col:'#FDBA74',p:1},
-    {name:'Performance Bonus',val:vBonus,col:'#FE7C39',p:2},
-    {name:'Medical & Health',val:vMed,col:'#2563EB',p:3},
-    {name:'Retirement / Pension',val:vRet,col:'#3B82F6',p:3},
-    {name:'Life & Insurance',val:vIns,col:'#60A5FA',p:3},
-    {name:'Other Benefits',val:vObn,col:'#93C5FD',p:3}
-  ].filter(x=>x.val>0);
 
-  let y2=24,gap2=14,avail2=H-48-gap2*(t2.length-1);
-  t2.forEach(n=>{n.h=Math.max(26,(n.val/tot)*avail2);n.y=y2;y2+=n.h+gap2;});
-
-  let y3=16,gap3=8,avail3=H-32-gap3*(t3.length-1);
-  t3.forEach(n=>{n.h=Math.max(20,(n.val/tot)*avail3);n.y=y3;y3+=n.h+gap3;});
-
-  const rootH=H-48,rootY=24;
-  let paths='';
-  let runRoot=rootY;
-  t2.forEach((n,idx)=>{
-    const sliceH=(n.val/tot)*rootH;
-    const x0=colX[0]+nodeW,x1=colX[1];
-    const cx=(x0+x1)/2;
-    paths+=`<path class="flow-path" d="M${x0},${runRoot} C${cx},${runRoot} ${cx},${n.y} ${x1},${n.y} L${x1},${n.y+n.h} C${cx},${n.y+n.h} ${cx},${runRoot+sliceH} ${x0},${runRoot+sliceH} Z" fill="${n.col}" fill-opacity="0.22"><title>${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,1)})</title></path>`;
-    runRoot+=sliceH;
-  });
-
-  const pOffsets=[0,0,0,0];
-  t3.forEach(n=>{
-    const parent=t2[n.p];
-    const pRatio=parent.val?(n.val/parent.val):0;
-    const sliceH=pRatio*parent.h;
-    const sy=parent.y+pOffsets[n.p];
-    pOffsets[n.p]+=sliceH;
-    const x0=colX[1]+nodeW,x1=colX[2];
-    const cx=(x0+x1)/2;
-    paths+=`<path class="flow-path" d="M${x0},${sy} C${cx},${sy} ${cx},${n.y} ${x1},${n.y} L${x1},${n.y+n.h} C${cx},${n.y+n.h} ${cx},${sy+sliceH} ${x0},${sy+sliceH} Z" fill="${n.col}" fill-opacity="0.24"><title>${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,1)})</title></path>`;
-  });
-
-  let nodes=`<g class="flow-node"><rect x="${colX[0]}" y="${rootY}" width="${nodeW}" height="${rootH}" rx="8" fill="#0F172A"/><text x="${colX[0]+14}" y="${rootY+28}" fill="#94A3B8" font-size="10" font-weight="700">TOTAL PACKAGE</text><text x="${colX[0]+14}" y="${rootY+48}" fill="#FFFFFF" font-size="13" font-weight="700">${esc(titleLbl)}</text><text x="${colX[0]+14}" y="${rootY+74}" fill="#FD5108" font-size="20" font-weight="800">${fm(tot)}</text><text x="${colX[0]+14}" y="${rootY+94}" fill="#CBD5E1" font-size="11">${subE.length} Employee${subE.length===1?'':'s'}</text></g>`;
-
-  t2.forEach(n=>{
-    nodes+=`<g class="flow-node"><rect x="${colX[1]}" y="${n.y}" width="${nodeW}" height="${n.h}" rx="6" fill="${n.col}"/><text x="${colX[1]+12}" y="${n.y+n.h/2+4}" fill="#FFFFFF" font-size="11.5" font-weight="700">${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,0)})</text></g>`;
-  });
-
-  t3.forEach(n=>{
-    nodes+=`<g class="flow-node"><rect x="${colX[2]}" y="${n.y}" width="${nodeW+20}" height="${n.h}" rx="5" fill="#FFFFFF" stroke="${n.col}" stroke-width="1.5"/><rect x="${colX[2]}" y="${n.y}" width="6" height="${n.h}" rx="2" fill="${n.col}"/><text x="${colX[2]+14}" y="${n.y+n.h/2+4}" fill="#0F172A" font-size="11" font-weight="600">${n.name}: <tspan font-weight="700">${fm(n.val)}</tspan> (${pc(n.val/tot*100,1)})</text></g>`;
-  });
-
-  wrap.innerHTML=`<svg viewBox="0 0 ${W} ${H}" class="w-full min-w-[780px] h-auto select-none">${paths}${nodes}</svg>`;
+  box.innerHTML=`<div class="space-y-3.5">${stages.map((st,idx)=>{
+    const maxW=100-(idx*7);
+    return`<div class="funnel-row bg-slate-50/70 border border-slate-200/80 rounded-xl p-3">
+      <div class="flex flex-wrap justify-between items-center mb-1.5">
+        <div><span class="text-xs font-bold text-slate-900">${st.stage}</span> <span class="text-[11px] text-slate-500 ml-1">${st.sub}</span></div>
+        <div class="flex flex-wrap gap-3 text-[11px]">${st.items.map(it=>`<span class="inline-flex items-center gap-1.5 font-semibold text-slate-700"><span class="w-2.5 h-2.5 rounded-sm" style="background:${it.col}"></span>${it.lbl}: <b>${it.cnt}</b> (${pc(it.cnt/tot*100,0)})</span>`).join('')}</div>
+      </div>
+      <div class="mx-auto transition-all duration-500" style="width:${maxW}%">
+        <div class="h-7 w-full bg-slate-200/70 rounded-lg overflow-hidden flex shadow-inner">
+          ${st.items.filter(it=>it.cnt>0).map(it=>`<div class="funnel-bar h-full flex items-center justify-center text-[11px] font-bold text-white px-2 truncate" style="width:${(it.cnt/tot*100).toFixed(2)}%;background:${it.col}" title="${it.lbl}: ${it.cnt} (${pc(it.cnt/tot*100,1)})">${(it.cnt/tot*100)>=11?`${it.lbl} ${pc(it.cnt/tot*100,0)}`:''}</div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
 }
 
-function rRewards(){
-  const L=G.map(g=>g.grade);
-  document.getElementById('rw-cards').innerHTML=
-    kpi('Total Compensation',fm(K.tcc),'Base + Allowances + Bonus + Benefits','text-pwcOrange')+
-    kpi('Avg Total Rewards',fm(K.avgTcc),'Median: '+fm(K.medTcc))+
-    kpi('Fixed vs Variable',pc((K.tcc-K.bonus)/K.tcc*100,0)+' / '+pc(K.bonus/K.tcc*100,0),'Package leverage')+
-    kpi('Adjusted Gender Gap',K.gap==null?'-':pc(K.gap),'Within-grade base comparison',K.gap>3?'text-rose-600':'');
-
-  renderFlowChart();
-
-  table('tb-rw',['Grade','Headcount','Avg Base','Allowances','Bonus','Benefits','Total Rewards','Female %','Avg Age','Avg Tenure','Gender Gap'],G.map(g=>[
-    esc(g.grade),g.hc,fmt(g.avg),fmt(g.aAllow),fmt(g.aBonus),fmt(g.aBen),`<b class="text-pwcOrange">${fmt(g.aTcc)}</b>`,
-    pc(g.fPct,0),g.avgAge.toFixed(1)+'y',avg(g.e.map(e=>e.ten)).toFixed(1)+'y',
-    g.gap==null?'-':`<span class="${Math.abs(g.gap)>3?'text-rose-600 font-bold':''}">${pc(g.gap)}</span>`
-  ]));
-
-  const ds=(f,names,cols)=>names.map((n,i)=>({label:n,data:G.map(g=>f(g,i)),backgroundColor:cols[i]}));
-  chart('c-rw-tcc',{type:'bar',data:{labels:L,datasets:ds((g,i)=>[g.avg,g.aAllow,g.aBonus,g.aBen][i],['Base','Allowances','Bonus','Benefits'],Object.values(COMP))},options:{scales:stk('Annual Value')}});
-  chart('c-rw-mix',{type:'bar',data:{labels:L,datasets:ds((g,i)=>g.hc?[g.avg,g.aAllow,g.aBonus,g.aBen][i]/g.aTcc*100:0,['Base','Allowances','Bonus','Benefits'],Object.values(COMP))},options:{scales:stk('% of Total',{max:100})}});
-
-  chart('c-rw-gender-dist',{
-    type:'bar',
-    data:{
-      labels:L,
-      datasets:[
-        {label:'Female (%)',data:G.map(g=>g.fPct),backgroundColor:C.o,borderRadius:3},
-        {label:'Male (%)',data:G.map(g=>g.mPct),backgroundColor:C.d,borderRadius:3}
-      ]
-    },
-    options:{scales:stk('Share of Headcount (%)',{max:100})}
-  });
-
-  chart('c-rw-age-dist',{
-    data:{
-      labels:L,
-      datasets:[
-        {type:'bar',label:'Average Age (Years)',data:G.map(g=>g.avgAge),backgroundColor:'rgba(59,130,246,0.75)',borderRadius:4,yAxisID:'y'},
-        line('Average Tenure (Years)',G.map(g=>avg(g.e.map(e=>e.ten))),C.o,{borderWidth:2.5,pointRadius:4,yAxisID:'y1'})
-      ]
-    },
-    options:{scales:{y:{beginAtZero:false,suggestedMin:20,suggestedMax:60,title:{display:true,text:'Age (Yrs)'}},y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false},title:{display:true,text:'Tenure (Yrs)'}}}}
-  });
-
-  chart('c-rw-gender',{type:'bar',data:{labels:L,datasets:[{label:'Gender Pay Gap %',data:G.map(g=>g.gap??0),backgroundColor:G.map(g=>Math.abs(g.gap||0)>3?C.r:C.d),borderRadius:4}]},options:{plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Gap %'}}}}});
-  chart('c-rw-ten',{type:'scatter',data:{datasets:[{label:'Employees',data:E.map(e=>({x:e.ten,y:e.base/G.find(g=>g.grade===e.grade).mid*100,id:e.id,role:e.role})),backgroundColor:'rgba(253,81,8,.65)',pointRadius:4,pointHoverRadius:7}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.id} (${c.raw.role}): ${c.raw.x}y tenure, ${c.raw.y.toFixed(0)}% compa-ratio`}}},scales:{x:{title:{display:true,text:'Tenure (years)'}},y:{title:{display:true,text:'Compa-ratio %'}}}}});
-  chart('c-rw-allow',{type:'bar',data:{labels:L,datasets:ds((g,i)=>[g.aHous,g.aTrans,g.aOth][i],['Housing','Fuel & Transport','Other Allowances'],[C.o,C.o3,C.g])},options:{scales:stk()}});
-  chart('c-rw-ben',{type:'bar',data:{labels:L,datasets:ds((g,i)=>[g.aMed,g.aRet,g.aIns,g.aObn][i],['Medical','Retirement','Insurance','Other Benefits'],[C.blue,C.d,C.o3,C.g])},options:{scales:stk()}});
+function rDemo(){
+  const L=G.map(g=>g.grade),gm={};G.forEach(g=>gm[g.grade]=g);
+  document.getElementById('dm-cards').innerHTML=kpi('Female share',pc(K.fPct,0),'of staff in scope')+kpi('Adjusted gender gap',K.gap==null?'-':pc(K.gap),'base pay, within grade',K.gap>3?'text-rose-600':'')+kpi('Average age',K.age==null?'-':K.age.toFixed(1)+' yrs','across active staff')+kpi('Average tenure',K.ten==null?'-':K.ten.toFixed(1)+' yrs','years of service');
+  renderFunnel();
+  chart('c-dm-gender',{data:{labels:L,datasets:[{label:'Female',data:G.map(g=>g.fPct),backgroundColor:C.o,borderRadius:3},{label:'Male',data:G.map(g=>g.mPct),backgroundColor:C.d,borderRadius:3}]},options:{scales:stk('% of staff',{max:100}),plugins:{tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${pc(c.raw,0)}`}}}}},{drill:true});
+  const ageShare=(g,fn)=>g.hc?(g.e.filter(e=>e.age!=null&&fn(e.age)).length/g.hc*100):0;
+  chart('c-dm-age-band',{data:{labels:L,datasets:[
+    {label:'< 30 yrs',data:G.map(g=>ageShare(g,a=>a<30)),backgroundColor:'#3B82F6',borderRadius:2},
+    {label:'30–39 yrs',data:G.map(g=>ageShare(g,a=>a>=30&&a<40)),backgroundColor:'#0EA5E9',borderRadius:2},
+    {label:'40–49 yrs',data:G.map(g=>ageShare(g,a=>a>=40&&a<50)),backgroundColor:'#FE7C39',borderRadius:2},
+    {label:'50+ yrs',data:G.map(g=>ageShare(g,a=>a>=50)),backgroundColor:'#1E293B',borderRadius:2}
+  ]},options:{scales:stk('% of grade',{max:100}),plugins:{tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${pc(c.raw,1)}`}}}}},{drill:true});
+  chart('c-dm-age',{data:{labels:L,datasets:[{type:'bar',label:'Average age',data:G.map(g=>g.avgAge),backgroundColor:'rgba(59,130,246,.75)',borderRadius:4,yAxisID:'y'},line('Average tenure',G.map(g=>g.avgTen),C.o,{borderWidth:2.5,yAxisID:'y1'})]},options:{scales:{x:{grid:{display:false}},y:{beginAtZero:false,suggestedMin:20,title:{display:true,text:'Age (yrs)'},grid:{color:'#F1F5F9'}},y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false},title:{display:true,text:'Tenure (yrs)'}}}}},{drill:true});
+  chart('c-dm-gap',{data:{labels:L,datasets:[{label:'Gender pay gap %',data:G.map(g=>g.gap??0),backgroundColor:G.map(g=>Math.abs(g.gap||0)>3?C.r:C.d),borderRadius:5}]},options:{plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'%'},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}},{drill:true});
+  chart('c-dm-ten',{type:'scatter',data:{datasets:[{label:'Employees',data:E.filter(e=>e.ten!=null).map(e=>({x:e.ten,y:e.base/gm[e.grade].mid*100,id:e.id,role:e.role})),backgroundColor:'rgba(253,81,8,.65)',pointRadius:4,pointHoverRadius:8}]},options:{interaction:{mode:'nearest',intersect:true},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.id} (${c.raw.role}): ${c.raw.x}y tenure, ${c.raw.y.toFixed(0)}% compa-ratio`}}},scales:{x:{title:{display:true,text:'Tenure (years)'},grid:{display:false}},y:{title:{display:true,text:'Compa-ratio %'},grid:{color:'#F1F5F9'}}}}});
 }
 
-function rBench(){
-  const p=S.pBench,L=G.map(g=>g.grade),m=G.map(g=>mkt(g,p)),ratio=G.map((g,i)=>g.mid/m[i]*100),ov=avg(ratio);
-  const mapPanel=document.getElementById('bn-map-panel');
-  if(mapPanel){
-    if(S.benchmarks && S.benchmarks.length){
-      mapPanel.innerHTML=`<div class="flex items-center justify-between mb-2"><span class="text-xs font-bold text-slate-800">Client Grade → Benchmark Level Mapping</span><span class="sub">Adjust which benchmark level each internal grade is evaluated against</span></div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">${G.map(g=>`<div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
-        <div class="text-[11px] font-bold text-slate-800 truncate">${esc(g.grade)}</div>
-        <select onchange="updateGradeMapping('${esc(g.grade).replace(/'/g,"\\'")}',this.value)" class="mt-1 w-full text-[11px] border border-slate-300 rounded px-1.5 py-1 bg-white font-semibold text-pwcOrange">
-          ${S.benchmarks.map(b=>`<option value="${esc(b.bGrade)}" ${b.bGrade===g.bGrade?'selected':''}>${esc(b.bGrade)}</option>`).join('')}
-        </select>
-      </div>`).join('')}</div>`;
-    } else {
-      mapPanel.innerHTML='';
-    }
-  }
-  document.getElementById('bn-cards').innerHTML=kpi('Benchmark',`P${p} market (${S.benchmarks.length||G.length} levels)`)+kpi('Midpoint competitiveness',pc(ov),rc(ov)[0],'text-pwcOrange')+kpi('Total rewards vs. market P50',pc(K.tccVs),rc(K.tccVs)[0])+kpi('Grades aligned / lagging / leading',`${ratio.filter(r=>r>=95&&r<=105).length} / ${ratio.filter(r=>r<95).length} / ${ratio.filter(r=>r>105).length}`);
-  const cells=g=>[g.hc?g.avg/g.p50*100:null,g.hc?g.aAllow/g.mAllow*100:null,g.hc?g.bPct/g.mBonus*100:null,g.hc?g.aBen/g.mBen*100:null,g.hc?g.aTcc/g.mTcc*100:null];
-  document.getElementById('tb-bnheat').innerHTML=`<thead><tr><th class="p-2 text-left">Client Grade</th><th class="p-2 text-left">Mapped Benchmark</th>${['Base pay','Allowances','Bonus target','Core benefits','Total rewards'].map(h=>`<th class="p-2 text-slate-500">${h}</th>`).join('')}</tr></thead><tbody>${G.map(g=>`<tr><th class="p-2 text-left">${esc(g.grade)}</th><td class="p-2 text-xs font-semibold text-slate-500">${esc(g.bGrade)}</td>${cells(g).map(r=>`<td class="p-2 heat" style="background:${rc(r)[2]}">${r==null?'-':r.toFixed(0)+'%'}</td>`).join('')}</tr>`).join('')}</tbody>`;
-  table('tb-bench',['Client Grade','Mapped Benchmark','Our Midpoint','Market P25','Market P50','Market P75','Market P90',`Market P${p}`,'Competitiveness','Gap','Avg Actual Base','Status'],G.map((g,i)=>{const[t,c]=rc(ratio[i]);return[esc(g.grade),`<span class="text-slate-500 font-semibold">${esc(g.bGrade)}</span>`,`<b class="text-pwcOrange">${fmt(g.mid)}</b>`,fmt(g.p25),fmt(g.p50),fmt(g.p75),fmt(g.p90),`<b>${fmt(m[i])}</b>`,`<b>${pc(ratio[i])}</b>`,fmt(g.mid-m[i]),g.hc?fmt(g.avg):'-',`<span class="px-2 py-0.5 rounded text-[11px] font-bold ${c}">${t}</span>`]}));
-  chart('c-bn-range',{type:'bar',data:{labels:L,datasets:[{label:'Our range',data:G.map(g=>[g.min,g.max]),backgroundColor:C.d,borderRadius:3},{label:'Market P25 to P90',data:G.map(g=>[g.p25,g.p90]),backgroundColor:C.o3,borderRadius:3},line('Market P'+p,m,C.o),line('Avg actual base',G.map(g=>g.hc?g.avg:null),C.r,{borderDash:[4,3]})]},options:{scales:ySc()}});
-  chart('c-bn-ratio',{data:{labels:L,datasets:[{type:'bar',label:'Competitiveness %',data:ratio,backgroundColor:ratio.map(r=>r<95?C.am:r>105?C.r:C.gr)},line('95%',L.map(()=>95),C.g,{pointRadius:0,borderDash:[4,4]}),line('105%',L.map(()=>105),C.g,{pointRadius:0,borderDash:[4,4]})]},options:{scales:ySc('%',{beginAtZero:false,suggestedMin:80,suggestedMax:120})}});
-  const names=['Base pay','Allowances','Bonus target','Core benefits','Total rewards'];
-  chart('c-bn-comp',{type:'bar',data:{labels:L,datasets:names.map((n,i)=>({label:n,data:G.map(g=>cells(g)[i]),backgroundColor:[C.d,C.o,C.o3,C.g,'#64748b'][i]}))},options:{scales:ySc('% of market P50',{beginAtZero:false,suggestedMin:60})}});
-  chart('c-bn-pos',{type:'line',data:{labels:L,datasets:[line('Market percentile',G.map(g=>g.mp),C.o,{fill:true,backgroundColor:'rgba(253,81,8,.1)'}),line('P50',L.map(()=>50),C.g,{pointRadius:0,borderDash:[4,4]})]},options:{scales:ySc('percentile',{max:100})}});
-  const out=E.map(e=>{const g=G.find(x=>x.grade===e.grade);return{e,g,r:e.base<g.p25?'Below market P25':e.base>g.p90?'Above market P90':null,d:e.base/g.p50*100}}).filter(x=>x.r).sort((a,b)=>Math.abs(b.d-100)-Math.abs(a.d-100)).slice(0,15);
-  table('tb-bnout',['Employee','Client Grade','Mapped Benchmark','Role','Base pay','Market P50','vs. P50','Flag'],out.map(x=>[esc(x.e.id),esc(x.g.grade),esc(x.g.bGrade),esc(x.e.role),fmt(x.e.base),fmt(x.g.p50),pc(x.d,0),`<span class="font-bold ${x.r[0]==='B'?'text-amber-600':'text-rose-600'}">${x.r}</span>`]));
-}
-function updateGradeMapping(gradeName,newBGrade){
-  const g=S.grades.find(x=>x.grade===gradeName);
-  if(g){g.bGrade=newBGrade;renderAll();}
-}
-
+function selRole(el){S.node={grade:el.dataset.g,role:el.dataset.r};S.fresh=false;renderAll()}
+function togGrade(el){const k=el.dataset.g;S.collapsed.has(k)?S.collapsed.delete(k):S.collapsed.add(k);S.fresh=false;renderAll()}
 function rWork(){
-  const gs=[...G].reverse(),sel=S.node;
-  const col=g=>{const roles={};g.e.forEach(e=>(roles[e.role]=roles[e.role]||[]).push(e));
-    const gf=g.below+g.above>0;
-    return `<div class="col"><div class="flex justify-center"><div class="w-px h-4 bg-slate-300"></div></div>
-    <div class="node ${gf?'flag':''}"><div class="flex justify-between"><b>${esc(g.grade)}</b>${gf?'<span class="text-pwcOrange">⚠</span>':''}</div><div>HC ${g.hc} | Avg TCC ${fm(g.aTcc)}</div><div class="text-slate-500">Compa ${pc(g.compa,0)} | ${fm(g.min)}-${fm(g.max)}</div></div>
-    <div class="ml-3 mt-1.5 space-y-1.5 border-l border-slate-300 pl-3">${Object.keys(roles).map(r=>{const es=roles[r],o=es.filter(e=>e.base<g.min||e.base>g.max).length,s=sel&&sel.grade===g.grade&&sel.role===r;
-      return `<button class="node ${o?'flag':''} ${s?'sel':''}" onclick="S.node={grade:'${g.grade}',role:'${esc(r).replace(/'/g,"\\'")}'};renderAll()"><div class="flex justify-between"><b>${esc(r)}</b>${o?'<span class="text-pwcOrange">⚠</span>':''}</div><div>${es.length} staff | ${fm(avg(es.map(e=>e.tcc)))}</div></button>`}).join('')}</div></div>`};
-  document.getElementById('wk-tree').innerHTML=`<div class="flex justify-center"><div class="node root"><b>Organisation</b><div>${K.hc} employees | ${G.length} grades</div><div>Total rewards ${fm(K.tcc)} | ${K.out} outliers</div></div></div><div class="flex justify-center"><div class="w-px h-4 bg-slate-300"></div></div><div class="border-t border-slate-300 flex gap-3">${gs.map(col).join('')}</div>`;
-  const d=document.getElementById('wk-detail');
-  if(!sel){d.innerHTML='<div class="card text-sm text-slate-500">Select a role card above to see its pay components, benchmark position and employees.</div>';return}
-  const g=G.find(x=>x.grade===sel.grade),es=g.e.filter(e=>e.role===sel.role);if(!es.length){d.innerHTML='';return}
-  const a=f=>avg(es.map(f)),tcc=a(e=>e.tcc),comps=[['Base',a(e=>e.base),g.avg],['Allowances',a(e=>e.allow),g.aAllow],['Bonus',a(e=>e.bonus),g.aBonus],['Benefits',a(e=>e.ben),g.aBen]];
-  d.innerHTML=`<div class="grid grid-cols-2 md:grid-cols-5 gap-4">${kpi('Role',esc(sel.role),esc(sel.grade))}${kpi('Headcount',es.length)}${kpi('Avg total rewards',fm(tcc),'grade avg '+fm(g.aTcc),'text-pwcOrange')}${kpi('vs. market total rewards',pc(tcc/g.mTcc*100,0),rc(tcc/g.mTcc*100)[0])}${kpi('Outliers vs. range',es.filter(e=>e.base<g.min||e.base>g.max).length)}</div>
-   <div class="card"><div class="h3">Role vs. grade average, by component</div>${comps.map(c=>`<div class="mb-2.5"><div class="flex justify-between text-xs"><span>${c[0]}</span><span><b>${fm(c[1])}</b> <span class="text-slate-400">grade avg ${fm(c[2])} (${sgn((c[1]/c[2]-1)*100,x=>x.toFixed(0)+'%')})</span></span></div><div class="h-2 bg-slate-100 rounded"><div class="h-2 rounded" style="width:${Math.min(100,c[1]/(Math.max(c[1],c[2])||1)*100)}%;background:${C.o}"></div></div></div>`).join('')}</div>`;
+  const gs=[...G].reverse(),sel=S.node;let d=0;
+  const col=g=>{const roles={};g.e.forEach(e=>(roles[e.role]=roles[e.role]||[]).push(e));const gf=g.below+g.above>0,coll=S.collapsed.has(g.grade);
+    return`<div class="col"><div class="flex justify-center"><div class="w-px h-4 bg-slate-300"></div></div>
+    <button class="node ${gf?'flag':''}" style="--d:${(d+=.04).toFixed(2)}s" data-g="${esc(g.grade)}" onclick="togGrade(this)"><div class="flex justify-between"><b>${esc(g.grade)}</b><span class="text-slate-400">${coll?'▸':'▾'}${gf?' <span class="text-pwcOrange">⚠</span>':''}</span></div><div>${g.hc} staff | avg ${fm(g.aTcc)}</div><div class="text-slate-500">Compa ${pc(g.compa,0)} | ${fm(g.min)}-${fm(g.max)}</div></button>
+    ${coll?'':`<div class="ml-3 mt-1.5 space-y-1.5 border-l border-slate-300 pl-3">${Object.keys(roles).map(r=>{const es=roles[r],o=es.filter(e=>e.base<g.min||e.base>g.max).length,s=sel&&sel.grade===g.grade&&sel.role===r;
+      return`<button class="node ${o?'flag':''} ${s?'sel':''}" style="--d:${(d+=.03).toFixed(2)}s" data-g="${esc(g.grade)}" data-r="${esc(r)}" onclick="selRole(this)"><div class="flex justify-between"><b>${esc(r)}</b>${o?'<span class="text-pwcOrange">⚠</span>':''}</div><div>${es.length} staff | ${fm(avg(es.map(e=>e.tcc)))}</div></button>`}).join('')}</div>`}</div>`};
+  document.getElementById('wk-tree').innerHTML=`<div class="w-full"><div class="flex justify-center"><div class="node root"><b>Organisation</b><div>${K.hc} employees | ${G.length} grades</div><div>Total rewards ${fm(K.tcc)} | ${K.out} outside band</div></div></div><div class="flex justify-center"><div class="w-px h-4 bg-slate-300"></div></div><div class="border-t border-slate-300 flex flex-wrap gap-3">${gs.map(col).join('')}</div></div>`;
+  const dv=document.getElementById('wk-detail');
+  if(!sel){dv.innerHTML='<div class="card text-sm text-slate-500">Select a role card above to see its pay components, market position and demographics.</div>';return}
+  const g=G.find(x=>x.grade===sel.grade),es=g?g.e.filter(e=>e.role===sel.role):[];if(!es.length){dv.innerHTML='';return}
+  const a=f=>avg(es.map(f)),tcc=a(e=>e.tcc),fp=es.filter(e=>e.gender==='F').length/es.length*100,tn=es.map(e=>e.ten).filter(x=>x!=null),comps=[['Base',a(e=>e.base),g.avg],['Allowances',a(e=>e.allow),g.aAllow],['Bonus',a(e=>e.bonus),g.aBonus],['Benefits',a(e=>e.ben),g.aBen]];
+  dv.innerHTML=`<div class="grid grid-cols-2 md:grid-cols-5 gap-4">${kpi('Role',esc(sel.role),esc(sel.grade))}${kpi('Headcount',es.length,pc(fp,0)+' female'+(tn.length?' | avg tenure '+avg(tn).toFixed(1)+'y':''))}${kpi('Avg total rewards',fm(tcc),'grade avg '+fm(g.aTcc),'text-pwcOrange')}${kpi('vs. market total rewards',pc(tcc/g.mTcc*100,0),rc(tcc/g.mTcc*100)[0])}${kpi('Outside band',es.filter(e=>e.base<g.min||e.base>g.max).length)}</div>
+   <div class="card"><div class="h3">Role vs. grade average, by component</div>${comps.map(c=>`<div class="mb-3"><div class="flex justify-between text-xs"><span>${c[0]}</span><span><b>${fm(c[1])}</b> <span class="text-slate-400">grade avg ${fm(c[2])} (${sgn((c[1]/(c[2]||1)-1)*100,x=>x.toFixed(0)+'%')})</span></span></div><div class="h-2 bg-slate-100 rounded overflow-hidden"><div class="h-2 rounded transition-all duration-700" style="width:${Math.min(100,c[1]/(Math.max(c[1],c[2])||1)*100)}%;background:${C.o}"></div></div></div>`).join('')}<button class="text-xs font-bold text-pwcOrange hover:underline" onclick="S.sel=${G.indexOf(g)};switchTab('grade')">Open ${esc(g.grade)} outlier analysis</button></div>`;
+}
+
+function hoverGrade(i){const ch=charts['c-st-range'];if(!ch)return;const m=ch.getDatasetMeta(0).data[i];if(!m)return;const a=[{datasetIndex:0,index:i}];ch.setActiveElements(a);ch.tooltip.setActiveElements(a,{x:m.x,y:m.y});ch.update('none')}
+function unhoverGrade(){const ch=charts['c-st-range'];if(!ch)return;ch.setActiveElements([]);ch.tooltip.setActiveElements([],{x:0,y:0});ch.update('none')}
+function rStruct(){rHeat();
+  const p=S.pStruct,L=G.map(g=>g.grade),sel=g=>g.min+(g.max-g.min)*p/100;
+  document.getElementById('st-cards').innerHTML=kpi('Grades',G.length,'low to high')+kpi('Average bandwidth',pc(avg(G.map(g=>g.bw))),'(max - min) / min','text-pwcOrange')+kpi('Avg midpoint progression',pc(avg(G.filter(g=>g.prog!=null).map(g=>g.prog))),'step between grades')+kpi('Average overlap',pc(avg(G.filter(g=>g.ovl!=null).map(g=>g.ovl))),'with next grade');
+  table('tb-struct',['Grade','Min','Midpoint','Max','Bandwidth','Mid. progression','Mid. differential','Overlap (prev)','P25','P50','P75','P90',`P${p}`,'Staff'],G.map(g=>{const q=x=>fmt(g.min+(g.max-g.min)*x/100);
+    return[esc(g.grade)+(g.derived?' <span class="text-amber-600" title="band derived from pay">*</span>':''),fmt(g.min),`<b class="text-pwcOrange">${fmt(g.mid)}</b>`,fmt(g.max),pc(g.bw,0),g.prog==null?'-':pc(g.prog,0),g.diff==null?'-':fmt(g.diff),g.ovlPrev==null?'-':`<span class="${g.ovlPrev>60?'text-amber-600 font-bold':''}">${pc(g.ovlPrev,0)}</span>`,q(25),q(50),q(75),q(90),`<b class="text-pwcOrange">${fmt(sel(g))}</b>`,g.hc]}),
+    i=>`data-i="${i}" onmouseenter="hoverGrade(${i})" onmouseleave="unhoverGrade()"`);
+  const hov=a=>{document.querySelectorAll('#tb-struct tr.hl').forEach(r=>r.classList.remove('hl'));if(a.length){const r=document.querySelector(`#tb-struct tr[data-i="${a[0].index}"]`);if(r)r.classList.add('hl')}};
+  chart('c-st-range',{data:{labels:L,datasets:[{type:'bar',label:'Salary band',data:G.map(g=>[g.min,g.max]),backgroundColor:'rgba(255,170,114,.55)',hoverBackgroundColor:'rgba(253,81,8,.6)',borderRadius:5,barPercentage:.55,order:3},
+    line('Midpoint',G.map(g=>g.mid),C.d,{borderWidth:3,pointRadius:5,order:1}),line('P'+p+' of band',G.map(sel),C.o,{borderDash:[5,4],borderWidth:2,order:2})]},
+    options:{scales:ySc('Annual base pay',{ticks:{callback:v=>fm(v)}}),plugins:{ladder:{g:G},tooltip:{callbacks:{label:c=>c.dataset.type==='bar'?`Band: ${fmt(c.raw[0])} to ${fmt(c.raw[1])}`:`${c.dataset.label}: ${fmt(c.raw)}`,afterBody:it=>{const g=G[it[0].dataIndex];return[`Bandwidth: ${pc(g.bw,0)}`,`Progression: ${g.prog==null?'-':pc(g.prog,1)}`,`Overlap with next: ${g.ovl==null?'-':pc(g.ovl,0)}`]}}}}}},{drill:true,hover:hov});
+  chart('c-st-ovl',{data:{labels:L,datasets:[{type:'bar',label:'Overlap with next grade',data:G.map(g=>g.ovl??0),backgroundColor:G.map(g=>(g.ovl||0)>60?C.r:'rgba(253,81,8,.8)'),borderRadius:5,order:2},line('Midpoint progression',G.map(g=>g.prog),C.d,{borderWidth:2.5,order:1})]},options:{scales:ySc('%'),plugins:{tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${pc(c.raw,1)}`}}}}},{drill:true});
+}
+
+function rRewards(){rDemo();
+  document.getElementById('rw-cards').innerHTML=kpi('Total rewards',fm(K.tcc),'base + allowances + bonus + benefits','text-pwcOrange')+kpi('Average per employee',fm(K.avgTcc))+kpi('Fixed / variable',pc((K.tcc-K.bonus)/K.tcc*100,0)+' / '+pc(K.bonus/K.tcc*100,0))+kpi('Bonus payout vs. target',pc(K.payout,0),'actual / target');
+  renderFlow();
+  document.getElementById('mx-amt').classList.toggle('on',S.mixMode==='amt');document.getElementById('mx-pct').classList.toggle('on',S.mixMode==='pct');
+  const L=G.map(g=>g.grade),pctm=S.mixMode==='pct';
+  chart('c-rw-mix',{data:{labels:L,datasets:['Base','Allowances','Bonus','Benefits'].map((n,i)=>({label:n,backgroundColor:Object.values(COMP)[i],borderRadius:3,data:G.map(g=>{const v=[g.avg,g.aAllow,g.aBonus,g.aBen][i];return pctm?(g.hc?v/g.aTcc*100:0):v})}))},options:{scales:stk(pctm?'% of package':'Average per employee',pctm?{max:100}:{ticks:{callback:v=>fm(v)}}),plugins:{tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${pctm?pc(c.raw,1):fmt(c.raw)}`}}}}},{drill:true});
+  table('tb-rw',['Grade','Staff','Base','Allowances','Bonus','Benefits','Total rewards','Fixed %','Variable %','Bonus payout'],G.map(g=>[esc(g.grade),g.hc,fmt(g.avg),fmt(g.aAllow),fmt(g.aBonus),fmt(g.aBen),`<b class="text-pwcOrange">${fmt(g.aTcc)}</b>`,g.hc?pc((1-g.aBonus/g.aTcc)*100,0):'-',g.hc?pc(g.aBonus/g.aTcc*100,0):'-',pc(g.payout,0)]));
+}
+function renderFlow(){
+  const wrap=document.getElementById('flow-svg'),tip=document.getElementById('flow-tip'),box=document.getElementById('flow-svg-wrap');if(!wrap)return;
+  const fns=[...new Set(E.map(e=>e.fn))].sort(),opts=[['All',`Entire population (${E.length} staff)`],...fns.map(f=>['fn:'+f,'Department: '+f]),...G.filter(g=>g.hc).map(g=>['g:'+g.grade,'Grade: '+g.grade]),...E.slice(0,150).map(e=>['e:'+e.id,`${e.id} - ${e.role} (${e.grade})`])];
+  if(!opts.some(o=>o[0]===S.flowScope))S.flowScope='All';
+  document.getElementById('flow-scope').innerHTML=opts.map(o=>`<option value="${esc(o[0])}" ${o[0]===S.flowScope?'selected':''}>${esc(o[1])}</option>`).join('');
+  let sub=E,title='Total package';const sc=S.flowScope;
+  if(sc.startsWith('fn:')){sub=E.filter(e=>e.fn===sc.slice(3));title=sc.slice(3)}else if(sc.startsWith('g:')){sub=E.filter(e=>e.grade===sc.slice(2));title=sc.slice(2)}else if(sc.startsWith('e:')){sub=E.filter(e=>e.id===sc.slice(2));title=sc.slice(2)}
+  const tot=sum(sub.map(e=>e.tcc))||1,sv=f=>sum(sub.map(e=>e[f]));
+  const t2=[{k:'base',name:'Base salary',val:sv('base'),col:'#1E293B'},{k:'allow',name:'Allowances',val:sv('allow'),col:'#FD5108'},{k:'bonus',name:'Bonus',val:sv('bonus'),col:'#FE7C39'},{k:'ben',name:'Core benefits',val:sv('ben'),col:'#3B82F6'}];
+  const t3=[{k:'base3',name:'Guaranteed base',val:sv('base'),col:'#1E293B',p:0},{k:'hous',name:'Housing',val:sv('hous'),col:'#FD5108',p:1},{k:'trans',name:'Fuel & transport',val:sv('trans'),col:'#FB923C',p:1},{k:'oth',name:'Other allowances',val:sv('oth'),col:'#FDBA74',p:1},{k:'bonus3',name:'Performance bonus',val:sv('bonus'),col:'#FE7C39',p:2},
+    {k:'med',name:'Medical & health',val:sv('med'),col:'#2563EB',p:3},{k:'ret',name:'Retirement',val:sv('ret'),col:'#3B82F6',p:3},{k:'ins',name:'Insurance',val:sv('ins'),col:'#60A5FA',p:3},{k:'obn',name:'Other benefits',val:sv('obn'),col:'#93C5FD',p:3}].filter(x=>x.val>0);
+  const W=940,H=Math.max(380,t3.length*34+30),cx0=20,cx1=340,cx2=670,nw=220;
+  let y=24;const avail2=H-48-14*3;t2.forEach(n=>{n.h=Math.max(26,n.val/tot*avail2);n.y=y;y+=n.h+14});
+  y=16;const avail3=H-32-8*(t3.length-1);t3.forEach(n=>{n.h=Math.max(22,n.val/tot*avail3);n.y=y;y+=n.h+8});
+  const rootY=24,rootH=H-48;let els='',d=0,run=rootY;const off=[0,0,0,0];
+  const el=(k,chain,tip,inner)=>{d+=.05;return`<g class="flow-el" data-k="${k}" data-chain="${chain}" data-tip="${esc(tip)}" style="--d:${d.toFixed(2)}s">${inner}</g>`};
+  const kids=i=>t3.filter(x=>x.p===i).map(x=>'n3'+x.k+' l3'+x.k).join(' ');
+  t2.forEach((n,i)=>{const sh=n.val/tot*rootH,x0=cx0+nw,x1=cx1,c=(x0+x1)/2;
+    els+=el('l2'+n.k,`root n2${n.k} l2${n.k} ${kids(i)}`,`${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,1)})`,`<path d="M${x0},${run} C${c},${run} ${c},${n.y} ${x1},${n.y} L${x1},${n.y+n.h} C${c},${n.y+n.h} ${c},${run+sh} ${x0},${run+sh} Z" fill="${n.col}" fill-opacity=".22"/>`);run+=sh});
+  t3.forEach(n=>{const par=t2[n.p],sh=par.val?n.val/par.val*par.h:0,sy=par.y+off[n.p];off[n.p]+=sh;const x0=cx1+nw,x1=cx2,c=(x0+x1)/2;
+    els+=el('l3'+n.k,`root n2${par.k} l2${par.k} n3${n.k} l3${n.k}`,`${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,1)} of package)`,`<path d="M${x0},${sy} C${c},${sy} ${c},${n.y} ${x1},${n.y} L${x1},${n.y+n.h} C${c},${n.y+n.h} ${c},${sy+sh} ${x0},${sy+sh} Z" fill="${n.col}" fill-opacity=".26"/>`)});
+  els+=el('root','*',`${title}: ${fm(tot)} across ${sub.length} staff`,`<rect x="${cx0}" y="${rootY}" width="${nw}" height="${rootH}" rx="8" fill="#0F172A"/><text x="${cx0+14}" y="${rootY+28}" fill="#94A3B8" font-size="10" font-weight="700">TOTAL PACKAGE</text><text x="${cx0+14}" y="${rootY+48}" fill="#fff" font-size="13" font-weight="700">${esc(title.length>26?title.slice(0,25)+'…':title)}</text><text x="${cx0+14}" y="${rootY+76}" fill="#FD5108" font-size="22" font-weight="800">${fm(tot)}</text><text x="${cx0+14}" y="${rootY+96}" fill="#CBD5E1" font-size="11">${sub.length} employee${sub.length===1?'':'s'}</text>`);
+  t2.forEach((n,i)=>els+=el('n2'+n.k,`root n2${n.k} l2${n.k} ${kids(i)}`,`${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,1)})`,`<rect x="${cx1}" y="${n.y}" width="${nw}" height="${n.h}" rx="6" fill="${n.col}"/><text x="${cx1+12}" y="${n.y+n.h/2+4}" fill="#fff" font-size="11.5" font-weight="700">${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,0)})</text>`));
+  t3.forEach(n=>els+=el('n3'+n.k,`root n2${t2[n.p].k} l2${t2[n.p].k} n3${n.k} l3${n.k}`,`${n.name}: ${fm(n.val)} (${pc(n.val/tot*100,1)} of package)`,`<rect x="${cx2}" y="${n.y}" width="${nw+30}" height="${n.h}" rx="5" fill="#fff" stroke="${n.col}" stroke-width="1.5"/><rect x="${cx2}" y="${n.y}" width="6" height="${n.h}" rx="2" fill="${n.col}"/><text x="${cx2+14}" y="${n.y+n.h/2+4}" fill="#0F172A" font-size="11" font-weight="600">${n.name}: <tspan font-weight="700">${fm(n.val)}</tspan> (${pc(n.val/tot*100,1)})</text>`));
+  wrap.innerHTML=`<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto select-none">${els}</svg>`;
+  const all=()=>wrap.querySelectorAll('[data-k]');
+  wrap.onmouseover=e=>{const t=e.target.closest('[data-k]');if(!t)return;const ch=t.dataset.chain;all().forEach(x=>x.classList.toggle('dim',ch!=='*'&&!ch.split(' ').includes(x.dataset.k)));tip.textContent=t.dataset.tip;tip.style.opacity=1};
+  wrap.onmousemove=e=>{const r=box.getBoundingClientRect();tip.style.left=(e.clientX-r.left+box.scrollLeft+14)+'px';tip.style.top=(e.clientY-r.top+14)+'px'};
+  wrap.onmouseleave=()=>{all().forEach(x=>x.classList.remove('dim'));tip.style.opacity=0};
 }
 
 function rGrade(){
   S.sel=Math.min(S.sel,G.length-1);const g=G[S.sel];
-  document.getElementById('grade-pills').innerHTML=G.map((x,i)=>`<button class="pill ${i===S.sel?'on':''}" onclick="S.sel=${i};renderAll()">${esc(x.grade)}</button>`).join('');
-  const cBtn=document.getElementById('gd-cleanse-btn');
-  if(cBtn){
-    cBtn.innerText=S.excludeOutliers?'Anomalies Excluded (Restore)':'Eliminate Anomalies';
-    cBtn.className=S.excludeOutliers?'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition':'px-3 py-1.5 rounded-lg text-xs font-bold bg-pwcOrange text-white hover:bg-pwcHover transition';
-  }
-  document.getElementById('gd-empty').classList.toggle('hidden',g.hc>0);
-  document.getElementById('gd-body').classList.toggle('hidden',!g.hc);
-  if(!g.hc)return;
+  chart('c-gd-out',{data:{labels:G.map(x=>x.grade),datasets:[{label:'Below band',data:G.map(x=>x.below),backgroundColor:C.r,borderRadius:3},{label:'Above band',data:G.map(x=>x.above),backgroundColor:C.am,borderRadius:3}]},options:{scales:stk('Employees',{ticks:{precision:0}})}},{drill:true});
+  document.getElementById('grade-pills').innerHTML=G.map((x,i)=>`<button class="pill ${i===S.sel?'on':''}" onclick="S.sel=${i};S.fresh=true;renderAll()">${esc(x.grade)}${x.below+x.above?` <span class="text-rose-600">(${x.below+x.above})</span>`:''}</button>`).join('');
+  const cb=document.getElementById('gd-cleanse-btn');cb.innerText=S.excludeOutliers?'Restore all':'Eliminate anomalies';cb.className=S.excludeOutliers?'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition':'px-3 py-1.5 rounded-lg text-xs font-bold bg-pwcOrange text-white hover:bg-pwcHover transition';
+  document.getElementById('gd-cl-note').innerText=S.excludeOutliers?`${K.rawHc-K.hc} staff removed from all analysis`:`Would remove ${K.out} staff outside their band`+(S.manual.size?` (+${S.manual.size} manual)`:'');
+  document.getElementById('gd-empty').classList.toggle('hidden',g.hc>0);document.getElementById('gd-body').classList.toggle('hidden',!g.hc);if(!g.hc)return;
+  const p25=quant(g.sal,25),p75=quant(g.sal,75);
+  document.getElementById('gd-cards').innerHTML=kpi('Employees',g.hc,S.excludeOutliers?`of ${g.rawE.length}`:'in grade')+kpi('Average base',fm(g.avg),'midpoint '+fm(g.mid))+kpi('Compa-ratio',pc(g.compa),'range penetration '+pc(g.pen,0),'text-pwcOrange')+kpi('Pay percentiles',`${fm(p25)} / ${fm(quant(g.sal,50))} / ${fm(p75)}`,'actual P25 / P50 / P75')+kpi('Outside band',`${g.below} / ${g.above}`,'below / above','text-rose-600');
+  const roles={};g.e.forEach(e=>(roles[e.role]=roles[e.role]||[]).push(e));const names=Object.keys(roles).sort((a,b)=>avg(roles[a].map(e=>e.base))-avg(roles[b].map(e=>e.base)));
+  const pts=[];names.forEach((n,i)=>roles[n].forEach((e,j)=>pts.push({x:i+((j*37%21)-10)/45,y:e.base,id:e.id,role:e.role,vs:(e.base/g.avg-1)*100})));const hl=y=>[{x:-.5,y},{x:names.length-.5,y}];
+  chart('c-gd-scatter',{type:'scatter',data:{datasets:[{label:'Employees',data:pts,backgroundColor:pts.map(q=>q.y<g.min||q.y>g.max?C.r:q.y<p25||q.y>p75?C.am:C.o),pointRadius:6,pointHoverRadius:10,order:5},
+    line('Band max',hl(g.max),C.r,{borderDash:[6,4],pointRadius:0}),line('Midpoint',hl(g.mid),C.d,{pointRadius:0,borderWidth:2}),line('Average pay',hl(g.avg),C.blue,{pointRadius:0,borderDash:[2,3]}),line('Band min',hl(g.min),C.r,{borderDash:[6,4],pointRadius:0}),line('Actual P25',hl(p25),C.g,{pointRadius:0,borderDash:[2,4],borderWidth:1}),line('Actual P75',hl(p75),C.g,{pointRadius:0,borderDash:[2,4],borderWidth:1})]},
+    options:{interaction:{mode:'nearest',intersect:true},scales:{x:{min:-.5,max:names.length-.5,grid:{display:false},ticks:{stepSize:1,callback:v=>Number.isInteger(v)?names[v]:''}},y:{title:{display:true,text:'Base pay'},grid:{color:'#F1F5F9'},ticks:{callback:v=>fm(v)}}},
+    plugins:{tooltip:{callbacks:{label:c=>c.raw.id?`${c.raw.id} (${c.raw.role}): ${fmt(c.raw.y)}  ${sgn(c.raw.vs,v=>v.toFixed(1)+'%')} vs avg`:`${c.dataset.label}: ${fmt(c.raw.y)}`}}}}});
+  const flag=e=>e.base<g.min?['Below band','bg-rose-100 text-rose-700']:e.base>g.max?['Above band','bg-amber-100 text-amber-800']:e.base<p25?['Below P25','bg-sky-100 text-sky-700']:e.base>p75?['Above P75','bg-violet-100 text-violet-700']:['In range','text-slate-400'];
+  const F={flag:['Flagged',e=>e.base<g.min||e.base>g.max||e.base<p25||e.base>p75],below:['Below band',e=>e.base<g.min],above:['Above band',e=>e.base>g.max],p25:['Below P25',e=>e.base<p25],p75:['Above P75',e=>e.base>p75],all:['All',e=>true]};
+  document.getElementById('of-chips').innerHTML=Object.entries(F).map(([k,v])=>`<button class="pill ${S.oFilter===k?'on':''}" onclick="S.oFilter='${k}';S.fresh=false;renderAll()">${v[0]}</button>`).join('');
+  const rows=g.e.filter(F[S.oFilter][1]).sort((a,b)=>Math.abs(b.base-g.avg)-Math.abs(a.base-g.avg)).slice(0,60);
+  table('tb-emps',['Employee','Role','Department','Base pay','vs. grade avg','Compa-ratio','Position in band','Status',''],rows.map(e=>{const f=flag(e),v=(e.base/g.avg-1)*100;return[esc(e.id),esc(e.role),esc(e.fn),fmt(e.base),`<b class="${v>=0?'text-emerald-600':'text-amber-600'}">${sgn(v,x=>x.toFixed(1)+'%')}</b>`,pc(e.base/g.mid*100,0),pc((e.base-g.min)/(g.max-g.min)*100,0),`<span class="px-2 py-0.5 rounded text-[11px] font-bold ${f[1]}">${f[0]}</span>`,`<button class="text-[11px] font-bold text-slate-400 hover:text-rose-600" onclick="S.manual.add('${q$(e.id)}');S.fresh=false;renderAll()">Exclude</button>`]}));
+  const rs=names.map(n=>{const es=roles[n],a=f=>avg(es.map(f));return[esc(n),es.length,fmt(a(e=>e.base)),fmt(a(e=>e.allow)),fmt(a(e=>e.bonus)),fmt(a(e=>e.ben)),`<b class="text-pwcOrange">${fmt(a(e=>e.tcc))}</b>`,`<b class="${a(e=>e.tcc)>=g.aTcc?'text-emerald-600':'text-amber-600'}">${sgn((a(e=>e.tcc)/g.aTcc-1)*100,x=>x.toFixed(1)+'%')}</b>`,pc(a(e=>e.base)/g.mid*100,0)]});
+  table('tb-roles',['Role','Staff','Avg base','Allowances','Bonus','Benefits','Total rewards','vs. grade avg','Compa-ratio'],rs);
+}
 
-  document.getElementById('gd-cards').innerHTML=
-    kpi('Headcount',g.hc,S.excludeOutliers?`Filtered from ${g.rawE.length}`:'Active staff')+
-    kpi('Avg Base Pay',fm(g.avg),'Grade Midpoint: '+fm(g.mid))+
-    kpi('Avg Total Rewards',fm(g.aTcc),'Market P50: '+fm(g.mTcc),'text-pwcOrange')+
-    kpi('Compa-Ratio',pc(g.compa),'Penetration: '+pc(g.pen,0))+
-    kpi('Bandwidth Outliers',`${g.below} / ${g.above}`,'Below Min / Above Max','text-rose-600');
-
-  const p=S.pGrade,act=quant(g.sal,p),mk=mkt(g,p);
-  document.getElementById('gd-pct-text').innerHTML=`Actual internal base pay at <b>P${p}</b> is <b class="text-pwcOrange">${fmt(act)}</b> (Internal P25: <b>${fmt(quant(g.sal,25))}</b>, P50: <b>${fmt(quant(g.sal,50))}</b>, P75: <b>${fmt(quant(g.sal,75))}</b>). Market P${p} is <b>${fmt(mk)}</b>.`;
-
-  const roles={};g.e.forEach(e=>(roles[e.role]=roles[e.role]||[]).push(e));
-  const names=Object.keys(roles).sort((a,b)=>avg(roles[a].map(e=>e.tcc))-avg(roles[b].map(e=>e.tcc)));
-  const rs=names.map(n=>{const es=roles[n],a=f=>avg(es.map(f)),f=es.filter(e=>e.gender==='F').map(e=>e.base),m=es.filter(e=>e.gender==='M').map(e=>e.base);
-    return{n,hc:es.length,b:a(e=>e.base),al:a(e=>e.allow),bo:a(e=>e.bonus),be:a(e=>e.ben),t:a(e=>e.tcc),cr:a(e=>e.base)/g.mid*100,pen:a(e=>(e.base-g.min)/(g.max-g.min)*100),gp:f.length&&m.length?(avg(m)-avg(f))/avg(m)*100:null,out:es.filter(e=>e.base<g.min||e.base>g.max).length}});
-  table('tb-roles',['Role','Headcount','Avg Base','Allowances','Bonus','Benefits','Total Rewards','vs. Grade Avg','Compa-Ratio','Penetration','Gender Gap','Outliers'],rs.map(r=>[esc(r.n),r.hc,fmt(r.b),fmt(r.al),fmt(r.bo),fmt(r.be),`<b class="text-pwcOrange">${fmt(r.t)}</b>`,`<span class="font-bold ${r.t>=g.aTcc?'text-emerald-600':'text-amber-600'}">${sgn((r.t/g.aTcc-1)*100,x=>x.toFixed(1)+'%')}</span>`,pc(r.cr),pc(r.pen,0),r.gp==null?'-':pc(r.gp),r.out]));
-
-  chart('c-gd-role',{type:'bar',data:{labels:names,datasets:[['Base','b',C.d],['Allowances','al',C.o],['Bonus','bo',C.o3],['Benefits','be',C.g]].map(x=>({label:x[0],data:rs.map(r=>r[x[1]]),backgroundColor:x[2]}))},options:{scales:stk()}});
-  const pos=e=>(e.base-g.min)/(g.max-g.min)*100,bins=[0,0,0,0,0,0];g.e.forEach(e=>{const x=pos(e);bins[x<0?0:x<25?1:x<50?2:x<75?3:x<=100?4:5]++});
-  chart('c-gd-dist',{type:'bar',data:{labels:['Below Min','Q1 (0-25%)','Q2 (25-50%)','Q3 (50-75%)','Q4 (75-100%)','Above Max'],datasets:[{label:'Employees',data:bins,backgroundColor:[C.r,C.o3,C.o2,C.o,C.d,C.r],borderRadius:4}]},options:{plugins:{legend:{display:false}},scales:ySc('Employees',{ticks:{precision:0}})}});
-
-  const pts=[];names.forEach((n,i)=>roles[n].forEach((e,j)=>pts.push({x:i+((j*37%21)-10)/45,y:e.base,id:e.id,role:e.role})));
-  const hl=y=>[{x:-.5,y},{x:names.length-.5,y}];
-  chart('c-gd-scatter',{
-    type:'scatter',
-    data:{
-      datasets:[
-        {label:'Employees',data:pts,backgroundColor:pts.map(pt=>pt.y<g.min||pt.y>g.max?C.r:C.o),pointRadius:5,pointHoverRadius:8},
-        line('Grade Max',hl(g.max),C.r,{borderDash:[5,4],pointRadius:0}),
-        line('Midpoint (P50)',hl(g.mid),C.d,{borderWidth:2,pointRadius:0}),
-        line('Grade Min',hl(g.min),C.r,{borderDash:[5,4],pointRadius:0})
-      ]
-    },
-    options:{
-      plugins:{tooltip:{callbacks:{label:c=>c.raw.id?`${c.raw.id} (${c.raw.role}): ${fmt(c.raw.y)}`:`${c.dataset.label}: ${fmt(c.raw.y)}`}}},
-      scales:{x:{min:-.5,max:names.length-.5,ticks:{stepSize:1,callback:v=>Number.isInteger(v)?names[v]:''}},y:{title:{display:true,text:'Annual Base Salary'}}}
-    }
-  });
-
-  table('tb-emps',['Employee ID','Role','Department','Base Salary','vs. Grade Avg','Compa-Ratio','Range Position','Anomaly Status'],[...g.e].sort((a,b)=>Math.abs(b.base-g.mid)-Math.abs(a.base-g.mid)).slice(0,12).map(e=>{
-    const x=pos(e),diffAvg=(e.base/g.avg-1)*100;
-    return[
-      esc(e.id),esc(e.role),esc(e.fn),fmt(e.base),
-      `<span class="font-semibold ${diffAvg>=0?'text-emerald-600':'text-amber-600'}">${sgn(diffAvg,v=>v.toFixed(1)+'%')}</span>`,
-      pc(e.base/g.mid*100),pc(x,0),
-      x<0?'<span class="px-2 py-0.5 rounded bg-rose-100 text-rose-700 font-bold text-[11px]">Below Min Outlier</span>':
-      x>100?'<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[11px]">Above Max Outlier</span>':
-      '<span class="text-slate-400">Within Bandwidth</span>'
-    ];
-  }));
+function updateGradeMapping(name,b){const g=S.grades.find(x=>x.grade===name);if(g){g.bGrade=b;S.fresh=false;renderAll()}}
+function rBench(){
+  const p=S.pBench,L=G.map(g=>g.grade),m=G.map(g=>mkt(g,p)),ratio=G.map((g,i)=>g.mid/m[i]*100),ov=avg(ratio);
+  document.getElementById('bn-note').innerHTML=S.estMarket?'<span class="text-amber-600 font-semibold">Market values are estimated. Import a benchmark sheet for real results.</span>':`Comparing <b>${G.length} grades</b> against <b class="text-pwcOrange">${S.benchmarks.length} benchmark levels</b>`;
+  document.getElementById('bn-map-panel').innerHTML=S.benchmarks.length?`<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2.5">${G.map(g=>`<div class="bg-slate-50 border border-slate-200 rounded-lg p-2"><div class="text-[11px] font-bold truncate">${esc(g.grade)}</div><select onchange="updateGradeMapping('${q$(g.grade)}',this.value)" class="mt-1 w-full text-[11px] border border-slate-300 rounded px-1.5 py-1 bg-white font-semibold text-pwcOrange">${S.benchmarks.map(b=>`<option value="${esc(b.bGrade)}" ${gk(b.bGrade)===gk(g.bGrade)?'selected':''}>${esc(b.bGrade)}</option>`).join('')}</select></div>`).join('')}</div>`:'<div class="sub">No benchmark levels to map.</div>';
+  document.getElementById('bn-cards').innerHTML=kpi('Benchmark',`P${p} market`)+kpi('Midpoint competitiveness',pc(ov),rc(ov)[0],'text-pwcOrange')+kpi('Total rewards vs. P50',pc(K.tccVs),rc(K.tccVs)[0])+kpi('Aligned / lagging / leading',`${ratio.filter(r=>r>=95&&r<=105).length} / ${ratio.filter(r=>r<95).length} / ${ratio.filter(r=>r>105).length}`);
+  const cells=g=>[g.hc?g.avg/g.p50*100:null,g.hc?g.aAllow/g.mAllow*100:null,g.hc?g.bPct/g.mBonus*100:null,g.hc?g.aBen/g.mBen*100:null,g.hc?g.aTcc/g.mTcc*100:null];
+  document.getElementById('tb-bnheat').innerHTML=`<thead><tr><th class="p-2 text-left">Grade</th><th class="p-2 text-left">Benchmark</th>${['Base pay','Allowances','Bonus target','Benefits','Total rewards'].map(h=>`<th class="p-2 text-slate-500">${h}</th>`).join('')}</tr></thead><tbody>${G.map(g=>`<tr><th class="p-2 text-left">${esc(g.grade)}</th><td class="p-2 text-slate-500 font-semibold">${esc(g.bGrade)}</td>${cells(g).map(r=>`<td class="p-2 heat" style="background:${rc(r)[2]}">${r==null?'-':r.toFixed(0)+'%'}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  table('tb-bench',['Grade','Mapped Benchmark','Our Midpoint','Market P25','Market P50','Market P75','Market P90',`Market P${p}`,'Competitiveness','Avg Actual Base','Status'],G.map((g,i)=>{const[t,c]=rc(ratio[i]);return[esc(g.grade),`<span class="text-slate-500 font-semibold">${esc(g.bGrade)}</span>`,`<b class="text-pwcOrange">${fmt(g.mid)}</b>`,fmt(g.p25),fmt(g.p50),fmt(g.p75),fmt(g.p90),`<b>${fmt(m[i])}</b>`,`<b>${pc(ratio[i])}</b>`,g.hc?fmt(g.avg):'-',`<span class="px-2 py-0.5 rounded text-[11px] font-bold ${c}">${t}</span>`]}));
+  chart('c-bn-range',{data:{labels:L,datasets:[{type:'bar',label:'Our band',data:G.map(g=>[g.min,g.max]),backgroundColor:C.d,borderRadius:4,barPercentage:.7},{type:'bar',label:'Market P25 to P90',data:G.map(g=>[g.p25,g.p90]),backgroundColor:C.o3,borderRadius:4,barPercentage:.7},line('Market P'+p,m,C.o),line('Avg actual base',G.map(g=>g.hc?g.avg:null),C.r,{borderDash:[4,3]})]},options:{scales:ySc('',{ticks:{callback:v=>fm(v)}})}},{drill:true});
+  chart('c-bn-ratio',{data:{labels:L,datasets:[{type:'bar',label:'Competitiveness %',data:ratio,backgroundColor:ratio.map(r=>r<95?C.am:r>105?C.r:C.gr),borderRadius:5},line('95%',L.map(()=>95),C.g,{pointRadius:0,borderDash:[4,4]}),line('105%',L.map(()=>105),C.g,{pointRadius:0,borderDash:[4,4]})]},options:{scales:ySc('%',{beginAtZero:false,suggestedMin:80,suggestedMax:120})}},{drill:true});
 }
 
 function rToBe(){
   const X=toBe(),T=X.T,t=X.tot,L=G.map(g=>g.grade);
-  document.getElementById('sc-pills').innerHTML=Object.keys(PRESETS).map(k=>`<button class="pill ${Object.entries(PRESETS[k]).every(([a,b])=>S.tb[a]===b)?'on':''}" onclick="applyPreset('${k}')">${k}</button>`).join('')+'<span class="sub self-center ml-2">Presets adjust sliders automatically.</span>';
-  document.getElementById('tb-cards').innerHTML=kpi('Incremental cost (cash + benefits)',fm(t.inc),pc(t.inc/t.asTcc*100,2)+' of total rewards','text-pwcOrange')+kpi('Incl. employer on-costs',fm(t.incCtc),pc(t.incCtc/t.asCtc*100,2)+' of CTC')+kpi('Employees affected',t.aff,pc(K.hc?t.aff/K.hc*100:0,0)+' of population')+kpi('Below new min / above new max',`${t.nb} / ${t.na}`,'','text-rose-600');
-  table('tb-tobe',['Grade','As-is mid','To-be mid','Change','As-is range','To-be range','To-be overlap','To-be progression','Below new min','Above new max','Base cost','Allowance cost','Bonus cost','Benefit cost','Total'],T.map(r=>{const ch=(r.mid/r.g.mid-1)*100;return[esc(r.g.grade),fmt(r.g.mid),`<b class="text-pwcOrange">${fmt(r.mid)}</b>`,`<b class="${ch>=0?'text-emerald-600':'text-amber-600'}">${sgn(ch,x=>x.toFixed(1)+'%')}</b>`,`${fmt(r.g.min)} - ${fmt(r.g.max)}`,`${fmt(r.min)} - ${fmt(r.max)}`,r.ovl==null?'-':pc(r.ovl),r.prog==null?'-':pc(r.prog),r.nb,r.na,fmt(r.cB),fmt(r.cA),fmt(r.cBo),fmt(r.cBe),`<b>${fmt(r.inc)}</b>`]}));
-  chart('c-tb-range',{type:'bar',data:{labels:L,datasets:[{label:'As-is range',data:G.map(g=>[g.min,g.max]),backgroundColor:C.d,borderRadius:3},{label:'To-be range',data:T.map(r=>[r.min,r.max]),backgroundColor:C.o,borderRadius:3},line('To-be midpoint',T.map(r=>r.mid),C.o3,{pointRadius:4})]},options:{scales:ySc()}});
-  chart('c-tb-ovl',{data:{labels:L,datasets:[{type:'bar',label:'To-be overlap %',data:T.map(r=>r.ovl??0),backgroundColor:C.o},line('To-be progression %',T.map(r=>r.prog??0),C.d),line('As-is progression %',G.map(g=>g.prog??0),C.g,{borderDash:[4,3]})]},options:{scales:ySc('%')}});
-  chart('c-tb-lev',{type:'bar',data:{labels:L,datasets:[['Base','cB'],['Allowances','cA'],['Bonus','cBo'],['Benefits','cBe']].map((x,i)=>({label:x[0],data:T.map(r=>r[x[1]]),backgroundColor:Object.values(COMP)[i]}))},options:{scales:stk()}});
-  const sc=Object.keys(PRESETS).map(k=>({k,r:toBe(PRESETS[k])})),cur={k:'Current settings',r:X};
-  const all=[...sc,cur];
-  chart('c-tb-sc',{type:'bar',data:{labels:all.map(x=>x.k),datasets:[{label:'Incremental cost',data:all.map(x=>x.r.tot.inc),backgroundColor:[C.g,C.o3,C.o2,C.d]}]},options:{plugins:{legend:{display:false}},scales:ySc('',{ticks:{callback:v=>fm(v)}})}});
-  table('tb-sc',['Scenario','Target percentile','Incremental cost','% of total rewards','Incl. on-costs','Employees affected','Avg CTC change / employee'],all.map(x=>{const q=x.r.tot,pp=x.r.p;return[x.k,'P'+pp.pct,fm(q.inc),pc(q.inc/q.asTcc*100,2),fm(q.incCtc),q.aff,fm(K.hc?q.incCtc/K.hc:0)]}));
+  document.getElementById('sc-pills').innerHTML=Object.keys(PRESETS).map(k=>`<button class="pill ${Object.entries(PRESETS[k]).every(([a,b])=>S.tb[a]===b)?'on':''}" onclick="applyPreset('${k}')">${k}</button>`).join('');
+  document.getElementById('tb-cards').innerHTML=kpi('Incremental cost',fm(t.inc),pc(t.inc/t.asTcc*100,2)+' of total rewards','text-pwcOrange')+kpi('Incl. on-costs',fm(t.incCtc),pc(t.incCtc/t.asCtc*100,2)+' of CTC')+kpi('Employees affected',t.aff,pc(K.hc?t.aff/K.hc*100:0,0)+' of staff')+kpi('Below new min / above new max',`${t.nb} / ${t.na}`,'','text-rose-600');
+  table('tb-tobe',['Grade','As-is mid','To-be mid','Change','To-be range','To-be overlap','Below new min','Above new max','Base cost','Allowances','Bonus','Benefits','Total'],T.map(r=>{const ch=(r.mid/r.g.mid-1)*100;return[esc(r.g.grade),fmt(r.g.mid),`<b class="text-pwcOrange">${fmt(r.mid)}</b>`,`<b class="${ch>=0?'text-emerald-600':'text-amber-600'}">${sgn(ch,x=>x.toFixed(1)+'%')}</b>`,`${fmt(r.min)} - ${fmt(r.max)}`,r.ovl==null?'-':pc(r.ovl,0),r.nb,r.na,fmt(r.cB),fmt(r.cA),fmt(r.cBo),fmt(r.cBe),`<b>${fmt(r.inc)}</b>`]}));
+  chart('c-tb-range',{data:{labels:L,datasets:[{type:'bar',label:'As-is band',data:G.map(g=>[g.min,g.max]),backgroundColor:C.d,borderRadius:4,barPercentage:.7},{type:'bar',label:'To-be band',data:T.map(r=>[r.min,r.max]),backgroundColor:C.o,borderRadius:4,barPercentage:.7},line('To-be midpoint',T.map(r=>r.mid),C.o3)]},options:{scales:ySc('',{ticks:{callback:v=>fm(v)}}),plugins:{ladder:{g:T.map(r=>({min:r.min,max:r.max,mid:r.mid,prog:r.prog||0}))}}}});
+  chart('c-tb-lev',{data:{labels:L,datasets:[['Base','cB'],['Allowances','cA'],['Bonus','cBo'],['Benefits','cBe']].map((x,i)=>({label:x[0],data:T.map(r=>r[x[1]]),backgroundColor:Object.values(COMP)[i],borderRadius:3}))},options:{scales:stk('',{ticks:{callback:v=>fm(v)}})}});
 }
-function applyPreset(k){Object.assign(S.tb,PRESETS[k]);Object.keys(PRESETS[k]).forEach(x=>syncOut('tb.'+x));renderAll()}
+function applyPreset(k){Object.assign(S.tb,PRESETS[k]);Object.keys(PRESETS[k]).forEach(x=>syncOut('tb.'+x));S.fresh=false;renderAll()}
 
 function rImpact(){
-  const X=toBe(),T=X.T,t=X.tot,L=G.map(g=>g.grade),ph=S.tb.phase,net=t.incCtc-t.save;document.getElementById('im-on').innerText=S.tb.onCost+'%';
-  const asAvg=K.hc?t.asCtc/K.hc:0,toAvg=K.hc?t.toCtc/K.hc:0;
-  document.getElementById('im-cards').innerHTML=kpi('Average CTC / employee (as-is)',fm(asAvg))+kpi('Average CTC / employee (to-be)',fm(toAvg),sgn(toAvg-asAvg)+' ('+pc((toAvg/asAvg-1)*100,2)+')','text-pwcOrange')+kpi('Total incremental annual cost',fm(t.incCtc),pc(t.incCtc/t.asCtc*100,2)+' of as-is CTC')+kpi('Total to-be CTC',fm(t.toCtc),'as-is '+fm(t.asCtc))+
-    kpi('Retention savings (annual)',fm(t.save),`${S.tb.attrRed} pts lower attrition x ${S.tb.repl}% replacement cost`,'text-emerald-600')+kpi('Net annual impact',fm(net),'cost less retention savings',net>0?'text-rose-600':'text-emerald-600')+kpi('Payback on retention',t.save>0?(t.incCtc/t.save).toFixed(1)+' yrs':'-','incremental cost / annual savings')+kpi('Per-year cost during phasing',fm(t.incCtc/ph),ph+' year'+(ph>1?'s':'')+', even phasing');
-  table('tb-im',['Grade','Headcount','As-is total rewards','To-be total rewards','Change','Change %','Avg CTC as-is','Avg CTC to-be','Change / employee','Employer on-costs'],[...T.map(r=>{const h=r.g.hc||1;return[esc(r.g.grade),r.g.hc,fmt(r.asTcc),fmt(r.toTcc),fmt(r.inc),pc(r.asTcc?r.inc/r.asTcc*100:0,2),fmt(r.asCtc/h),fmt(r.toCtc/h),`<b class="text-pwcOrange">${fmt((r.toCtc-r.asCtc)/h)}</b>`,fmt(r.cOn)]}),['<b>Total</b>',K.hc,fmt(t.asTcc),fmt(t.toTcc),fmt(t.inc),pc(t.inc/t.asTcc*100,2),fmt(asAvg),fmt(toAvg),`<b class="text-pwcOrange">${fmt(toAvg-asAvg)}</b>`,fmt(t.cOn)]]);
-  chart('c-im-ctc',{type:'bar',data:{labels:L,datasets:[{label:'As-is avg CTC',data:T.map(r=>r.g.hc?r.asCtc/r.g.hc:0),backgroundColor:C.d},{label:'To-be avg CTC',data:T.map(r=>r.g.hc?r.toCtc/r.g.hc:0),backgroundColor:C.o}]},options:{scales:ySc('',{ticks:{callback:v=>fm(v)}})}});
+  const X=toBe(),T=X.T,t=X.tot,L=G.map(g=>g.grade),ph=S.tb.phase,net=t.incCtc-t.save,asAvg=K.hc?t.asCtc/K.hc:0,toAvg=K.hc?t.toCtc/K.hc:0;
+  document.getElementById('im-cards').innerHTML=kpi('Avg CTC / employee, as-is',fm(asAvg))+kpi('Avg CTC / employee, to-be',fm(toAvg),sgn(toAvg-asAvg)+' ('+pc((toAvg/asAvg-1)*100,2)+')','text-pwcOrange')+kpi('Incremental annual cost',fm(t.incCtc),pc(t.incCtc/t.asCtc*100,2)+' of as-is CTC')+kpi('Per year when phased',fm(t.incCtc/ph),ph+' year'+(ph>1?'s':''))+
+    kpi('Retention savings / year',fm(t.save),`${S.tb.attrRed} pts less attrition`,'text-emerald-600')+kpi('Net annual impact',fm(net),'cost less savings',net>0?'text-rose-600':'text-emerald-600')+kpi('Payback',t.save>0?(t.incCtc/t.save).toFixed(1)+' yrs':'-')+kpi('To-be CTC',fm(t.toCtc),'as-is '+fm(t.asCtc));
+  table('tb-im',['Grade','Staff','As-is rewards','To-be rewards','Change','Change %','Avg CTC as-is','Avg CTC to-be','Change / employee'],[...T.map(r=>{const h=r.g.hc||1;return[esc(r.g.grade),r.g.hc,fmt(r.asTcc),fmt(r.toTcc),fmt(r.inc),pc(r.asTcc?r.inc/r.asTcc*100:0,2),fmt(r.asCtc/h),fmt(r.toCtc/h),`<b class="text-pwcOrange">${fmt((r.toCtc-r.asCtc)/h)}</b>`]}),['<b>Total</b>',K.hc,fmt(t.asTcc),fmt(t.toTcc),fmt(t.inc),pc(t.inc/t.asTcc*100,2),fmt(asAvg),fmt(toAvg),`<b class="text-pwcOrange">${fmt(toAvg-asAvg)}</b>`]]);
+  chart('c-im-ctc',{data:{labels:L,datasets:[{label:'As-is',data:T.map(r=>r.g.hc?r.asCtc/r.g.hc:0),backgroundColor:C.d,borderRadius:4},{label:'To-be',data:T.map(r=>r.g.hc?r.toCtc/r.g.hc:0),backgroundColor:C.o,borderRadius:4}]},options:{scales:ySc('',{ticks:{callback:v=>fm(v)}})}},{drill:true});
   const v=[t.cB,t.cA,t.cBo,t.cBe,t.cOn];let run=t.asCtc;const fl=[[0,run]];v.forEach(x=>{fl.push([run,run+x]);run+=x});fl.push([0,run]);
-  chart('c-im-wf',{type:'bar',data:{labels:['As-is','Base','Allow.','Bonus','Benefits','On-costs','To-be'],datasets:[{data:fl,backgroundColor:[C.d,C.o,C.o2,C.o3,C.g,'#cbd5e1',C.d],borderRadius:3}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fm(c.raw[1]-c.raw[0])}}},scales:{y:{min:Math.floor(t.asCtc*.9/1e5)*1e5,ticks:{callback:v=>fm(v)}}}}});
-  const yrs=[1,2,3].map(y=>y<=ph?t.incCtc/ph:0);let cum=0;const cumv=yrs.map(x=>cum+=x);
-  chart('c-im-ph',{data:{labels:['Year 1','Year 2','Year 3'],datasets:[{type:'bar',label:'Cost in year',data:yrs,backgroundColor:C.o},line('Cumulative cost',cumv,C.d),line('Cumulative retention savings',[1,2,3].map(y=>[1,2,3].slice(0,y).reduce((a,z)=>a+t.save*Math.min(z,ph)/ph,0)),C.gr,{borderDash:[4,3]})]},options:{scales:ySc('',{ticks:{callback:v=>fm(v)}})}});
-  const ps=[40,45,50,55,60,65,70,75];
-  chart('c-im-sens',{type:'line',data:{labels:ps.map(x=>'P'+x),datasets:[line('Incremental cost incl. on-costs',ps.map(x=>toBe({pct:x}).tot.incCtc),C.o,{fill:true,backgroundColor:'rgba(253,81,8,.1)'}),line('Retention savings',ps.map(()=>t.save),C.gr,{borderDash:[4,3],pointRadius:0})]},options:{scales:ySc('',{ticks:{callback:v=>fm(v)}})}});
+  chart('c-im-wf',{data:{labels:['As-is','Base','Allow.','Bonus','Benefits','On-costs','To-be'],datasets:[{data:fl,backgroundColor:[C.d,C.o,C.o2,C.o3,C.blue,'#cbd5e1',C.d],borderRadius:5}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fm(c.raw[1]-c.raw[0])}}},scales:{y:{min:Math.floor(t.asCtc*.9/1e5)*1e5,ticks:{callback:v=>fm(v)},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
 }
 
-const R={dash:rDash,struct:rStruct,rewards:rRewards,bench:rBench,work:rWork,grade:rGrade,tobe:rToBe,impact:rImpact};
+const R={dash:rDash,struct:rStruct,rewards:rRewards,work:rWork,grade:rGrade,bench:rBench,tobe:rToBe,impact:rImpact};
 function renderAll(){
   derive();if(!G.length)return;
-  const dot=document.getElementById('cleanse-dot'),lbl=document.getElementById('cleanse-lbl');
-  if(dot&&lbl){
-    dot.className=S.excludeOutliers?'w-2 h-2 rounded-full bg-emerald-500':'w-2 h-2 rounded-full bg-slate-300';
-    lbl.innerText=S.excludeOutliers?`Outliers Excluded (${K.rawHc-K.hc} removed)`:'Include All Staff';
-  }
-  document.getElementById('pop-note').innerText=`${K.hc} of ${K.rawHc} employees${S.est?' | est. market':''}`;
+  document.getElementById('cleanse-dot').className='w-2 h-2 rounded-full '+(S.excludeOutliers?'bg-emerald-500':'bg-slate-300');
+  document.getElementById('cleanse-lbl').innerText=S.excludeOutliers?`Outliers excluded (${K.rawHc-K.hc})`:'Include all staff';
+  document.getElementById('pop-note').innerText=`${K.hc} of ${K.rawHc} employees`;
+  const w=[];if(S.derivedBands)w.push('Some grade bands were derived from actual pay because no min/max was found. Outlier flags for those grades are not meaningful.');if(S.estMarket)w.push('No market data found. Market values are estimated from grade midpoints.');
+  document.getElementById('warn-bar').innerHTML=w.length?`<div class="mb-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg px-4 py-2.5 text-xs flex justify-between gap-3"><span>${w.join(' ')}</span><button class="font-bold underline shrink-0" onclick="showReport()">Details</button></div>`:'';
   R[S.tab]();
+  if(S.fresh){S.fresh=false;countUp()}
 }
 
-/* ================= EXCEL IMPORT / EXPORT ================= */
-const key=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,'');
-const pick=(o,ns)=>{for(const n of ns)if(o[n]!==undefined&&o[n]!=='')return o[n]};
-const num=v=>{if(v===undefined)return;const n=Number(String(v).replace(/[^0-9.\-]/g,''));return isNaN(n)?undefined:n};
-const normRows=ws=>XLSX.utils.sheet_to_json(ws,{defval:''}).map(r=>{const o={};Object.keys(r).forEach(k=>o[key(k)]=r[k]);return o});
-function setPopOptions(){const f=[...new Set(S.emps.map(e=>e.fn))].sort();const el=document.getElementById('pop');el.innerHTML=['All',...f].map(x=>`<option>${esc(x)}</option>`).join('');S.pop='All'}
-
-function handleExcelImport(ev){
-  const file=ev.target.files[0];if(!file)return;const rd=new FileReader();
-  rd.onload=e=>{try{
-    const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'}),names=wb.SheetNames;
-    const gs=names.find(n=>/grade|band|struct|range/i.test(n))||names[0];
-    const bs=names.find(n=>/bench|market|survey/i.test(n)&&n!==gs);
-    const es=names.find(n=>/emp|staff|people|roster|incumb/i.test(n))||(names.length>1?names.find(n=>n!==gs&&n!==bs):null);
-    let est=false;
-
-    // Parse optional separate Benchmarks sheet (e.g., 6 benchmark levels)
-    let benchmarks=[];
-    if(bs){
-      benchmarks=normRows(wb.Sheets[bs]).map((r,i)=>{
-        const p50=num(pick(r,['marketp50','p50','marketmedian','mktp50','midpoint','mid']));
-        if(p50==null)return null;
-        let bn=num(pick(r,['marketbonustargetpct','marketbonuspct','marketbonus','marketbonustarget']));if(bn!=null&&bn<=1)bn*=100;
-        const ma=num(pick(r,['marketallowancesp50','marketallowances','marketallowance'])),mb=num(pick(r,['marketbenefitsp50','marketbenefits']));
-        if(ma==null||bn==null||mb==null)est=true;
-        return{
-          bGrade:String(pick(r,['benchmarkgrade','benchmark','level','grade','band','marketgrade'])??('BM-'+(i+1))).trim(),
-          p25:num(pick(r,['marketp25','p25','mktp25']))??p50*.88,
-          p50,
-          p75:num(pick(r,['marketp75','p75','mktp75']))??p50*1.12,
-          p90:num(pick(r,['marketp90','p90','mktp90']))??p50*1.25,
-          mAllow:ma??p50*.1,mBonus:bn??10,mBen:mb??p50*.12
-        };
-      }).filter(Boolean).sort((a,b)=>a.p50-b.p50);
-    }
-
-    const rawGrades=normRows(wb.Sheets[gs]).map((r,i)=>{
-      const min=num(pick(r,['min','minimum','rangemin','minsalary'])),max=num(pick(r,['max','maximum','rangemax','maxsalary']));if(min==null||max==null||max<=min)return null;
-      const mid=(min+max)/2,p50=num(pick(r,['marketp50','p50','marketmedian','mktp50']));
-      let bn=num(pick(r,['marketbonustargetpct','marketbonuspct','marketbonus','marketbonustarget']));if(bn!=null&&bn<=1)bn*=100;
-      const ma=num(pick(r,['marketallowancesp50','marketallowances','marketallowance'])),mb=num(pick(r,['marketbenefitsp50','marketbenefits']));
-      return{
-        grade:String(pick(r,['grade','level','band','jobgrade','hostgrade'])??('Grade '+(i+1))).trim(),
-        bGrade:String(pick(r,['benchmarkgrade','mappedbenchmark','benchmark','marketgrade','marketlevel'])??'').trim(),
-        min,max,mid,
-        p25:num(pick(r,['marketp25','p25','mktp25'])),
-        p50,
-        p75:num(pick(r,['marketp75','p75','mktp75'])),
-        p90:num(pick(r,['marketp90','p90','mktp90'])),
-        mAllow:ma,mBonus:bn,mBen:mb
-      };
-    }).filter(Boolean).sort((a,b)=>a.min-b.min);
-
-    if(!rawGrades.length){showMsg('Invalid Grade Sheet','No valid grades found. Ensure your Grades sheet has Grade, Min, and Max columns.');return}
-
-    // If no separate Benchmarks sheet was provided, extract unique benchmark levels from rows that have market data
-    if(!benchmarks.length){
-      const rowsWithMkt=rawGrades.filter(g=>g.p50!=null);
-      if(rowsWithMkt.length>0){
-        const seen=new Map();
-        rowsWithMkt.forEach((g,idx)=>{
-          const keyName=g.bGrade||`Benchmark ${idx+1} (${g.grade})`;
-          if(!seen.has(keyName)){
-            seen.set(keyName,{
-              bGrade:keyName,
-              p25:g.p25??g.p50*.88,
-              p50:g.p50,
-              p75:g.p75??g.p50*1.12,
-              p90:g.p90??g.p50*1.25,
-              mAllow:g.mAllow??g.p50*.1,
-              mBonus:g.mBonus??10,
-              mBen:g.mBen??g.p50*.12
-            });
-          }
-        });
-        benchmarks=[...seen.values()].sort((a,b)=>a.p50-b.p50);
-      }
-    }
-
-    // Map each client grade (e.g. 12 grades) to its nearest or explicitly mapped benchmark level (e.g. 6 benchmarks)
-    const grades=rawGrades.map(g=>{
-      if(benchmarks.length){
-        let matched=benchmarks.find(b=>b.bGrade.toLowerCase()===g.bGrade.toLowerCase());
-        if(!matched){
-          matched=benchmarks.reduce((best,cur)=>Math.abs(cur.p50-g.mid)<Math.abs(best.p50-g.mid)?cur:best,benchmarks[0]);
-        }
-        return {...g,bGrade:matched.bGrade};
-      } else {
-        est=true;
-        return {...g,bGrade:g.grade,p25:g.mid*.88,p50:g.mid,p75:g.mid*1.12,p90:g.mid*1.25,mAllow:g.mid*.1,mBonus:10,mBen:g.mid*.12};
-      }
-    });
-
-    let emps=[];
-    if(es&&es!==gs)emps=normRows(wb.Sheets[es]).map((r,i)=>{
-      let bp=num(pick(r,['bonustargetpct','bonustarget','targetbonus','bonustargetpercent']))||0;if(bp>1)bp/=100;
-      const at=num(pick(r,['allowances','totalallowances'])),bt=num(pick(r,['benefits','totalbenefits']));
-      const h=num(pick(r,['housingallowance','housing','hra'])),tr=num(pick(r,['transportallowance','transport','fuel','fuelallowance'])),o=num(pick(r,['otherallowance','otherallowances']));
-      const hasA=h!=null||tr!=null||o!=null;
-      return{id:String(pick(r,['employeeid','empid','id','employee','name'])??('E'+(i+1))),grade:String(pick(r,['grade','level','band','hostgrade'])??'').trim(),role:String(pick(r,['role','designation','title','jobtitle','position'])??'Unspecified').trim(),fn:String(pick(r,['function','department','businessunit'])??'All staff').trim(),
-        gender:String(pick(r,['gender','sex'])??'M').trim().charAt(0).toUpperCase(),age:num(pick(r,['age']))??32,ten:num(pick(r,['tenureyears','tenure','yearsofservice']))??0,base:num(pick(r,['basesalary','base','salary','basepay','annualsalary'])),
-        hous:h??0,trans:tr??0,oth:hasA?(o??0):(at??0),bpct:bp,bonus:num(pick(r,['bonusactual','bonus','bonuspaid','actualbonus']))??0,
-        med:num(pick(r,['medical','healthinsurance']))??0,ret:num(pick(r,['retirement','pension','providentfund']))??0,ins:num(pick(r,['insurance','lifeinsurance']))??0,obn:num(pick(r,['otherbenefits']))??(bt??0)};
-    }).filter(x=>x.base!=null&&grades.some(g=>g.grade===x.grade));
-    prep(emps);S.grades=grades;S.benchmarks=benchmarks;S.emps=emps;S.est=est;S.sel=0;S.node=null;S.excludeOutliers=false;setPopOptions();
-    document.getElementById('data-status').innerText=`${file.name} (${grades.length} grades → ${benchmarks.length||grades.length} benchmarks, ${emps.length} staff)`;
-    renderAll();
-  }catch(err){console.error(err);showMsg('Import Error','Could not read this file. Please ensure it matches the Excel template format (.xlsx, .xls or .csv).')}ev.target.value=''};
-  rd.readAsArrayBuffer(file);
-}
+/* ================= EXPORT / TEMPLATE ================= */
 function downloadTemplate(){
   const d=sampleData(),wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(d.grades.map(g=>({Grade:g.grade,BenchmarkGrade:g.bGrade,Min:g.min,Max:g.max}))),'Grades');
@@ -969,23 +698,14 @@ function downloadTemplate(){
 }
 function exportResults(){
   const X=toBe(),wb=XLSX.utils.book_new(),r1=v=>v==null?'':+v.toFixed(1);
-  XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(G.map(g=>({Grade:g.grade,'Mapped Benchmark':g.bGrade,Min:g.min,Midpoint:g.mid,Max:g.max,'Bandwidth %':r1(g.bw),'Overlap %':r1(g.ovlPrev),'Midpoint Progression %':r1(g.prog),'Midpoint Differential':g.diff==null?'':Math.round(g.diff),Headcount:g.hc,'Avg Base':Math.round(g.avg),'Avg Total Rewards':Math.round(g.aTcc),'Compa-ratio %':r1(g.compa),'Market P50':g.p50,'Midpoint vs Market P50 %':r1(g.mid/g.p50*100),'Below Min':g.below,'Above Max':g.above}))),'As-is diagnostic');
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(G.map(g=>({Grade:g.grade,Benchmark:g.bGrade,Min:g.min,Midpoint:g.mid,Max:g.max,'Bandwidth %':r1(g.bw),'Midpoint progression %':r1(g.prog),'Midpoint differential':g.diff==null?'':Math.round(g.diff),'Overlap with previous %':r1(g.ovlPrev),P25:Math.round(g.min+(g.max-g.min)*.25),P50:Math.round(g.min+(g.max-g.min)*.5),P75:Math.round(g.min+(g.max-g.min)*.75),P90:Math.round(g.min+(g.max-g.min)*.9),Staff:g.hc,'Avg base':Math.round(g.avg),'Avg total rewards':Math.round(g.aTcc),'Compa-ratio %':r1(g.compa),'Market P50':Math.round(g.p50),'Below band':g.below,'Above band':g.above}))),'As-is diagnostic');
+  const out=[];G.forEach(g=>g.rawE.forEach(e=>{if(e.base<g.min||e.base>g.max)out.push({Employee:e.id,Grade:g.grade,Role:e.role,'Base pay':e.base,Min:g.min,Max:g.max,Flag:e.base<g.min?'Below band':'Above band'})}));
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(out),'Outliers');
   XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(X.T.map(t=>({Grade:t.g.grade,'To-be min':Math.round(t.min),'To-be mid':Math.round(t.mid),'To-be max':Math.round(t.max),'Base cost':Math.round(t.cB),'Allowance cost':Math.round(t.cA),'Bonus cost':Math.round(t.cBo),'Benefit cost':Math.round(t.cBe),'On-costs':Math.round(t.cOn),'Total incremental':Math.round(t.inc),'As-is CTC':Math.round(t.asCtc),'To-be CTC':Math.round(t.toCtc)}))),'To-be and impact');
   XLSX.writeFile(wb,'rewards-analysis.xlsx');
 }
 
-window.onload=()=>{
-  Chart.defaults.font.size=11;
-  Chart.defaults.color='#64748B';
-  const d=sampleData();
-  prep(d.emps);
-  S.grades=d.grades;
-  S.benchmarks=d.benchmarks;
-  S.emps=d.emps;
-  buildShell();
-  setPopOptions();
-  switchTab('dash');
-};
+window.onload=()=>{Chart.defaults.font.size=11;Chart.defaults.font.family='Inter';Chart.defaults.color='#64748B';const d=sampleData();prep(d.emps);S.grades=d.grades;S.benchmarks=d.benchmarks;S.emps=d.emps;buildShell();setPopOptions();switchTab('dash')};
 </script>
 </body>
 </html>
